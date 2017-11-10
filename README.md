@@ -179,7 +179,7 @@ Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacakt�
 
 `cd build`
 
-`cmake -D CMAKE_BUILD_TYPE=RELEASE \
+	`cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D CMAKE_INSTALL_PREFIX=/usr/local \
 -D INSTALL_PYTHON_EXAMPLES=ON \
 -D INSTALL_C_EXAMPLES=OFF \
@@ -263,9 +263,9 @@ matplotlib	`sudo pip install matplotlib`
 PIL(Pillow)	`sudo pip install Pillow`
 
 
-zbar		`sudo apt-get install libzbar-dev` 	qr kod okuma kütüphanesi
+zbar		`sudo apt-get install libzbar-dev` 	
 
-		`sudo pip install zbar`
+`sudo pip install zbar`		qr kod okuma kütüphanesi
 
 
 sklearn 	`sudo pip install sklearn`		yapay zeka kütüphanesi
