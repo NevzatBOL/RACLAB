@@ -24,11 +24,9 @@ indirilen paket açılır.
 gerekli paketler cuda dizinine kopyalanır.
 
 
-`sudo cp cuda/include/cudnn.h /usr/local/cuda/include` 
-
-`sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64` 
-
-`sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*`
+	`sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+	 sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+	 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*`
 
 Debian dosyaları indirilir ve kurulur.
 
@@ -83,15 +81,13 @@ indirilen paket çalıştırılarak kurulum tamamlanır.
 
 `sudo apt-get install ros-kinetic-desktop-full`
 
-`sudo rosdep init`
-
-`rosdep update`
-
+	`sudo rosdep init
+	 rosdep update`
 
 
-`echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc`
 
-`source ~/.bashrc`
+	`echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+	 source ~/.bashrc`
 
 
 
@@ -180,12 +176,12 @@ Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacakt�
 `cd build`
 
 	`cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CMAKE_INSTALL_PREFIX=/usr/local \
--D INSTALL_PYTHON_EXAMPLES=ON \
--D INSTALL_C_EXAMPLES=OFF \
--D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.3.0/modules \
--D PYTHON_EXECUTABLE=~/.virtualenvs/cv/bin/python \
--D BUILD_EXAMPLES=ON ..`
+	-D CMAKE_INSTALL_PREFIX=/usr/local \
+	-D INSTALL_PYTHON_EXAMPLES=ON \
+	-D INSTALL_C_EXAMPLES=OFF \
+	-D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.3.0/modules \
+	-D PYTHON_EXECUTABLE=~/.virtualenvs/cv/bin/python \
+	-D BUILD_EXAMPLES=ON ..`
 
 
 
