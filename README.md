@@ -84,10 +84,16 @@ indirilen paket çalıştırılarak kurulum tamamlanır.
 `sudo apt-get install ros-kinetic-desktop-full`
 
 `sudo rosdep init`
+
 `rosdep update`
 
+
+
 `echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc`
+
 `source ~/.bashrc`
+
+
 
 `source /opt/ros/kinetic/setup.bash`
 
@@ -124,37 +130,55 @@ Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacakt�
 `sudo apt-get install libxvidcore-dev libx264-dev`
 
 
+
 `sudo apt-get install libatlas-base-dev gfortran`
 
 `sudo apt-get install python2.7-dev python3.5-dev`
 
+
+
 `cd ~`
+
 `wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.3.0.zip`
+
 `unzip opencv.zip`
 
 `wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.3.0.zip`
 `unzip opencv_contrib.zip`
 
+
+
 `sudo apt-get install python-pip`
 `sudo pip install numpy`
+
+
 
 `sudo pip install virtualenv virtualenvwrapper`
 
 `export WORKON_HOME=$HOME/.virtualenvs`
+
 `source /usr/local/bin/virtualenvwrapper.sh`
 
 `echo -e "\n# virtualenv and virtualenvwrapper" >> ~/.bashrc`
+
 `echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc`
+
 `echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc`
 
 `source ~/.bashrc`
 
 `mkvirtualenv cv -p python2`
 
+
+
 `workon cv`
+
 `cd ~/opencv-3.3.0/`
+
 `mkdir build`
+
 `cd build`
+
 `cmake -D CMAKE_BUILD_TYPE=RELEASE \
 -D CMAKE_INSTALL_PREFIX=/usr/local \
 -D INSTALL_PYTHON_EXAMPLES=ON \
@@ -163,34 +187,50 @@ Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacakt�
 -D PYTHON_EXECUTABLE=~/.virtualenvs/cv/bin/python \
 -D BUILD_EXAMPLES=ON ..`
 
+
+
 `make -j4`
+
 `sudo make install`
+
 `sudo ldconfig`
+
+
 
 `cd ~/.virtualenvs/cv/lib/python2.7/site-packages/`
 `ln -s /usr/local/lib/python2.7/site-packages/cv2.so cv2.so`
 
-Eğer /usr/local/lib/python2.7/site-packages/ konumu boşsa aşağıdaki satır kullanılmalıdır.
+*Eğer /usr/local/lib/python2.7/site-packages/ konumu boşsa aşağıdaki satır kullanılmalıdır.*
 
 `ln -s /usr/local/lib/python2.7/dist-packages/cv2.so cv2.so`
+
 Kurulum tamamlandı.
 
 `python`
+
 `>>> import cv2`
+
 `>>> cv2.__version__`
+
 `'3.3.0'`
+
 kurulumu kontrol edebiliriz.
 
-Eğer opencv kurulumu tamamlandı ve kurulan terminalde çalıştığı halde 
-yeni açılan terminallerde çalışmıyorsa aşağıdaki işlemler uygulanmalıdır.
 
-`sudo nano ~/.bashrc`		
-`export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH` yada
+*Eğer opencv kurulumu tamamlandı ve kurulan terminalde çalıştığı halde 
+yeni açılan terminallerde çalışmıyorsa aşağıdaki işlemler uygulanmalıdır.*
+
+`sudo nano ~/.bashrc`	
+
+`export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH`yada
+
 `export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:$PYTHONPATH` .bashrc dosyasına bu satır eklenerek kaydedilir.
 
 Raspberry Pi için;
 `sudo raspi-config`
+
 `Advanced Options > Expand Filesystem`
+
 `reboot`
 
 Komutları uygulanarak opencv kurulumu için hazır halegetirilir, ardından Metod2 Kullanılarak kurulum tamamlanır.
@@ -210,20 +250,31 @@ https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-pytho
 ### Kütüp hane kurmada kullanılabilecek metodlar;
 
 `sudo apt-get install python-kütüphane_adı`
+
 `sudo pip install kütüphane_adı`
 
 `pip search kütüphane_adı` 	Kütüphane aramada kullanılır.
 
 
+
 matplotlib	`sudo pip install matplotlib`
+
+
 PIL(Pillow)	`sudo pip install Pillow`
-zbar		`sudo apt-get install libzbar-dev` 	qr kod okuma kütüphanesi		
+
+
+zbar		`sudo apt-get install libzbar-dev` 	qr kod okuma kütüphanesi
+
 		`sudo pip install zbar`
 
-sklearn 	`sudo pip install sklearn`	yapay zeka kütüphanesi
+
+sklearn 	`sudo pip install sklearn`		yapay zeka kütüphanesi
+
 scipy		`sudo pip install scipy`		sklearn için gerekli.
 
+
 pytesseract	`sudo pip install pytesseract`			görüntüden text çekmek için kullanılır.
+
 tesseract	`sudo apt-get install tesseract-ocr`		pytesseract için gerekli.
 
 
