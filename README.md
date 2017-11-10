@@ -6,6 +6,7 @@ https://developer.nvidia.com/cuda-80-ga2-download-archive
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
 `sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb`
+
 `sudo apt-get install cuda-8.0`
 
 Komutları ile kurulum tamamlanır.
@@ -17,11 +18,18 @@ https://developer.nvidia.com/rdp/cudnn-download
 cuDNN v6.0 Library for Linux	Paketi indirilir.
 
 indirilen paket açılır.
+
 `tar -xzvf cudnn-8.0-linux-x64-v6.0.tgz`
 
 gerekli paketler cuda dizinine kopyalanır.
+
+
 `sudo cp cuda/include/cudnn.h /usr/local/cuda/include` 
+
+
 `sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64` 
+
+
 `sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*`
 
 Debian dosyaları indirilir ve kurulur.
