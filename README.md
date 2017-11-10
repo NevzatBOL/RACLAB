@@ -1,6 +1,6 @@
 # Paket-Kurulumları
 
-##CUDA 8.0 KURULUMU
+## CUDA 8.0 KURULUMU
 
 https://developer.nvidia.com/cuda-80-ga2-download-archive
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
@@ -11,7 +11,7 @@ adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
 Komutları ile kurulum tamamlanır.
 
-##cuDNN 6.0 KURULUMU
+## cuDNN 6.0 KURULUMU
 
 https://developer.nvidia.com/rdp/cudnn-download
 
@@ -26,20 +26,22 @@ gerekli paketler cuda dizinine kopyalanır.
 
 `sudo cp cuda/include/cudnn.h /usr/local/cuda/include` 
 
-
 `sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64` 
-
 
 `sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*`
 
 Debian dosyaları indirilir ve kurulur.
+
 cuDNN v6.0 Runtime Library for Ubuntu16.04 (Deb)
+
 `sudo dpkg -i libcudnn6_6.0.21-1+cuda8.0_amd64.deb`
 
 cuDNN v6.0 Developer Library for Ubuntu16.04 (Deb)
+
 `sudo dpkg -i libcudnn6-dev_6.0.21-1+cuda8.0_amd64.deb`
 
 cuDNN v6.0 Code Samples and User Guide for Ubuntu16.04 (Deb)
+
 `sudo dpkg -i libcudnn6-doc_6.0.21-1+cuda8.0_amd64.deb`
 
 
@@ -47,27 +49,31 @@ Referans Link:
 
 http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
 
-##TensorFlow KURULUMU
+## TensorFlow KURULUMU
 
 python 2.7 GPU için paket kurulumu
+
 `pip install --upgrade tensorflow-gpu` 
 
 Referans Link:
 
 https://www.tensorflow.org/install/install_linux
 
-##ZED KAMERA SDK KURULUMU
+## ZED KAMERA SDK KURULUMU
 
 https://www.stereolabs.com/developers/release/2.2/
+
 Adresinden CUDA 8 için ZED SDK for Linux paketi indirilir.
 
 indirilen pakete çalışma izni verilir.
+
 `sudo chmod +x ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run`
 
 indirilen paket çalıştırılarak kurulum tamamlanır.
+
 `./ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run`
 
-##ROS KİNETİC KURULUMU
+## ROS KİNETİC KURULUMU
 
 `sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'`
 
@@ -90,28 +96,33 @@ indirilen paket çalıştırılarak kurulum tamamlanır.
 Referans Link:
 http://wiki.ros.org/kinetic/Installation/Ubuntu
 
-##OPENCV KURULUMU
+## OPENCV KURULUMU
 
-####ROS Kinetic ile birlikte opencv3.2 sürümü kurulu olarak geldiği için opencv kurulumu yapmaya gerek yoktur. python 2.7 de opencv direk import edilebilir.
+#### ROS Kinetic ile birlikte opencv3.2 sürümü kurulu olarak geldiği için opencv kurulumu yapmaya gerek yoktur. python 2.7 de opencv direk import edilebilir.
 
 Kurulum yapmak isteyenler için;
 
-###Metod1:
+### Metod1:
 `sudo apt-get install python-opencv`
 Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacaktır.
 
-###Metod2:
+### Metod2:
 `sudo apt-get update`
+
 `sudo apt-get upgrade`
 
 `sudo apt-get install build-essential cmake git pkg-config`
+
 `sudo apt-get install libjpeg8-dev libtiff4-dev libjasper-dev libpng12-dev`	
 
-//eğer libtiff4-dev kütüphanesi bulunamazsa bunun yerine libtiff5-dev kullanıla bilir.
+*eğer libtiff4-dev kütüphanesi bulunamazsa bunun yerine libtiff5-dev kullanıla bilir.*
 
 `sudo apt-get install libgtk2.0-dev libgtk-3-dev`
+
 `sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev`
+
 `sudo apt-get install libxvidcore-dev libx264-dev`
+
 
 `sudo apt-get install libatlas-base-dev gfortran`
 
@@ -186,15 +197,18 @@ Komutları uygulanarak opencv kurulumu için hazır halegetirilir, ardından Met
 
 Referans Link:
 Ubuntu için:
+
 http://pythonopencv.com/install-opencv-3-3-and-python2-7-3-5-bindings-on-ubuntu-16-04/
 https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
 
 Raspberry Pi için:
+
 https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
 
-##BAĞZI PYTHON PAKETLERİNİN KURULUMU
+## BAĞZI PYTHON PAKETLERİNİN KURULUMU
 
-###Kütüp hane kurmada kullanılabilecek metodlar;
+### Kütüp hane kurmada kullanılabilecek metodlar;
+
 `sudo apt-get install python-kütüphane_adı`
 `sudo pip install kütüphane_adı`
 
