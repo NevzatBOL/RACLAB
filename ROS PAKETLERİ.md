@@ -52,3 +52,12 @@ Derinlik ve noktasal bulut değeri varsayılan olarak 100 tanımlanmıştır. Bu
 Birden fazla zed kullanma
 
     roslaunch zed_wrapper zed_multi_cam.launch
+    
+Kameradan alınan veri tipleri;
+
+    image_rect_color                : Renk düzeltilmiş görüntü
+    image_raw_color                 : Renk düzeltilmemiş görüntü
+    /depth/depth_registered         : Sol resimde kayıtlı derinlik harita görüntüsü
+    /point_cloud/cloud_registered   : Kayıtlı renk noktası bulutu
+    /camera/odom                    : zed_initial_frame'e göre mutlak 3D konum ve yön bilgisi
+    /camera_info                    : Kamera kalibrasyon verileri
