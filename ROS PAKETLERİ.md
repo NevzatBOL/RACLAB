@@ -53,7 +53,7 @@ Birden fazla zed kullanma
 
     roslaunch zed_wrapper zed_multi_cam.launch
     
-Kameradan alınan veri tipleri;
+Yayınlanan Konular;
 
     image_rect_color                : Renk düzeltilmiş görüntü
     image_raw_color                 : Renk düzeltilmemiş görüntü
