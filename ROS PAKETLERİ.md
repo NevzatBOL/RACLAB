@@ -22,7 +22,7 @@ ROS için zed paketini githubdan çekelim.
     cd ..
     catkin_make
 
-zed kamerayı çalıştıralım.
+Zed kamerayı çalıştıralım.
  
     roslaunch zed_wrapper zed.launch
 
@@ -36,13 +36,13 @@ Kameradan gelen görüntüleri incelemenin başka bir yolu;
     rostopic list
     rosrun image_view image_view image:=/zed/rgb/image_raw_color
     
-zed kameryı rviz de çalıştırabiliriz.
+Zed kamerayı rviz de çalıştırabiliriz.
  
     roslaunch zed_wrapper display.launch
     
     
     
 
-birden fazla zed kullanma
+Birden fazla zed kullanma
 
     roslaunch zed_wrapper zed_multi_cam.launch
