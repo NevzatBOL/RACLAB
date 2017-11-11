@@ -24,10 +24,10 @@ ROS için zed paketini githubdan çekelim.
  
  zed kamerayı çalıştıralım.
  
-        roslaunch zed_wrapper zed.launch
+     roslaunch zed_wrapper zed.launch
     
  zed kameradan gelen verileri rviz çalıştıralım.
  
-        roslaunch zed_wrapper display.launch
+     roslaunch zed_wrapper display.launch
 
     
