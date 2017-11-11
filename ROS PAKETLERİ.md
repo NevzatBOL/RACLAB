@@ -40,8 +40,8 @@ Zed kamerayı rviz de çalıştırabiliriz.
  
     roslaunch zed_wrapper display.launch
     
-Rviz'de /depth/depth_registered derinlik değeri 8bit'dir bu değer `launch/zed_camera.launch` dosyasın da 
-openni_depth_mode value=1 yapılarak 16bit yapılabilir.
+Rviz'de /depth/depth_registered derinlik değeri metre cinsinden 8bit'dir, bu değer `launch/zed_camera.launch` dosyasın da 
+openni_depth_mode value=1 yapılarak milimetre cinsinden 16bit yapılabilir.
 
     <param name="openni_depth_mode" value="1"/>
   
