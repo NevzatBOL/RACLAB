@@ -26,7 +26,7 @@ zed kamerayı çalıştıralım.
  
     roslaunch zed_wrapper zed.launch
     
-zed kameradan gelen verileri rvizde çalıştıralım.
+zed kameryı rviz de çalıştırabiliriz.
  
     roslaunch zed_wrapper display.launch
     
