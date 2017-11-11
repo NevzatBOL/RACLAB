@@ -45,8 +45,7 @@ openni_depth_mode value=1 yapılarak 16bit yapılabilir.
 
     <param name="openni_depth_mode" value="1"/>
   
-Derinlik ve noktasal bulut değeri varsayılan olarak 100 tanımlanmıştır. Bu değerde tüm derinlik değerleri, derinlik ve noktasal bulut'a yazılır. Belirli bir değerin altındaki değerleri filtrelemek için aşağıdaki komut kullanıla bilir.
-(80 varsayılan filtre değeridir.)
+Derinlik ve noktasal bulut değeri varsayılan olarak 100 tanımlanmıştır. Bu değerde tüm derinlik değerleri, derinlik ve noktasal bulut'a yazılır. Belirli bir değerin altındaki değerleri filtrelemek için aşağıdaki komut kullanıla bilir. (80 varsayılan filtre değeridir.)
   
     rosrun dynamic_reconfigure dynparam set /zed/zed_wrapper_node confidence 80    
 
