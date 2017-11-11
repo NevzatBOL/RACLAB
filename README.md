@@ -69,7 +69,34 @@ indirilen pakete çalışma izni verilir.
 indirilen paket çalıştırılarak kurulum tamamlanır.
 
 	./ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run
+	
+### ZED KAMERA PYTHON3 PAKET KURULUMU
+https://github.com/stereolabs/zed-python
 
+Adresinden python3.5+ için paket indirilir.
+
+	sudo apt*get install python3-pip
+	sudo pip3 install cython
+	sudo pip3 install numpy
+	
+	python3 setup.py build
+	python3 setup.py install
+pyzed kütüphanesinin kurulumu tamamlanır.
+
+pyzed kütüphanesinin yanında ihtiyacımız olan diğer kütüphanelerin kurulumları;
+
+https://pypi.python.org/pypi/PyOpenGL/3.1.1a1#downloads
+
+Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
+	
+	tar -zxvf PyOpenGL-3.1.1a1.tar.gz
+	cd PyOpenGL-3.1.1a1
+	python setup.py install
+
+opencv kurulumu aşağıda anlatılan uzun yöntemle yapılabileceği gibi görüntünün zed kamera kütüphanesinden alınacağından dolayı aşağıdaki komut ilede opencv kurulumu yapılabilir.
+
+	sudo install pip3 opencv-python
+	
 ## ROS KİNETİC KURULUMU
 
 	sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
