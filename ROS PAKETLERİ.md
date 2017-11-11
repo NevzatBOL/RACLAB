@@ -39,6 +39,14 @@ Kameradan gelen görüntüleri incelemenin başka bir yolu;
 Zed kamerayı rviz de çalıştırabiliriz.
  
     roslaunch zed_wrapper display.launch
+
+Birden fazla zed kullanma
+
+    roslaunch zed_wrapper zed_multi_cam.launch
+
+Birden fazla zed ve gpu kullanma
+
+    roslaunch zed_wrapper zed_multi_gpu.launch
     
 Rviz'de /depth/depth_registered derinlik değeri metre cinsinden 8bit'dir, bu değer `launch/zed_camera.launch` dosyasın da 
 openni_depth_mode value=1 yapılarak milimetre cinsinden 16bit yapılabilir.
@@ -48,11 +56,7 @@ openni_depth_mode value=1 yapılarak milimetre cinsinden 16bit yapılabilir.
 Derinlik ve noktasal bulut değeri varsayılan olarak 100 tanımlanmıştır. Bu değerde tüm derinlik değerleri, derinlik ve noktasal bulut'a yazılır. Belirli bir değerin altındaki değerleri filtrelemek için aşağıdaki komut kullanıla bilir. (80 varsayılan filtre değeridir.)
   
     rosrun dynamic_reconfigure dynparam set /zed/zed_wrapper_node confidence 80    
-
-Birden fazla zed kullanma
-
-    roslaunch zed_wrapper zed_multi_cam.launch
-    
+   
 Yayınlanan Konular;
 
     image_rect_color                : Renk düzeltilmiş görüntü
