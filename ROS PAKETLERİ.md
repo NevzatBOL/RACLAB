@@ -61,3 +61,8 @@ Yayınlanan Konular;
     /point_cloud/cloud_registered   : Kayıtlı renk noktası bulutu
     /camera/odom                    : zed_initial_frame'e göre mutlak 3D konum ve yön bilgisi
     /camera_info                    : Kamera kalibrasyon verileri
+
+Referans Linkler;
+
+https://www.stereolabs.com/documentation/integrations/ros/getting-started.html
+http://wiki.ros.org/zed-ros-wrapper
