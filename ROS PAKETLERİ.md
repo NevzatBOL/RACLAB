@@ -29,6 +29,12 @@ zed kamerayı çalıştıralım.
 Kameradan gelen görüntüleri rqt de inceleyelim.
 
     rqt_image_view
+
+Kameradan gelen görüntüleri incelemenin başka bir yolu;
+   
+    roscore
+    rostopic list
+    rosrun image_view image_view image:=/zed/rgb/image_raw_color
     
 zed kameryı rviz de çalıştırabiliriz.
  
