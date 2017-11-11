@@ -3,6 +3,7 @@
 ## CUDA 8.0 KURULUMU
 
 https://developer.nvidia.com/cuda-80-ga2-download-archive
+
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
 	sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
@@ -73,7 +74,7 @@ indirilen paket çalıştırılarak kurulum tamamlanır.
 ### ZED KAMERA PYTHON3 PAKET KURULUMU
 https://github.com/stereolabs/zed-python
 
-Adresinden python3.5+ için paket indirilir.
+Adresinden python3.5+ için pyzed kütüphanesi indirilir.
 
 	sudo apt*get install python3-pip
 	sudo pip3 install cython
@@ -83,7 +84,7 @@ Adresinden python3.5+ için paket indirilir.
 	python3 setup.py install
 pyzed kütüphanesinin kurulumu tamamlanır.
 
-pyzed kütüphanesinin yanında ihtiyacımız olan diğer kütüphanelerin kurulumları;
+#### pyzed kütüphanesinin yanında ihtiyacımız olan diğer kütüphanelerin kurulumları;
 
 https://pypi.python.org/pypi/PyOpenGL/3.1.1a1#downloads
 
@@ -93,7 +94,7 @@ Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
 	cd PyOpenGL-3.1.1a1
 	python setup.py install
 
-opencv kurulumu aşağıda anlatılan uzun yöntemle yapılabileceği gibi görüntünün zed kamera kütüphanesinden alınacağından dolayı aşağıdaki komut ilede opencv kurulumu yapılabilir.
+opencv kurulumu aşağıda anlatılan uzun yöntemle yapılabileceği gibi görüntü pyzed kütüphanesinden alınacağından dolayı aşağıdaki komut ilede opencv kurulumu yapılabilir.
 
 	sudo install pip3 opencv-python
 	
