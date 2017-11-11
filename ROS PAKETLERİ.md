@@ -25,6 +25,10 @@ ROS için zed paketini githubdan çekelim.
 zed kamerayı çalıştıralım.
  
     roslaunch zed_wrapper zed.launch
+
+Kameradan gelen görüntüleri rqt de inceleyelim.
+
+    rqt_image_view
     
 zed kameryı rviz de çalıştırabiliriz.
  
