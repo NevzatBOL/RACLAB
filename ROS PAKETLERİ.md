@@ -10,9 +10,9 @@ Adresinden zed kamera paketi indirilir.
     mkdir -p zed/src
     cd zed
     catkin_make
-    source devel/setup.bach
-    gedit ~/.bachrc
-      source /home/nevzat/zed/devel/setup.bach
+    source devel/setup.bash
+    gedit ~/.bashrc
+      source /home/nevzat/zed/devel/setup.bash
  
 ROS için zed paketini githubdan çekelim.
 
