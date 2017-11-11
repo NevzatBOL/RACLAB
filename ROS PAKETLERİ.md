@@ -5,6 +5,8 @@ https://github.com/stereolabs/zed-ros-wrapper
 
 Adresinden zed kamera paketi indirilir.
 
+İlk olarak çalışma dizini oluşturalım.
+
     mkdir -p zed/src
     cd zed
     catkin_make
@@ -12,11 +14,20 @@ Adresinden zed kamera paketi indirilir.
     gedit ~/.bachrc
       source /home/nevzat/zed/devel/setup.bach
  
+ROS için zed paketini githubdan çekelim.
+
     cd src
     git clone https://github.com/stereolabs/zed-ros-wrapper.git
- 
+    
     cd ..
     catkin_make
  
-    roslaunch zed_wrapper zed.launch
-    roslaunch zed_wrapper display.launch
+ zed kamerayı çalıştıralım.
+ 
+        roslaunch zed_wrapper zed.launch
+    
+ zed kameradan gelen verileri rviz çalıştıralım.
+ 
+        roslaunch zed_wrapper display.launch
+
+    
