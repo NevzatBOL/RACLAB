@@ -1,5 +1,5 @@
 #-*-coding: cp1254-*-
-###Sekil Algılama###
+###Sekil Algılama1###
 
 import numpy as np
 import cv2
