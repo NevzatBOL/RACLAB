@@ -233,7 +233,7 @@ Raspberry Pi için;
 	Advanced Options > Expand Filesystem
 	reboot
 
-Komutları uygulanarak opencv kurulumu için hazır halegetirilir, ardından Metod2 Kullanılarak kurulum tamamlanır.
+Komutları uygulanarak opencv kurulumu için hazır hale getirilir, ardından Metod2 Kullanılarak kurulum tamamlanır.
 
 Referans Link:
 Ubuntu için:
@@ -245,7 +245,7 @@ Raspberry Pi için:
 
 https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
 
-## BAĞZI PYTHON PAKETLERİNİN KURULUMU
+## BAZI PYTHON PAKETLERİNİN KURULUMU
 
 ### Kütüp hane kurmada kullanılabilecek metodlar;
 
