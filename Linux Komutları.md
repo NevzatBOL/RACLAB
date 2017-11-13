@@ -103,24 +103,26 @@
     
 ## Ağ Komutları
 
-    ifconfig			            ağ ayarlarını gözterir.
-    sudo ifconfig ağ down		    ağı kapatır.
-    sudo ifconfig ağ up		        ağı açar.
-    sudo dhclient			        ip adresini yeniler.
+    ifconfig			ağ ayarlarını gözterir.
+    sudo ifconfig ağ down		ağı kapatır.
+    sudo ifconfig ağ up		ağı açar.
+    sudo dhclient			ip adresini yeniler.
     /etc/init.d/networking restart	network servisini yeniden başlatır.
     
-    ping ip/web_sitesi		        ip/web_sitesine sürekli küçük veri paketleri gönderir.
+    ping ip/web_sitesi		ip/web_sitesine sürekli küçük veri paketleri gönderir.
     ping -c sayı ip/web_sitesi   	ip/web_sitesi girilen sayı kadar ping atar.
-    apt-get install traceroute	    ip takipetme paketini yükledik.
-    traceroute www.google.com	    ip/web_sitesi bağlanmak için getiğimiz ipleri gösterir.	
+    apt-get install traceroute	ip takipetme paketini yükledik.
+    traceroute www.google.com	ip/web_sitesi bağlanmak için getiğimiz ipleri gösterir.	
     
     nslookup
-	>server			            bağlı olduğumuz dns'yi gösterir.
-	>google.com		            aradığımız ağın dns'ini gösterir.
+	>server			        bağlı olduğumuz dns'yi gösterir.
+	>google.com		        aradığımız ağın dns'ini gösterir.
 	>server 127.0.1.1	        bağlanmak istediğimiz dns'yi değiştirebiliriz.	
 
-    sudo nano /etc/resolv.conf	    dns dosyasını açarız.
-    nameserver 127.0.1.1		    bağlanmak istediğimiz dns'yi değiştirebiliriz.	
+    sudo nano /etc/resolv.conf	dns dosyasını açarız.
+    nameserver 127.0.1.1		radığımız ağın dns'ini gösterir.
+120
+        >server 127.0.1.1               bbağlanmak istediğimiz dns'yi değiştirebiliriz.	
     
 ## Sunucu Kurma
 
@@ -129,16 +131,16 @@
     
 ## Proxy Kurma
 
-    foxyproxy 			chrome eklentisini kuruyoruz.
+    foxyproxy 		chrome eklentisini kuruyoruz.
     fresh ip address	http://www.us-proxy.org/ sitesinden anonymous veya elite proxy iplerini kopyalıyoruz.
     proxy checker		http://www.checker.freeproxy.ru/checker/ sitesinden kopyaladığımız iplerin çalışırlığını test ediyoruz. çalışan ipleri kurduğumuz foxyproxy eklentisi üzerinden port numarası ile birlikte giriyoruz.
     
  ## VPN Kurma
  
      vpn book			https://www.vpnbook.com/ sitesinden openvpnden istediğimiz vpn paketini indiriyoruz.
-					    vpn kapetini zip den çıkartıyoruz.
-     sudo openvpn	    orn_vpn		indirdiğimiz klasör içindeki vpnleriden birini çalıştırıyoruz.
-					    vpnbook sitesindeki username ve password ü kullanarak vpn e bağlanıyoruz.
+					vpn kapetini zip den çıkartıyoruz.
+     sudo openvpn orn_vpn		indirdiğimiz klasör içindeki vpnleriden birini çalıştırıyoruz.
+					vpnbook sitesindeki username ve password ü kullanarak vpn e bağlanıyoruz.
                     
 ## Grub Onarma
 
@@ -149,17 +151,17 @@
     
 ## Disk Bağlanma Sorunu Çözümü
 
-    powercfg.exe /hibernate off		windowsta cmd yi yönetici çalıştırılır. 
-						            Girilen komut ile windowsun hızlı başlat seçeneği kapatılır.
+    powercfg.exe /hibernate off			windowsta cmd yi yönetici çalıştırılır. 
+							Girilen komut ile windowsun hızlı başlat seçeneği kapatılır.
 
-    sudo fdisk -l				    Disklerin hangi bölümde kurulduğunu listeler.
-    sudo mkdir -p /media/sdb(x)		NTFS biçimli bir disk bölümünü /media dizini altında "sdb1" adında bir dizine bağlamak için  
-						            /media dizini altında sdb1 adında bir klasör yoksa bu klasörü oluşturmalıyız.
+    sudo fdisk -l					Disklerin hangi bölümde kurulduğunu listeler.
+    sudo mkdir -p /media/sdb(x)			NTFS biçimli bir disk bölümünü /media dizini altında "sdb1" adında bir dizine bağlamak için  
+							/media dizini altında sdb1 adında bir klasör yoksa bu klasörü oluşturmalıyız.
     sudo mount -t ntfs-3g /dev/sdb1 /media/sdb(x)	/media/sdb(x) dizinine bağlıyoruz. (x) yerine bağlanmak istediğimiz bölüm yazılmalıdır.
     
 ## Ubuntu 16.04 Güç kritik seviyeye düştüğünde derin uykuya geçmeyi aktif etme
 
-    sudo pm-hibernate    		derin uykunun çalışırlığını test ettik.
+    sudo pm-hibernate	derin uykunun çalışırlığını test ettik.
     
     Bunu yapmak için, düzenlemeye başlayın:
     sudo nano /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
