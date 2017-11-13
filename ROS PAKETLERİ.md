@@ -48,7 +48,7 @@ Birden fazla zed ve gpu kullanma
 
     roslaunch zed_wrapper zed_multi_gpu.launch
     
-Rviz'de /depth/depth_registered derinlik değeri metre cinsinden 8bit'dir, bu değer `launch/zed_camera.launch` dosyasın da 
+Rviz'de /depth/depth_registered derinlik değeri metre cinsinden 32bit'dir, bu değer `launch/zed_camera.launch` dosyasın da 
 openni_depth_mode value=1 yapılarak milimetre cinsinden 16bit yapılabilir.
 
     <param name="openni_depth_mode" value="1"/>
