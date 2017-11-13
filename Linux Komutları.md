@@ -17,22 +17,22 @@
 
 ## Dosya İşlemleri
 
-    pwd 				bulunduğumuz dizini gösterir.	
-    ls				    bulunduğumuz dizindeki dosyları ve klasörleri listeler.
-    ls -l				bulunduğumuz dizindeki dosyları ve klasörleri özellikleri ile birlikte listeler.
-    ls -a				bulunduğumuz dizindeki gizli dosya ve klasörleri listeler.
-    cd				    dizinler arası geçişi sağlar.
-    cd .. 				bir üst dizine çıkar.
-    cd ~				varsayılan dizine gider.
-    cd dizin			girilen dizine gider.
+    pwd 			bulunduğumuz dizini gösterir.	
+    ls			bulunduğumuz dizindeki dosyları ve klasörleri listeler.
+    ls -l			bulunduğumuz dizindeki dosyları ve klasörleri özellikleri ile birlikte listeler.
+    ls -a			bulunduğumuz dizindeki gizli dosya ve klasörleri listeler.
+    cd			dizinler arası geçişi sağlar.
+    cd .. 			bir üst dizine çıkar.
+    cd ~			varsayılan dizine gider.
+    cd dizin		girilen dizine gider.
 
-    mkdir klasor			        bulunduğumuz dizinde klasör oluşturur.
-    mkdir -p a/b			        bulunduğumuz dizinde iç içe a ve b klasörlerini oluşturur.
+    mkdir klasor			bulunduğumuz dizinde klasör oluşturur.
+    mkdir -p a/b			bulunduğumuz dizinde iç içe a ve b klasörlerini oluşturur.
     mkdir -p a/b && touch a/a.txt 	bulunduğumuz dizinde iç içe klasör oluşturur ve a klasörü içine a.txt dosyasını oluşturur.
-    mkdir touch a/b/b.txt	a klasörü içindeki b klasörü içine b.txt dosyasını oluşturur. 
+    mkdir touch a/b/b.txt		a klasörü içindeki b klasörü içine b.txt dosyasını oluşturur. 
     cp dosya klasor 		dosyayı klasor dizinine kopyalar.
     mv dosya klasor 		dosyayı klasor dizinine taşır.
-    rm dosya			    dosyayı siler.
+    rm dosya			dosyayı siler.
     rm -rf klasor			klasörü siler.	
 
     touch dosya.txt			bulunduğumuz dizinde dosya oluşturur.
@@ -46,25 +46,25 @@
     more dosya.txt			dosyayı düz okur.
     tac dosya.txt			dosyayının sonundan okur.	
 
-    gpg -c dosya.txt		        dosyayı şifreler
+    gpg -c dosya.txt		dosyayı şifreler
     gpg -o yeni.txt dosya.txt.gpg	şifreli dosyayı yeni.txt dosyasına çıkartır.
 
 ## Dosya/Program/Paket/Aygıt arama
 
     find dosya			    bulunduğumuz dizinde dosyayı arar.
-	find |grep dosya 		tüm dizinlerde dosayı arar.
-	which program_adı		programın bulunduğu dizini gösterir.
-	whereis program_adı		programın bulunduğu dizini detaylı gösterir.
-	
-	lspci -v			bilgisayarımıza bağlı olan aygıtları lister.
-	lsusb				bilgisayarımıza bağlı olan usb aygıtlarını listeler.
-
-	apt-cache depends program_adı	programın ihtiyaç duyduğu paketleri listeler.
-	apt-cache search program_adı	paket dosyaları içerisinde programa ait tüm paketleri listeler.
+    find |grep dosya 		tüm dizinlerde dosayı arar.
+    which program_adı		programın bulunduğu dizini gösterir.
+    whereis program_adı		programın bulunduğu dizini detaylı gösterir.
     
-	dpkg -l				    sistemde kurulu olan tüm paketleri listeler.
-	dpkg -S program_adı		programın kurulduğu bütün paketleri listeler.
-	dpkg -L program_adı		programın kurduğu bütün paketleri listeler.
+    lspci -v			bilgisayarımıza bağlı olan aygıtları lister.
+    lsusb				bilgisayarımıza bağlı olan usb aygıtlarını listeler.
+    
+    apt-cache depends program_adı	programın ihtiyaç duyduğu paketleri listeler.
+    apt-cache search program_adı	paket dosyaları içerisinde programa ait tüm paketleri listeler.
+    
+    dpkg -l				    sistemde kurulu olan tüm paketleri listeler.
+    dpkg -S program_adı		programın kurulduğu bütün paketleri listeler.
+    dpkg -L program_adı		programın kurduğu bütün paketleri listeler.
     
 ## Bilgisayar Kapama/Yeniden Başlatma
 
