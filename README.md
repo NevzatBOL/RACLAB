@@ -141,7 +141,7 @@ Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacakt�
 	sudo apt-get install build-essential cmake git pkg-config
 	sudo apt-get install libjpeg8-dev libtiff4-dev libjasper-dev libpng12-dev	
 
-*eğer libtiff4-dev kütüphanesi bulunamazsa bunun yerine libtiff5-dev kullanıla bilir.*
+*eğer libtiff4-dev kütüphanesi bulunamazsa bunun yerine libtiff5-dev kullanılabilir.*
 
 	sudo apt-get install libgtk2.0-dev libgtk-3-dev
 	sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
