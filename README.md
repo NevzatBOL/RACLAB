@@ -229,12 +229,13 @@ yeni açılan terminallerde çalışmıyorsa aşağıdaki işlemler uygulanmalı
 	export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:$PYTHONPATH 
 	.bashrc dosyasına bu satır eklenerek kaydedilir.
 
-Raspberry Pi için;
+**Raspberry Pi için;**
+
 	sudo raspi-config
 	Advanced Options > Expand Filesystem
 	reboot
 
-Komutları uygulanarak opencv kurulumu için hazır hale getirilir, ardından Metod2 Kullanılarak kurulum tamamlanır.
+*Komutları uygulanarak opencv kurulumu için hazır hale getirilir.Eğer görüntü sadece raspberry pi kamera modülünden alınacaksa Metod1 ile, harici kameradan görüntü alınacaksa Metod2 Kullanılarak kurulum tamamlanır.*
 
 Referans Link:
 Ubuntu için:
@@ -252,7 +253,7 @@ https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-pytho
 
 	sudo apt-get install python-kütüphane_adı
 	sudo pip install kütüphane_adı
-`	pip search kütüphane_adı 	Kütüphane aramada kullanılır.
+	pip search kütüphane_adı 	Kütüphane aramada kullanılır.
 
 
 
