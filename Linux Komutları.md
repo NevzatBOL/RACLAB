@@ -1,18 +1,18 @@
 # Linux Komutları
 
-    man komut			        komut hakkında bilgi verir.
-	whoami				        aktif kullanıcıyı gösterir.
-	w				            bu gün aktif olmuş tüm kullanıcıları gösterir.
-	uname -a			        kurulu olan linux serisini gösterir.
-	sudo 				        bir seferlik admin yetkisi verir.
-    sudo -s                     sürekli admin yetkisi verir.
-	sudo su				        sürekli tüm sistemde admin yetkisi verir.           
-	top				            çalışmakta olan processleri gösterir.
-	ps aux				        çalışmakta olan bütün sistemi görüntüler.
-	ps aux |grep program_adı	programın çalışma bilgilerini verir.
-	kill -9 PID			        PID'si verilen process'i durdurur.
-	history				        terminalden daha önce yazılmış tüm komutları listeler.
-	sudo -H nautilus		    Dosya sisteminde root yetkisi verir.
+    man komut			komut hakkında bilgi verir.
+    whoami				aktif kullanıcıyı gösterir.
+    w				bu gün aktif olmuş tüm kullanıcıları gösterir.
+    uname -a			kurulu olan linux serisini gösterir.
+    sudo 				bir seferlik admin yetkisi verir.
+    sudo -s                     	sürekli admin yetkisi verir.
+    sudo su				sürekli tüm sistemde admin yetkisi verir.           	
+    top				çalışmakta olan processleri gösterir.
+    ps aux				çalışmakta olan bütün sistemi görüntüler.
+    ps aux |grep program_adı	programın çalışma bilgilerini verir.
+    kill -9 PID			PID'si verilen process'i durdurur.
+    history				terminalden daha önce yazılmış tüm komutları listeler.
+    sudo -H nautilus		Dosya sisteminde root yetkisi verir.
 
 
 ## Dosya İşlemleri
