@@ -52,6 +52,7 @@ http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
 
 python 2.7 GPU için paket kurulumu
 
+	sudo apt-get install python-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
 	sudo pip install --upgrade tensorflow-gpu
 
 Referans Link:
