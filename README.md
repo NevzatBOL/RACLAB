@@ -77,7 +77,7 @@ https://github.com/stereolabs/zed-python
 
 Adresinden python3.5+ için pyzed kütüphanesi indirilir.
 
-	sudo apt*get install python3-pip
+	sudo apt-get install python3-pip
 	sudo pip3 install cython
 	sudo pip3 install numpy
 	
@@ -93,7 +93,7 @@ Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
 	
 	tar -zxvf PyOpenGL-3.1.1a1.tar.gz
 	cd PyOpenGL-3.1.1a1
-	python setup.py install
+	python3 setup.py install
 
 opencv kurulumu aşağıda anlatılan uzun yöntemle yapılabileceği gibi görüntü pyzed kütüphanesinden alınacağından dolayı aşağıdaki komut ilede opencv kurulumu yapılabilir.
 
