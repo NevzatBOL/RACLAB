@@ -7,6 +7,7 @@ https://developer.nvidia.com/cuda-80-ga2-download-archive
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
 	sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+	sudo apt-get update
 	sudo apt-get install cuda-8.0
 
 Komutları ile kurulum tamamlanır.
