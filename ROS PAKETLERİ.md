@@ -71,3 +71,55 @@ Referans Linkler;
 https://www.stereolabs.com/documentation/integrations/ros/getting-started.html
 
 http://wiki.ros.org/zed-ros-wrapper
+
+## SCANSE SWEEP LİDAR
+
+git clone https://github.com/jetsonhacks/installSweep
+Adresinden dosyalar indirilir
+    cd installSweep/
+    ./installSweepSDK.sh
+Yukarıdaki adımlarda home dizinine sweep-sdk yi indirdik. Paketi kurmadan önce lidarin usb serial number'ı öğrenmemiz gerekli. Lidar usb ile bilgisayara bağladıktan sonra terminalden "dmesg --follow"  komutu çalıştırılır ve serial number 
+"~/installSweep" dizinindeki "99-usb-serial-rules" isimli dosyanın içindeki ATTRS(serial)=="xxxxxxxx" isimli satırdaki xxxxxxx kısmına kopyalanır ve kaydedilir.
+    cd installSweep/
+    sudo cp 99-usb-serial.rules /etc/udev/rules.d/
+    
+SWEEP-SDK ÜZERİNDEN VERİ ALMA
+
+    cd ~/sweep-sdk/libsweep/build
+    sudo ./sweep-ctl /dev/sweep get motor_speed
+Lidarın çalışma frekansını verir
+    sudo ./sweep-ctl /dev/sweep get sample_rate
+Lidarın dakikadaki örnek sayısını verir
+    sudo ./sweep-ctl /dev/sweep set motor_speed 5
+Lidarın çalışma frekansını değiştirir 1-10 arasındaki frekanslara ayarlanabilir
+    sudo ./sweep-ctl /dev/sweep set sample_rate 1000
+Lidarın dakikadaki örnek sayısını değiştirir, maximum 1000
+    cd ~/sweep-sdk/libsweep/examples/build
+    sudo ./example-c /dev/sweep
+Lidarın 10 tur dönmesi sonuçunda aldığı verileri terminal ekranına yazdırır.
+    sudo ./example-viewer /dev/sweep
+Lidar verilerini viewer ekranında gösterir.
+
+SWEEP LİDAR PAKETİ WORKSPACE ÜZERİNE KURULUMU
+
+İlk önce lidar için bir workspace oluşturalım 
+    mkdir -p lidar/src
+    cd ~/lidar/src
+    catkin_init_workspace
+    cd installSweep/
+    ./installSweepROS.sh ~/lidar
+önceden açılmış bir workspace'e kurmak için ./installSweepROS.sh [catkin workspace name] kullanılabilir.
+    cd ~/lidar/src/sweep-ros/launch
+    gedit sweep2scan.launch
+Açılan sayfada type string value degerini /dev/sweep yap ve kaydet
+    roslaunch sweep_ros view_sweep_laser_scan.launch
+Lidar verilerini Rviz üzerinde gösterir
+    roslaunch sweep_ros sweep2scan.launch
+Lidar verilerini /scan topic'i üzerinden yayınlar
+
+    sudo chown username /dev/ttyUSB0
+Lidar çalıştırılırken terminalde "error opening serial port" hatası verirse yönetici olarak açabilir veya yukarıdaki komut ile lidar usb kablosu takılı olduğu sürece doğru açılmasını sağlayabilirsiniz her kablo söküp takmada tekrar bu komutu çalışmalısınız.
+
+    
+    
+
