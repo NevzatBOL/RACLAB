@@ -120,9 +120,7 @@
 	>server 127.0.1.1	        bağlanmak istediğimiz dns'yi değiştirebiliriz.	
 
     sudo nano /etc/resolv.conf	dns dosyasını açarız.
-    nameserver 127.0.1.1		radığımız ağın dns'ini gösterir.
-120
-        >server 127.0.1.1               bbağlanmak istediğimiz dns'yi değiştirebiliriz.	
+    nameserver 127.0.1.1	        bağlanmak istediğimiz dns'yi değiştirebiliriz.	
     
 ## Sunucu Kurma
 
@@ -151,8 +149,12 @@
     
 ## Disk Bağlanma Sorunu Çözümü
 
+**Windwos hızlı başlatma için kendini tam olarak kapatmaz, bu tip durumlarda linuxtan windows disklerine erişmemize izinverilmez. Bunu önelemek için windowsun hızlı başlatma seçeneği kapatılabilir.**
+
     powercfg.exe /hibernate off			windowsta cmd yi yönetici çalıştırılır. 
 							Girilen komut ile windowsun hızlı başlat seçeneği kapatılır.
+
+*Eğer diğer disklere halen erişemiyorsanız aşağıdaki kodları kullanarak tüm disklere erişim sağlaya bilirsiniz.*
 
     sudo fdisk -l					Disklerin hangi bölümde kurulduğunu listeler.
     sudo mkdir -p /media/sdb(x)			NTFS biçimli bir disk bölümünü /media dizini altında "sdb1" adında bir dizine bağlamak için  
