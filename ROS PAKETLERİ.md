@@ -68,7 +68,7 @@ Yayınlanan Konular;
 
 Launch Dosyası Parametreleri;
 
-    Parameter	        Description	                                            Value
+    Parameter	        Description	                                        Value
     svo_file	        Specify SVO filename	                                Path to an SVO file
     resolution	        Select ZED camera resolution	                        ‘0’: HD2K, ‘1’: HD1080, ‘2’: HD720, ‘3’: VGA
     frame_rate	        Set ZED camera video framerate	                        int
