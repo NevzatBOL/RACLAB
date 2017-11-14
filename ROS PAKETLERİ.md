@@ -66,20 +66,20 @@ Yayınlanan Konular;
     /camera/odom                    : zed_initial_frame'e göre mutlak 3D konum ve yön bilgisi
     /camera_info                    : Kamera kalibrasyon verileri
 
-    Parameter	        Description	                    Value
-    svo_file	        Specify SVO filename	        Path to an SVO file
-    resolution	        Select ZED camera resolution	‘0’: HD2K, ‘1’: HD1080, ‘2’: HD720, ‘3’: VGA
-    frame_rate	        Set ZED camera video framerate	int
-    sensing_mode	        Select depth sensing mode	    ‘0’: STANDARD, ‘1’: FILL
-    quality	                Select depth map quality	    ‘0’: NONE, ‘1’: PERFORMANCE, ‘2’: MEDIUM, ‘3’: QUALITY
+    Parameter	        Description	                                            Value
+    svo_file	        Specify SVO filename	                                Path to an SVO file
+    resolution	        Select ZED camera resolution	                        ‘0’: HD2K, ‘1’: HD1080, ‘2’: HD720, ‘3’: VGA
+    frame_rate	        Set ZED camera video framerate	                        int
+    sensing_mode	        Select depth sensing mode	                        ‘0’: STANDARD, ‘1’: FILL
+    quality	                Select depth map quality	                        ‘0’: NONE, ‘1’: PERFORMANCE, ‘2’: MEDIUM, ‘3’: QUALITY
     openni_depth_mode	Convert 32bit depth in meters to 16bit in millimeters	‘0’: 32bit float meters, ‘1’: 16bit uchar millimeters
-    zed_id	                Select a ZED camera by its ID.  ID are assigned by Ubuntu. Useful when multiple cameras are connected. ID is ignored if an SVO path is specified.	int, default ‘0’
-    gpu_id	                Select a GPU device for depth computation	int, default ‘-1’ (best device found)
-    publish_tf	        Enable/Disable publish odometry TF	true, false
-    odometry_frame	        Odometry frame name	string,     default=‘odometry_frame’
-    base_frame	        Base link frame name	        string, default=‘base_frame’
-    camera_frame	        Camera frame name	            string, default=‘camera_frame’
-    depth_frame	        Depth frame name	            string, default=‘depth_frame’
+    zed_id	                Select a ZED camera by its ID.  ID are assigned by Ubuntu. Useful when multiple cameras are connected. ID is ignored if an SVO path is specified.	                        int, default ‘0’
+    gpu_id	                Select a GPU device for depth computation	        int, default ‘-1’ (best device found)
+    publish_tf	        Enable/Disable publish odometry TF	                    true, false
+    odometry_frame	        Odometry frame name	string,                         default=‘odometry_frame’
+    base_frame	        Base link frame name	                                string, default=‘base_frame’
+    camera_frame	        Camera frame name	                                string, default=‘camera_frame’
+    depth_frame	        Depth frame name	                                    string, default=‘depth_frame’
 
 
 
