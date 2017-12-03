@@ -32,3 +32,4 @@
 
 **ornk16: QR Kod Okuma**
 
+**ornk17: Resmi 16'ya Böleme ve Parçaları Karıştırıp Tekrar Birleştirme**
