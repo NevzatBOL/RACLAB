@@ -17,3 +17,5 @@
 [lenet tutorial](http://deeplearning.net/tutorial/lenet.html)
 
 [neuralnetwork](http://neuralnetworksanddeeplearning.com/chap1.html)              *Toplam 6 chapter*
+
+[deep learning and opencv](http://www.learnopencv.com/)
