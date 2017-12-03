@@ -24,6 +24,7 @@
     cd				dizinler arası geçişi sağlar.
     cd .. 				bir üst dizine çıkar.
     cd ~				varsayılan dizine gider.
+    cd -				önceki dizine gider.
     cd dizin			girilen dizine gider.
 
     mkdir klasor			bulunduğumuz dizinde klasör oluşturur.
