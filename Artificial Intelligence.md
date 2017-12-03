@@ -1,4 +1,6 @@
-#Artificial Intelligence
+# Artificial Intelligence
+
+## Kaynaklar 
 
 [jetson-inference](https://github.com/dusty-nv/jetson-inference)
 
@@ -10,8 +12,8 @@
 
 [deel learning blog](https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/)
 
-[deep learning tutoril](http://deeplearning.net/tutorial/contents.html)
+[deep learning tutorial](http://deeplearning.net/tutorial/contents.html)
 
 [lenet tutorial](http://deeplearning.net/tutorial/lenet.html)
 
-[neuralnetwork](http://neuralnetworksanddeeplearning.com/chap1.html)
+[neuralnetwork](http://neuralnetworksanddeeplearning.com/chap1.html)              *Toplam 6 chapter*
