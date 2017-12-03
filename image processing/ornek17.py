@@ -1,5 +1,5 @@
 #-*-coding: cp1254-*-
-###Resmi 16 ya bölen ve resmin parçalarını karıştırıp tekrar birleştiren program###
+###Resmi 16'ya Böleme ve Parçaları Karıştırıp Tekrar Birleştirme###
 
 import numpy as np
 import cv2
