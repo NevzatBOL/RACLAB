@@ -8,14 +8,16 @@
 
 [mit-cs231n-convolution-networks](http://cs231n.github.io/convolutional-networks/)
 
-[standford tutorials](http://ufldl.stanford.edu/tutorial/)
+[Stanford Tutorials](http://ufldl.stanford.edu/tutorial/)
 
-[deel learning blog](https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/)
+[Deel Learning Blog](https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/)
 
-[deep learning tutorial](http://deeplearning.net/tutorial/contents.html)
+[Deep Learning Tutorials](http://deeplearning.net/tutorial/contents.html)
 
-[lenet tutorial](http://deeplearning.net/tutorial/lenet.html)
+[LeNet Tutorial](http://deeplearning.net/tutorial/lenet.html)
 
-[neuralnetwork](http://neuralnetworksanddeeplearning.com/chap1.html)              *Toplam 6 chapter*
+[Neural Network](http://neuralnetworksanddeeplearning.com/chap1.html)              *Toplam 6 chapter*
 
-[deep learning and opencv](http://www.learnopencv.com/)
+[Deep Learning and Opencv](http://www.learnopencv.com/)
+
+[Deep Learning Türkiye](https://github.com/deeplearningturkiye/turkce-yapay-zeka-kaynaklari)
