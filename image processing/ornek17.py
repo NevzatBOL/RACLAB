@@ -1,3 +1,6 @@
+-*-coding: cp1254-*-
+#Resmi 16 ya bölen ve resmin parçalarını karıştırıp tekrar birleştiren program
+
 import numpy as np
 import cv2
 import random
