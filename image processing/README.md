@@ -36,10 +36,6 @@
 
 **ornk18: Resimden Text Çekme**
 
-
-
-
-
 **Faydalı Kaynaklar:**
 
 [sentdex python&opencv youtube kanalı](https://www.youtube.com/watch?v=Z78zbnLlPUA&list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq)
