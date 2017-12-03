@@ -23,4 +23,4 @@
 [Deep Learning Türkiye](https://github.com/deeplearningturkiye/turkce-yapay-zeka-kaynaklari)
 
 
-deneme
+
