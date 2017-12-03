@@ -21,3 +21,6 @@
 [Deep Learning and Opencv](http://www.learnopencv.com/)
 
 [Deep Learning Türkiye](https://github.com/deeplearningturkiye/turkce-yapay-zeka-kaynaklari)
+
+
+deneme
