@@ -225,10 +225,10 @@ kurulumu kontrol edebiliriz.
 *Eğer opencv kurulumu tamamlandı ve kurulan terminalde çalıştığı halde 
 yeni açılan terminallerde çalışmıyorsa aşağıdaki işlemler uygulanmalıdır.*
 
-	sudo nano ~/.bashrc	
+	sudo nano ~/.bashrc
 	export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH yada
 	export PYTHONPATH=/usr/local/lib/python2.7/dist-packages:$PYTHONPATH 
-	.bashrc dosyasına bu satır eklenerek kaydedilir.
+	.bashrc dosyasına bu satır(cv2.so dosyasının bulunduğu konum) eklenerek kaydedilir.
 
 **Raspberry Pi için;**
 
@@ -239,6 +239,7 @@ yeni açılan terminallerde çalışmıyorsa aşağıdaki işlemler uygulanmalı
 *Komutları uygulanarak opencv kurulumu için hazır hale getirilir.Eğer görüntü sadece raspberry pi kamera modülünden alınacaksa Metod1 ile, harici kameradan görüntü alınacaksa Metod2 Kullanılarak kurulum tamamlanır.*
 
 Referans Link:
+
 Ubuntu için:
 
 http://pythonopencv.com/install-opencv-3-3-and-python2-7-3-5-bindings-on-ubuntu-16-04/
@@ -250,8 +251,10 @@ https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-pytho
 
 ## BAZI PYTHON PAKETLERİNİN KURULUMU
 
-### Kütüp hane kurmada kullanılabilecek metodlar;
+### Kütüphane kurmada kullanılabilecek metodlar;
 
+	sudo apt-get install python-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
+	
 	sudo apt-get install python-kütüphane_adı
 	sudo pip install kütüphane_adı
 	pip search kütüphane_adı 	Kütüphane aramada kullanılır.
@@ -264,17 +267,14 @@ https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-pytho
 
 
 	zbar		sudo apt-get install libzbar-dev	
-
 			sudo pip install zbar			qr kod okuma kütüphanesi
 
 
 	sklearn 	sudo pip install sklearn		yapay zeka kütüphanesi
-
 	scipy		sudo pip install scipy			sklearn için gerekli.
 
 
 	pytesseract	sudo pip install pytesseract		görüntüden text çekmek için kullanılır.
-
 	tesseract	sudo apt-get install tesseract-ocr	pytesseract için gerekli.
 
 
