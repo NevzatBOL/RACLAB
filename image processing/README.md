@@ -33,3 +33,10 @@
 **ornk16: QR Kod Okuma**
 
 **ornk17: Resmi 16'ya Böleme ve Parçaları Karıştırıp Tekrar Birleştirme**
+
+Faydalı Kaynaklar:
+
+[sentdex python&opencv youtube kanalı](https://www.youtube.com/watch?v=Z78zbnLlPUA&list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq)
+[python&opencv blog](http://mavienginberk.blogspot.com.tr/search/label/opencv%20python)
+[opencv tutorial](https://docs.opencv.org/trunk/d6/d00/tutorial_py_root.html)
+[python&opencv örnek uygulamalar](https://www.pyimagesearch.com/)
