@@ -143,3 +143,51 @@
       topic /turtle1/pose/x	
       
 ![rqt plot](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_plot.png)
+
+## ROS Hizmetleri ve Parametreleri
+
+    rosservice					    -hizmet komutlarını listeler.
+    rosservice list					-sunulan hizmetleri listeler.
+
+    rosservice type /hizmet				-kullanılanmak istenen hizmetin türünü listeler.
+    rosservice type /clear
+        std_srvs/Empty
+        
+    rosservice call /hizmet				-hizmeti çağırır.
+    rosservice call /clear
+        
+    rosservice type /servis_ismi | rossrv show		-rossrv ros hizmet türleri hakkında bilgi görüntülemek için kullanılır.
+    rosservice type /spawn | rossrv show
+            float32 x
+            float32 y
+            float32 theta
+            string name
+            ---
+            string name
+
+    rosparam					    -paremetre komutlarını listeler.
+    rosparam list					-kullanılabilecek parametreleri listeler.
+
+    rosparam set parametre_ismi parametre_değeri	-parametreyi uygular.
+    rosparam set /background_r 150
+    rosservice call /clear
+    
+    rosparam get parametre_ismi			            -parametrenin değerlerini çeker.
+    rosparam get /background_g
+        86
+    rosparam get /					                -tüm parametre değerlerini listeler.
+        background_b: 255
+        background_g: 86
+        background_r: 150
+        roslaunch:
+          uris: {'aqy:51932': 'http://aqy:51932/'}
+        run_id: e07ea71e-98df-11de-8875-001b21201aa8
+
+    rosparam dump file_name.yaml			        -tüm parametreleri yaml uzantılı bir dosyaya kaydettik.
+    rosparam dump params.yaml
+    
+    rosparam load file_name.yaml isim		        -yaml uzantılı dosyadan tüm paremtreleri isim alanına yükledik.
+    rosparam load params.yaml copy
+    rosparam get /copy/background_r
+    
+    
