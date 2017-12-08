@@ -190,4 +190,277 @@
     rosparam load params.yaml copy
     rosparam get /copy/background_r
     
+## Rqt_console ve Roslaunch Kullanma
+    rosrun rqt_console rqt_console			    -düğümlerin çıktısını görüntülemek için kullanılır.
+    rosrun rqt_logger_level rqt_logger_level	-günlükçüyü açar.
+						                        -günlükçü düzeyi ayarlanarak, ayarlanan öncelik sıralamasına göre;
+						                        -ölümcül, hata, uyarı, bilgi ve hata ayıklama iletilerini alırız.
     
+ ![rpt_console](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_console%28start%29.png)
+  ![rqt_rqt_logger_level](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_logger_level%28error%29.png)
+     
+      rosrun turtlesim turtlesim_node
+     
+  ![rqt_consol_warn](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_console%28turtlesimerror%29.png)
+  
+      roslaunch paket_ismi file_name    -Birden fazla paketi tek seferde çalıştırmak için .launch pekiti oluşturulur.
+                                        -Bu paketin çalıştırılması ile birden fazla Node çalıştırılmış olur.
+      cd ~/catkin_ws/src/beginner_tutorials/	
+      mkdir launch
+      cd launch
+      touch turtlemimic.launch
+      gedit turtlemimic.lauch
+         <launch>
+
+          <group ns="turtlesim1">
+            <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+          </group>
+
+          <group ns="turtlesim2">
+            <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+          </group>
+
+          <node pkg="turtlesim" name="mimic" type="mimic">
+            <remap from="input" to="turtlesim1/turtle1"/>
+            <remap from="output" to="turtlesim2/turtle1"/>
+          </node>
+
+        </launch>
+        
+      roslaunch beginner_tutorials turtlemimic.launch
+      rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+      
+## ROS Dosya Düzenlemek 		
+    rosed paket_adı dosya_adı			-düzenlenmek istenen dosyanın konumuna gitmeye gerek kalmadan direk dosyaya erişmemizi sağlar.
+    export EDITOR='nano -w'				-varsayılan dosya editörü vim dir. bu editörü nano ile değiştirdik.
+                            			-sadece tanımlanan terminalde geçerlidir.
+
+    echo $EDITOR					    -tanımlı olan editörü gösterir.
+
+## ROS Msg ve Srv Oluşturma
+                            -msg: bir ros mesajının alanlarını tanımlayan basit metin dosyasıdır.
+                            -srv: bir hizmeti açıklar.
+                            -srv dosyası bir istek ve yanıt içeren mesaj dosyasıdır. iki kısım --- ile ayrılır.
+    roscd beginner_tutorials
+    mkdir msg					            -msg dosyasını oluşturduk.
+    echo "int64 num"> msg/Num.msg			-Num.msg dosyasına int64 num mesajını ekledik.
+
+    rosed beginner_tutorials package.xml		-package.xml dosyası içerisinde aşağıdaki kodların bulunduğundan emin oluruz.
+      <build_depend>message_generation</build_depend>	-message_gereration oluşturma zamanında ihtiyacımı var.
+      <run_depend>message_runtime</run_depend>		    -message_runtime çalıma zamanında ihtiyacımız var.
+
+
+    rosed paket_adı CMakeList.txt
+    find_package(catkin REQUIRED COMPONENTS
+       roscpp
+       rospy
+       std_msgs
+       message_generation				    -message_generation bağımlılığını ekledik.
+    )
+    catkin_package(
+      ...
+      CATKIN_DEPENDS message_runtime		-ileti zaman bamlılığını dışa aktardık.
+      ...
+    )
+    add_message_files(
+      FILES
+      Num.msg					            -mesaj dosyamızı ekledik.
+    )
+    generate_messages(				        -generate_message() fonksitonun çağrıldığından emin olmalıyız.
+      DEPENDENCIES
+      std_msgs
+    )
+
+    rosmsg show paket_ismi/ileti			-oluşturduğumuz msg dosyasının görünür olduğundan emin oluruz.
+    rosmsg show beginner_tutorials/Num
+        int64 num
+        
+    rosmsg show ileti				        -iletinin hangi pakette tanımlı olduğunu bilmiyorsak bu komutu kullanırız.
+    rosmsg show Num
+        [beginner_tutorials/Num]:
+        int64 num
+        
+    roscd beginner_tutorials
+    mkdir srv							-srv klasörünü oluşturduk.
+    roscp paket_ismi kopyalancak_dosya kopyalancak_yer&dosya_adı	-srv dosyasını başka bir paketten kopyalayarak oluşturduk.
+    roscp rospy_tutorials AddTwoInts.srv srv/AddTwoInts.srv
+
+    add_service_files(				
+      FILES
+      AddTwoInts.srv				        -.srv hizmet dosyamızı ekledik.
+    )
+
+    rossrv show paket_ismi/hizmet_adı		-hizmet_adı(.srv) dosyasının okur.
+    rossrv show beginner_tutorials/AddTwoInts
+        int64 a
+        int64 b
+        ---
+        int64 sum
+        
+    rossrv show hizmet_adı				    -hizmet_adı dosyasının bulunduğu tüm paketleri ve dosya içeriklerini yazdırır.
+    rossrv show AddTwoInts
+        [beginner_tutorials/AddTwoInts]:
+        int64 a
+        int64 b
+        ---
+        int64 sum
+
+        [rospy_tutorials/AddTwoInts]:
+        int64 a
+        int64 b
+        ---
+        int64 sum
+    
+    roscd paket_ismi
+    cd ../..
+    catkin_make install
+    
+ ## ROS Basit Yayıncı ve Abone Yazma C++
+    
+    roscd beginner_tutorials
+    mkdir -p src
+    cd src
+    touch talker.cpp
+    touch listener.cpp
+    
+    gedit talker.cpp    -talker.cpp dosyasını düzenlemek için açılır.
+    gedit listener.cpp -listener.cpp dosyası düzenlemek için açılır.
+
+### talker.cpp
+    #include "ros/ros.h"
+    #include "std_msgs/String.h"
+    #include <sstream>
+
+    int main(int argc,char **argv)
+    {
+            ros::init(argc,argv,"talker");  //Node'u (düğümü) başlatır.
+            ros::NodeHandle n;              //düğümü başlatır ve son düğüm yıkıldığında düğümün kullandığı tüm kaynakları temizler.
+            ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter",1000);     //mesaj yayınlama düğümlerini(Node) ayarladık.
+            ros::Rate loop_rate(10);        //çalışma hızımızı ayarlar. (10hz)
+
+            int count=0;
+            while(ros::ok())
+            {
+                    std_msgs::String msg;   //yayınlanacak mesajın türünü belirtik.
+
+                    std::stringstream ss;
+                    ss<<"hello world"<<count;       //mesajı oluşturduk.
+                    msg.data=ss.str();
+
+                    ROS_INFO("%s",msg.data.c_str());
+
+                    chatter_pub.publish(msg);       //mesajı yayınladık.
+
+                    ros::spinOnce();                //geri çağrıları almak için kullanılır.
+
+                    loop_rate.sleep();              //çalışma hızımızı 10hz e ayarlamak için artan sürede uyku moduna geçiyoruz.
+                    ++count;
+            }
+            return 0;
+    }
+
+### listener.cpp
+
+    #include "ros/ros.h"
+    #include "std_msgs/String.h"
+
+    void chatterCallback(const std_msgs::String::ConstPtr&msg)
+    {
+            ROS_INFO("I heard: [%s]",msg->data.c_str());
+    }
+
+    int main(int argc,char **argv)
+    {
+            ros::init(argc,argv,"listener");
+            ros::NodeHandle n;
+            ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+            //subscribe ile bir topic(konuyu) dinleriz.
+            //subscribe'ın ikinci paremetresi mesajın boyutudur.
+            //Mesajlar işlenenden daha hızlı geliyorsa, bu atılmaya başlaşlamadan önce belleğe atılacak ileti sayısıdır.
+            //üçüncü paremetresi çağrılacak fonksiyonun adıdır.
+            
+            ros::spin(); //bir döngüye girer ve mümkün olduğunca hızlı ileti çağırır.
+            return 0;
+    }
+
+*C++ dosyası oluşturulduktan sonra çalıştırıla bilmesi için oluşturulan dosyaların CMakeLists.txt dosyasına eklenmesi gerekir.*
+
+    rosed beginner_tutorials CMakeLists.txt	
+    
+    include_directories(include ${catkin_INCLUDE_DIRS})
+
+    add_executable(talker src/talker.cpp)
+    target_link_libraries(talker ${catkin_LIBRARIES})
+    add_dependencies(talker beginner_tutorials_generate_messages_cpp)
+
+    add_executable(listener src/listener.cpp)
+    target_link_libraries(listener ${catkin_LIBRARIES})
+    add_dependencies(listener beginner_tutorials_generate_messages_cpp)
+
+    cd ~/catkin_ws
+    catkin_make     -her c++ dosyası düzenlenme işleminden sonra catkin_make yapılmalıdır.
+    
+    roscore					oluşturulan talker ve listener kodları çalıştırılır.
+    rosrun beginner_tutorials talker.cpp
+    rosrun beginner_tutorials listener.cpp
+    
+## ROS Basit Yayıncı ve Abone Yazma Python    
+
+    roscd beginner_tutorials
+    mkdir scripts
+    cd scripts
+    touch talker.py
+    touch listener.py
+    
+    gedit talker.py
+    gedit listener.py
+    
+### talker.py
+    #!/usr/bin/env python
+    import rospy
+    from std_msgs.msg import String
+
+    def talker():
+        pub = rospy.Publisher('chatter', String, queue_size=10)  #yayıncı oluşturulur. Topic name: chatter  
+        rospy.init_node('talker', anonymous=True)   #yayıncının Node name:talker
+        rate = rospy.Rate(10) # 10hz
+        while not rospy.is_shutdown():  #paket kaparılana kadar devam et. (ctrl+c ile kapatılır.)
+            hello_str = "hello world %s" % rospy.get_time()
+            rospy.loginfo(hello_str)
+            pub.publish(hello_str)  #mesaj yayınlanır.
+            rate.sleep()
+
+    if __name__ == '__main__':
+        try:
+            talker()
+        except rospy.ROSInterruptException:
+        pass
+        
+    
+    chmod +x talker.py  -oluşturduğumuz python dosyasını çalıştırılabilir yaptık.
+    
+### listener.py
+    #!/usr/bin/env python
+    import rospy
+    from std_msgs.msg import String
+
+    def callback(data):
+        rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.data) #dinlenen mesaj yazdırılır.
+
+    def listener():
+        rospy.init_node('listener', anonymous=True) #dinleyici düğümü(Node).
+        rospy.Subscriber('chatter', String, callback)   #dinlenecek konu
+        rospy.spin()
+
+    if __name__ == '__main__':
+        listener()
+
+    chmod +x listener.py    -oluşturduğumuz python dosyasını çalıştırılabilir yaptık.
+    
+    roscore                                 
+    rosrun beginner_tutorials talker.py
+    rosrun beginner_tutorials listener.py
+
+
+    
+ 
