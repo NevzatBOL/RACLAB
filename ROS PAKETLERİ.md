@@ -2,6 +2,8 @@
 
 ## mybot_ws
 
+mybot_ws paketi githubdan klonlanarak çalışma dizini oluşturulur.
+
     cd ~
     git clone https://github.com/richardw05/mybot_ws.git
     gedit ~/.bashrc 
@@ -9,39 +11,48 @@
     cd mybot_ws/
     catkin_make
     source devel/setup.bash 
-    
-    roslaunch mybot_gazebo mybot_world.launch
-    roslaunch mybot_description mybot_rviz.launch 
-        Fixed Frame = odom  
-        Add -> RobotModel
-    rostopic pub /cmd_vel geometry_msgs/Twist '[0.2, 0.0, 0.0]' '[0.0, 0.0, 0.1]'
 
-    
+Robotun Gazebo ve Rviz üzerinde çalıştırılması
+
+    roslaunch mybot_gazebo mybot_world.launch       -robotun gazebo paketi çalıştırılır.
+    roslaunch mybot_description mybot_rviz.launch   -robotun rviz paketi çalıştırılır.
+        Fixed Frame = odom  
+        Add -> RobotModel                           -rviz'e robotun modeli eklenir.
+    rostopic pub /cmd_vel geometry_msgs/Twist '[0.2, 0.0, 0.0]' '[0.0, 0.0, 0.1]'   -robotu hareket ettirmek için komut girilir.
+
+Robot üzerindeki kameradan simulasyon ortamında görüntü alınması
+ 
     roslaunch mybot_gazebo mybot_world.launch
     roslaunch mybot_description mybot_rviz.launch 
         Fixed Frame = odom  
         Add -> RobotModel
-        Add -> Camera
+        Add -> Camera                               -rviz'e kamera'yı ekledik.
         Camera
-            Image Topic /mybot/camera1/image_raw
+            Image Topic /mybot/camera1/image_raw    -rviz üzerinden kameradan alınan görüntüye bakılabilir.
             
-    rosrun image_view image_view image:=/mybot/camera1/image_raw
+    rosrun image_view image_view image:=/mybot/camera1/image_raw    -kameradan alınan görüntüye image_view ile bakabiliriz.
 
+Haritalandırma ve Konumlandırma (SLAM)
+   
+    roscd mybot_navigation  
+    mkdir maps      -haritanın kaydedileceği klasörü oluşturduk.
     
     roslaunch mybot_gazebo mybot_world.launch
-    roslaunch mybot_navigation gmapping_demo.launch
+    roslaunch mybot_navigation gmapping_demo.launch         -haritalandırma için gerekli paketleri çalıştırdık.
     roslaunch mybot_description mybot_rviz_gmapping.launch
-    roslaunch mybot_navigation mybot_teleop.launch
-    rosrun map_server map_saver -f /home/nevzat/test_map
+    roslaunch mybot_navigation mybot_teleop.launch          -robotun klavyeden kontolü için gerekli paketi çalıştırdık.
+    rosrun map_server map_saver -f ~/mybot_ws/src/mybot_navigation/maps/test_map    -harita oluşturduktan sonra haritayı kaydettik.
+
+    roslaunch mybot_gazebo mybot_world.launch   
+    roslaunch mybot_navigation amcl_demo.launch             -oluşturduğumuz haritayı yükledik.
+    roslaunch mybot_description mybot_rviz_amcl.launch      -rviz üzerinden artık robotumuzu otomatik yönlendire biliriz.
+                                                            -2D Nav Goal kullanılarak robotu istenilen noktaya otomatik götürtebiliriz. (hedef nokta ve yönü belirler.)
+                                                            
+*Eğer lidar ile haritalama yapmıyorsa mybot.gazebo pekti içerisindeki  libgazebo_ros_gpu_laser.so yerine libgazebo_ros_laser.so bu yazılarak sorun çözülebilir.*
+
+
 
     
-
-
-
-
-
-
-
 
 
 
