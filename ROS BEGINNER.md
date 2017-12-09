@@ -385,7 +385,8 @@
 
 *C++ dosyası oluşturulduktan sonra çalıştırıla bilmesi için oluşturulan dosyaların CMakeLists.txt dosyasına eklenmesi gerekir.*
 
-    rosed beginner_tutorials CMakeLists.txt	
+    roscd beginner_tutorials 
+    gedit CMakeLists.txt	
     
     include_directories(include ${catkin_INCLUDE_DIRS})
 
@@ -462,5 +463,198 @@
     rosrun beginner_tutorials listener.py
 
 
+## ROS Basit Hizmet ve İştemci Yazma C++    
+	roscd beginner_tutorials/src
+	touch add_two_ints_server.cpp
+	touch add_two_ints_client.cpp
+	
+	gedit add_two_ints_server.cpp
+	gedit add_two_ints_client.cpp
+
+###  add_two_ints_server.cpp
+	#include "ros/ros.h"
+	#include "beginner_tutorials/AddTwoInts.h"
+
+	bool add(beginner_tutorials::AddTwoInts::Request  &req,
+		 beginner_tutorials::AddTwoInts::Response &res)
+	{
+		//daha önce oluşturduğumuz AddTwoInts.h  çağırdık.
+		//Bu işlev, hizmetin iki int eklemesini sağlar, srv dosyasında tanımlanan istek ve yanıt türünü alınır ve bir boolean döndürür.
+		res.sum = req.a + req.b;
+		ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
+		ROS_INFO("sending back response: [%ld]", (long int)res.sum);
+		return true;
+	 }
+
+	int main(int argc, char **argv)
+	{
+		ros::init(argc, argv, "add_two_ints_server");
+		ros::NodeHandle n;
+
+		ros::ServiceServer service = n.advertiseService("add_two_ints", add);
+		ROS_INFO("Ready to add two ints.");
+		ros::spin();
+		return 0;
+	}
+
+###  add_two_ints_client.cpp
+	#include "ros/ros.h"
+	#include "beginner_tutorials/AddTwoInts.h"
+	#include <cstdlib>
+
+	int main(int argc,char **argv)
+	{
+		ros::init(argc,argv,"add_two_ints_client");
+		if(argc != 3)
+		{
+			ROS_INFO("usage: add_two_ints_client X Y");
+			return 1;
+		}
+
+		ros::NodeHandle n;
+		ros::ServiceClient client = n.serviceClient<beginner_tutorials::AddTwoInts>("add_two_ints");
+		beginner_tutorials::AddTwoInts srv;
+		srv.request.a=atoll(argv[1]);
+		srv.request.b=atoll(argv[2]);
+		if(client.call(srv))
+		{
+			ROS_INFO("Sum: %ld", (long int)srv.response.sum);
+		}
+		else
+		{
+			ROS_ERROR("Failed to call service add_two_ints");
+			return 1;
+		}
+
+		return 0;
+	}
+	
+	
+	roscd beginner_tutorials 
+    	gedit CMakeLists.txt
+	
+	add_executable(add_two_ints_server src/add_two_ints_server.cpp)
+	target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
+	add_dependencies(add_two_ints_server beginner_tutorials_gencpp)
+
+	add_executable(add_two_ints_client src/add_two_ints_client.cpp)
+	target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
+	add_dependencies(add_two_ints_client beginner_tutorials_gencpp)
+
+	
+	cd ~/catkin_ws
+    	catkin_make     -her c++ dosyası düzenlenme işleminden sonra catkin_make yapılmalıdır.
     
- 
+
+	roscore
+	rosrun beginner_tutorials add_two_ints_server
+	rosrun beginner_tutorials add_two_ints_client 1 3		say1+say2 toplanır.
+	
+## ROS Basit Hizmet ve İştemci Yazma Python
+	roscd beginner_tutorials/scripts
+	touch add_two_ints_server.py
+	touch add_two_ints_client.py
+	
+	gedit add_two_ints_server.py
+	gedit add_two_ints_client.py
+	
+### add_two_ints_server.py
+	#!/usr/bin/env python
+
+	from beginner_tutorials.srv import *
+	import rospy
+
+	def handle_add_two_ints(req):
+		print "Returning [%s + %s = %s]"%(req.a, req.b, (req.a + req.b))
+		return AddTwoIntsResponse(req.a + req.b)
+
+	def add_two_ints_server():
+		rospy.init_node('add_two_ints_server')
+		s = rospy.Service('add_two_ints', AddTwoInts, handle_add_two_ints)
+		print "Ready to add two ints."
+		rospy.spin()
+
+	if __name__ == "__main__":
+		add_two_ints_server()
+
+
+	chmod +x add_two_ints_server.py		-python dosyasını çalıştırılabilir yaptık.
+
+### add_two_ints_client.py
+	import sys
+	import rospy
+	from beginner_tutorials.srv import *
+
+	def add_two_ints_clients(x,y):
+		rospy.wait_for_service('add_two_ints')
+		try:
+			add_two_ints=rospy.ServiceProxy('add_two_ints',AddTwoIns)
+			resp1=add_two_ints(x,y)
+			return resp1.sum
+		except rospy.ServiceException, e:
+			print "Serice call failed: %s"%e
+
+	def usage():
+		return "%s [x y]"%sys.argv[0]
+
+	if __name__ = "__main__":
+		if len(sys.argv)==3:
+			x=int(sys.argv[1])
+			y=int(sys.argv[2])
+		else:
+			print usage()
+			sys.exit(1)
+		print "Requesting %s+%s"%(x,y)
+		print "%s + %s = %s"%(x,y,add_two_ints_client(x,y))
+
+
+	chmod +x add_two_ints_client.py		-python dosyasını çalıştırılabilir yaptık.
+	
+	cd ~/catkin_ws
+    	catkin_make
+	
+	roscore
+	rosrun beginner_tutorials add_two_ints_server.py
+	rosrun beginner_tutorials add_two_ints_client.py 1 3
+
+## Verilerin Kaydedilmesi ve Oynatılması
+
+	roscd beginner_tutorials 
+	mkdir ~/bagfiles	kayıt için bir dosyalarını tutacağımız dosya oluşturduk.
+	cd ~/bagfiles		
+	
+	rosrun turtlesim turtlesim_node 
+	rosrun turtlesim turtle_teleop_key
+	rosbag record -a			yayınlanan tüm verileri kaydettik.
+	
+	*kayıt işlemi başlatıldıktan sonra turtle kontrol edilir ve ctrl+c ile kapatılır.
+	
+	rosbag info kayıtdosyası.bag		kaydettiğimiz dosyayı okuduk.
+	
+	rosrun turtlesim turtlesim_node 
+	rosbag play kayıtdosyası.bag		kaydettiğimiz dosyayı oynattık.
+	
+	rosbag play -r 2 kayıtdosyası.bag	kaydettiğimiz dosyayı -r seçeneği ile belirlenmiş bir faktörde değiştirebiliriz.
+	
+*bazı durumlarda kayıt dosyasını sadece belirli verileri kaydetmek için kullanmamız gerekebilir.
+bu tip durumlarda aşağıdaki satırdaki gibi kayıt işlemi yapılabilir.*
+
+	rosbag record -o subset /turtle1/cmd/vel /turtle1/pose	
+	
+## Roswtf ile Hataların Bulunması
+	roscore
+	roswtf		-çalışan ros paketlerinin ve düğümlerindeki hata ve uyarıları listeler.
+
+## Sistem Bağlılıkları Yönetme
+	rosdep install paket_ismi	-paketin ihtiyaç duyduğu tüm bağımlılıkları indirir.
+	rosdep install turtlesim
+	
+	-hata alırsak eğer aşağıdaki satırlar uygulanarak tekrar çalıştırılmalıdır.
+	sudo rosdep init
+	rosdep update			-rosdep güncelenir.
+
+	rosdep resolve paket_ismi	-bağımlılıkları çözümler.
+	
+## Kaynaklar
+	
+http://wiki.ros.org/ROS/Tutorials
