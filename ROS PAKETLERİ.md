@@ -20,6 +20,9 @@ Robotun Gazebo ve Rviz üzerinde çalıştırılması
         Add -> RobotModel                           -rviz'e robotun modeli eklenir.
     rostopic pub /cmd_vel geometry_msgs/Twist '[0.2, 0.0, 0.0]' '[0.0, 0.0, 0.1]'   -robotu hareket ettirmek için komut girilir.
 
+     rosrun tf view_frames                          -sistemin ağacını pdf olarak kaydedir. 
+     evince frames.pdf 
+
 Robot üzerindeki kameradan simulasyon ortamında görüntü alınması
  
     roslaunch mybot_gazebo mybot_world.launch
