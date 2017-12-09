@@ -54,16 +54,19 @@ Haritalandırma ve Konumlandırma (SLAM)
 *Eğer lidar ile haritalama yapmıyorsa mybot.gazebo pekti içerisindeki  libgazebo_ros_gpu_laser.so yerine libgazebo_ros_laser.so bu yazılarak sorun çözülebilir.*
 
 
+## Turtlebot
 
+    Turtlebot ile haritalama
     
-
-
-
-
-
-
-
-
+    roslaunch turtlebot_gazebo turtlebot_world.launch 
+    roslaunch turtlebot_gazebo gmapping_demo.launch  
+    roslaunch turtlebot_rviz_launchers view_navigation.launch
+    roslaunch turtlebot_teleop keyboard_teleop.launch
+    rosrun map_server map_saver -f test_map
+    
+    roslaunch turtlebot_gazebo turtlebot_world.launch 
+    roslaunch turtlebot_gazebo amcl_demo.launch map_file:=~/test_map.yaml
+    roslaunch turtlebot_rviz_launchers view_navigation.launch
 
 
 
