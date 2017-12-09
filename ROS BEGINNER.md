@@ -24,7 +24,7 @@
     roscd rospy/cmake 
     roscd log                       -ros'un günlük dosyalarının depolandığı adrese götürür.
     
-    rosls paket_ismi/alt_dizin	    -rosls ile paketin anadizinindeki veya alt dizinindeki dosyaları listeler.
+    rosls paket_ismi/alt_dizin	-rosls ile paketin anadizinindeki veya alt dizinindeki dosyaları listeler.
     rosls rospy
         cmake  package.xml  rosbuild
 
@@ -32,7 +32,7 @@
 
     catkin_create_pkg paket_ismi bağımlık1 bağımlık2	-çalıştığımız dizine paket_ismi de bağımlı olarak tanımladığız paketleri oluşturur.
     
-    cd ~/catkin_ws/src              -çalışma dizinimiz içerinsdeki src klasörünü gittik.
+    cd ~/catkin_ws/src              			-çalışma dizinimiz içerinsdeki src klasörünü gittik.
     catkin_create_pkg beginner_tutorials std_msgs rospy roscpp    -paketimizi oluşturduk.
     
     -Ros paketlerinde bulunan CMakeList.txt ve package.xml dosyalarını oluşturur.
@@ -76,47 +76,47 @@
     
 ## ROS Düğüm(Node) Kullanımı
 
-    roscore						-ros çekirdeğini aktif hale getirir.
+    roscore								-ros çekirdeğini aktif hale getirir.
     
     rosrun paket_adı düğüm_adı			                -doğrudan bir düğüm çalıştırabiliriz.
     rosrun turtlesim turtlesim_node
     
-    rosrun paket_adı düğüm_adı __name:=New_name	    -düğümü yeniden adlandırarak çalıştırır.
+    rosrun paket_adı düğüm_adı __name:=New_name	    		-düğümü yeniden adlandırarak çalıştırır.
     rosrun turtlesim turtlesim_node __name:=my_turtle
     
-    rosnode list					        -çalışan ros düğümlerini listeler.
-    rosnode info düğüm_adı				-belli bir düğüm hakkında bilgi verir.
+    rosnode list					        	-çalışan ros düğümlerini listeler.
+    rosnode info düğüm_adı						-belli bir düğüm hakkında bilgi verir.
    
-    rosnode ping düğüm_adı				-düğümü test eder.
+    rosnode ping düğüm_adı						-düğümü test eder.
     rosnode ping my_turtle
 ## ROS Konu(Topic) Kullanımı
 
-    rostopic				                  -rostopic için kullanılabilir alt komutları ver
-        rostopic bw	                  -konu tarafından kullanılan görüntü bant genişliği
-        rostopic delay	              -konunun yayınlanırken geçikme süresini verir.
+    rostopic				-rostopic için kullanılabilir alt komutları ver
+        rostopic bw	                	-konu tarafından kullanılan görüntü bant genişliği
+        rostopic delay	              	-konunun yayınlanırken geçikme süresini verir.
         rostopic echo	                -yayınlanan konuyu dinler.
         rostopic find	                -konunun tipini bulur.
-        rostopic hz	                  -konunun yayınlanma hızını verir.    
-        rostopic info                 -konu hakkında bilgi verir.
+        rostopic hz	                	-konunun yayınlanma hızını verir.    
+        rostopic info                 	-konu hakkında bilgi verir.
         rostopic list	                -yayınlanan konuları listeler.
-        rostopic pub                  -mesajları belirli bir konuda yayınlar
+        rostopic pub                  	-mesajları belirli bir konuda yayınlar
         rostopic type	                -konunun türünü verir.
 
 ## Örnek ROS Paketi Çalıştırma
     
-    roscore						                      -ros çekirdeğini aktif hale getirdik.
+    roscore						-ros çekirdeğini aktif hale getirdik.
     
-    rosrun turtlesim turtlesim_node			    -turtlesim_node düğümünü çalıştırdık.
+    rosrun turtlesim turtlesim_node			-turtlesim_node düğümünü çalıştırdık.
     rosrun turtlesim turtlesim_teleop_kep		-kaplumbanın hareket etmesi için gerekli olan düğümü çalıştırdık.
 
-    rosrun rqt_graph rqt_graph			        -sistemde neler olup bittiğinin dinamik bir grafiğini oluşturur.
-    rqt_graph					                      -aynı komutu bu şekilde de çalışıtabiliriz.
+    rosrun rqt_graph rqt_graph			-sistemde neler olup bittiğinin dinamik bir grafiğini oluşturur.
+    rqt_graph					-aynı komutu bu şekilde de çalışıtabiliriz.
     
 ![rqt graph](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_graph_turtle_key2.png)
     
     rostopic echo /turtle1/cmd_vel			    -cmd_vel konusunu dinlenir.
     
-    rostopic list -v				                -çalışan düğümler hakkında bilgi verir.
+    rostopic list -v				    -çalışan düğümler hakkında bilgi verir.
     
     rostopic type /turtle1/cmd_vel			    -yayınlanmakta olan konunun ileti türünü döndürür.
     
@@ -130,23 +130,23 @@
    
     Parametrelerin Açıklanması:
     
-    rostopic pub					                 -iletileri belirli bir konuda yayınlar.
-    -1						                         -rostopic'in yanlız bir mesaj yayınlayıp çıkmalarına sağlar.
-    /turtle1/cmd_vel				               -yayınlanacak konumun adıdır.
-    geomery_msgs/Twist				             -yayın yaparken kullanılacak ileti türüdür.
-    --						                         -çift çizgiden sonra mesaj yayınlanır.
-    -r 1						                       -1hz hızında sürekli mesaj yayınlar.
+    rostopic pub					-iletileri belirli bir konuda yayınlar.
+    -1						-rostopic'in yanlız bir mesaj yayınlayıp çıkmalarına sağlar.
+    /turtle1/cmd_vel				-yayınlanacak konumun adıdır.
+    geomery_msgs/Twist				-yayın yaparken kullanılacak ileti türüdür.
+    --						-çift çizgiden sonra mesaj yayınlanır.
+    -r 1						-1hz hızında sürekli mesaj yayınlar.
    
-    rostopic hz /turtle1/pose			        -mesajın yayınlanma hızını verir.
+    rostopic hz /turtle1/pose			-mesajın yayınlanma hızını verir.
 
-    rosrun rqt_plot rqt_plot			        -takip etmek istediğimiz değerleri grafikte çizdirebiliriz.
+    rosrun rqt_plot rqt_plot		        -takip etmek istediğimiz değerleri grafikte çizdirebiliriz.
       topic /turtle1/pose/x	
       
 ![rqt plot](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_plot.png)
 
 ## ROS Hizmetleri ve Parametreleri
 
-    rosservice					    -hizmet komutlarını listeler.
+    rosservice					-hizmet komutlarını listeler.
     rosservice list					-sunulan hizmetleri listeler.
 
     rosservice type /hizmet				-kullanılanmak istenen hizmetin türünü listeler.
@@ -156,7 +156,7 @@
     rosservice call /hizmet				-hizmeti çağırır.
     rosservice call /clear
         
-    rosservice type /servis_ismi | rossrv show		-rossrv ros hizmet türleri hakkında bilgi görüntülemek için kullanılır.
+    rosservice type /servis_ismi | rossrv show	-rossrv ros hizmet türleri hakkında bilgi görüntülemek için kullanılır.
     rosservice type /spawn | rossrv show
             float32 x
             float32 y
@@ -165,17 +165,17 @@
             ---
             string name
 
-    rosparam					    -paremetre komutlarını listeler.
+    rosparam					-paremetre komutlarını listeler.
     rosparam list					-kullanılabilecek parametreleri listeler.
 
     rosparam set parametre_ismi parametre_değeri	-parametreyi uygular.
     rosparam set /background_r 150
     rosservice call /clear
     
-    rosparam get parametre_ismi			            -parametrenin değerlerini çeker.
+    rosparam get parametre_ismi			-parametrenin değerlerini çeker.
     rosparam get /background_g
         86
-    rosparam get /					                -tüm parametre değerlerini listeler.
+    rosparam get /					-tüm parametre değerlerini listeler.
         background_b: 255
         background_g: 86
         background_r: 150
@@ -183,18 +183,18 @@
           uris: {'aqy:51932': 'http://aqy:51932/'}
         run_id: e07ea71e-98df-11de-8875-001b21201aa8
 
-    rosparam dump file_name.yaml			        -tüm parametreleri yaml uzantılı bir dosyaya kaydettik.
+    rosparam dump file_name.yaml			-tüm parametreleri yaml uzantılı bir dosyaya kaydettik.
     rosparam dump params.yaml
     
-    rosparam load file_name.yaml isim		        -yaml uzantılı dosyadan tüm paremtreleri isim alanına yükledik.
+    rosparam load file_name.yaml isim		-yaml uzantılı dosyadan tüm paremtreleri isim alanına yükledik.
     rosparam load params.yaml copy
     rosparam get /copy/background_r
     
 ## Rqt_console ve Roslaunch Kullanma
-    rosrun rqt_console rqt_console			    -düğümlerin çıktısını görüntülemek için kullanılır.
+    rosrun rqt_console rqt_console			-düğümlerin çıktısını görüntülemek için kullanılır.
     rosrun rqt_logger_level rqt_logger_level	-günlükçüyü açar.
-						                        -günlükçü düzeyi ayarlanarak, ayarlanan öncelik sıralamasına göre;
-						                        -ölümcül, hata, uyarı, bilgi ve hata ayıklama iletilerini alırız.
+						        -günlükçü düzeyi ayarlanarak, ayarlanan öncelik sıralamasına göre;
+						        -ölümcül, hata, uyarı, bilgi ve hata ayıklama iletilerini alırız.
     
  ![rpt_console](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_console%28start%29.png)
   ![rqt_rqt_logger_level](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_logger_level%28error%29.png)
@@ -231,23 +231,24 @@
       rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
       
 ## ROS Dosya Düzenlemek 		
-    rosed paket_adı dosya_adı			-düzenlenmek istenen dosyanın konumuna gitmeye gerek kalmadan direk dosyaya erişmemizi sağlar.
-    export EDITOR='nano -w'				-varsayılan dosya editörü vim dir. bu editörü nano ile değiştirdik.
-                            			-sadece tanımlanan terminalde geçerlidir.
+    rosed paket_adı dosya_adı	-düzenlenmek istenen dosyanın konumuna gitmeye gerek kalmadan direk dosyaya erişmemizi sağlar.
+    export EDITOR='nano -w'		-varsayılan dosya editörü vim dir. bu editörü nano ile değiştirdik.
+                            	-sadece tanımlanan terminalde geçerlidir.
 
-    echo $EDITOR					    -tanımlı olan editörü gösterir.
+    echo $EDITOR			-tanımlı olan editörü gösterir.
 
 ## ROS Msg ve Srv Oluşturma
-                            -msg: bir ros mesajının alanlarını tanımlayan basit metin dosyasıdır.
-                            -srv: bir hizmeti açıklar.
-                            -srv dosyası bir istek ve yanıt içeren mesaj dosyasıdır. iki kısım --- ile ayrılır.
+	
+	    -msg: bir ros mesajının alanlarını tanımlayan basit metin dosyasıdır.
+        -srv: bir hizmeti açıklar.
+        -srv dosyası bir istek ve yanıt içeren mesaj dosyasıdır. iki kısım --- ile ayrılır.
     roscd beginner_tutorials
-    mkdir msg					            -msg dosyasını oluşturduk.
-    echo "int64 num"> msg/Num.msg			-Num.msg dosyasına int64 num mesajını ekledik.
+    mkdir msg						-msg dosyasını oluşturduk.
+    echo "int64 num"> msg/Num.msg				-Num.msg dosyasına int64 num mesajını ekledik.
 
-    rosed beginner_tutorials package.xml		-package.xml dosyası içerisinde aşağıdaki kodların bulunduğundan emin oluruz.
+    rosed beginner_tutorials package.xml			-package.xml dosyası içerisinde aşağıdaki kodların bulunduğundan emin oluruz.
       <build_depend>message_generation</build_depend>	-message_gereration oluşturma zamanında ihtiyacımı var.
-      <run_depend>message_runtime</run_depend>		    -message_runtime çalıma zamanında ihtiyacımız var.
+      <run_depend>message_runtime</run_depend>		-message_runtime çalıma zamanında ihtiyacımız var.
 
 
     rosed paket_adı CMakeList.txt
@@ -255,7 +256,7 @@
        roscpp
        rospy
        std_msgs
-       message_generation				    -message_generation bağımlılığını ekledik.
+       message_generation				-message_generation bağımlılığını ekledik.
     )
     catkin_package(
       ...
@@ -264,9 +265,9 @@
     )
     add_message_files(
       FILES
-      Num.msg					            -mesaj dosyamızı ekledik.
+      Num.msg					-mesaj dosyamızı ekledik.
     )
-    generate_messages(				        -generate_message() fonksitonun çağrıldığından emin olmalıyız.
+    generate_messages(				-generate_message() fonksitonun çağrıldığından emin olmalıyız.
       DEPENDENCIES
       std_msgs
     )
@@ -275,7 +276,7 @@
     rosmsg show beginner_tutorials/Num
         int64 num
         
-    rosmsg show ileti				        -iletinin hangi pakette tanımlı olduğunu bilmiyorsak bu komutu kullanırız.
+    rosmsg show ileti				-iletinin hangi pakette tanımlı olduğunu bilmiyorsak bu komutu kullanırız.
     rosmsg show Num
         [beginner_tutorials/Num]:
         int64 num
@@ -287,7 +288,7 @@
 
     add_service_files(				
       FILES
-      AddTwoInts.srv				        -.srv hizmet dosyamızı ekledik.
+      AddTwoInts.srv				-.srv hizmet dosyamızı ekledik.
     )
 
     rossrv show paket_ismi/hizmet_adı		-hizmet_adı(.srv) dosyasının okur.
@@ -297,7 +298,7 @@
         ---
         int64 sum
         
-    rossrv show hizmet_adı				    -hizmet_adı dosyasının bulunduğu tüm paketleri ve dosya içeriklerini yazdırır.
+    rossrv show hizmet_adı		-hizmet_adı dosyasının bulunduğu tüm paketleri ve dosya içeriklerini yazdırır.
     rossrv show AddTwoInts
         [beginner_tutorials/AddTwoInts]:
         int64 a
@@ -324,7 +325,7 @@
     touch listener.cpp
     
     gedit talker.cpp    -talker.cpp dosyasını düzenlemek için açılır.
-    gedit listener.cpp -listener.cpp dosyası düzenlemek için açılır.
+    gedit listener.cpp  -listener.cpp dosyası düzenlemek için açılır.
 
 ### talker.cpp
     #include "ros/ros.h"
@@ -344,7 +345,7 @@
                     std_msgs::String msg;   //yayınlanacak mesajın türünü belirtik.
 
                     std::stringstream ss;
-                    ss<<"hello world"<<count;       //mesajı oluşturduk.
+                    ss<<"hello world"<<count;	//mesajı oluşturduk.
                     msg.data=ss.str();
 
                     ROS_INFO("%s",msg.data.c_str());
@@ -379,7 +380,7 @@
             //Mesajlar işlenenden daha hızlı geliyorsa, bu atılmaya başlaşlamadan önce belleğe atılacak ileti sayısıdır.
             //üçüncü paremetresi çağrılacak fonksiyonun adıdır.
             
-            ros::spin(); //bir döngüye girer ve mümkün olduğunca hızlı ileti çağırır.
+            ros::spin();	//bir döngüye girer ve mümkün olduğunca hızlı ileti çağırır.
             return 0;
     }
 
@@ -401,7 +402,7 @@
     cd ~/catkin_ws
     catkin_make     -her c++ dosyası düzenlenme işleminden sonra catkin_make yapılmalıdır.
     
-    roscore					oluşturulan talker ve listener kodları çalıştırılır.
+    roscore		-oluşturulan talker ve listener kodları çalıştırılır.
     rosrun beginner_tutorials talker.cpp
     rosrun beginner_tutorials listener.cpp
     
