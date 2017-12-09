@@ -34,7 +34,7 @@
     roslaunch mybot_navigation mybot_teleop.launch
     rosrun map_server map_saver -f /home/nevzat/test_map
 
-
+    
 
 
 
