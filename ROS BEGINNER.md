@@ -107,7 +107,7 @@
     roscore						-ros çekirdeğini aktif hale getirdik.
     
     rosrun turtlesim turtlesim_node			-turtlesim_node düğümünü çalıştırdık.
-    rosrun turtlesim turtlesim_teleop_kep		-kaplumbanın hareket etmesi için gerekli olan düğümü çalıştırdık.
+    rosrun turtlesim turtle_teleop_key 		-kaplumbanın hareket etmesi için gerekli olan düğümü çalıştırdık.
 
     rosrun rqt_graph rqt_graph			-sistemde neler olup bittiğinin dinamik bir grafiğini oluşturur.
     rqt_graph					-aynı komutu bu şekilde de çalışıtabiliriz.
@@ -143,6 +143,7 @@
       topic /turtle1/pose/x	
       
 ![rqt plot](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_plot.png)
+    
 
 ## ROS Hizmetleri ve Parametreleri
 
