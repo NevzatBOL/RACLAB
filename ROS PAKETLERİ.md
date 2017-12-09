@@ -1,5 +1,87 @@
 # ROS PAKETLERİ KULLANIMLARI VE KURULUMLARI
 
+## mybot_ws
+
+    cd ~
+    git clone https://github.com/richardw05/mybot_ws.git
+    gedit ~/.bashrc 
+        source /home/nevzat/mybot_ws/devel/setup.bash
+    cd mybot_ws/
+    catkin_make
+    source devel/setup.bash 
+    
+    roslaunch mybot_gazebo mybot_world.launch
+    roslaunch mybot_description mybot_rviz.launch 
+        Fixed Frame = odom  
+        Add -> RobotModel
+    rostopic pub /cmd_vel geometry_msgs/Twist '[0.2, 0.0, 0.0]' '[0.0, 0.0, 0.1]'
+
+    
+    roslaunch mybot_gazebo mybot_world.launch
+    roslaunch mybot_description mybot_rviz.launch 
+        Fixed Frame = odom  
+        Add -> RobotModel
+        Add -> Camera
+        Camera
+            Image Topic /mybot/camera1/image_raw
+            
+    rosrun image_view image_view image:=/mybot/camera1/image_raw
+
+    
+    roslaunch mybot_gazebo mybot_world.launch
+    roslaunch mybot_navigation gmapping_demo.launch
+    roslaunch mybot_description mybot_rviz_gmapping.launch
+    roslaunch mybot_navigation mybot_teleop.launch
+    rosrun map_server map_saver -f /home/nevzat/test_map
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## ZED KAMERA
 https://github.com/stereolabs/zed-ros-wrapper
 
