@@ -53,6 +53,9 @@ Haritalandırma ve Konumlandırma (SLAM)
                                                             
 *Eğer lidar ile haritalama yapmıyorsa mybot.gazebo pekti içerisindeki  libgazebo_ros_gpu_laser.so yerine libgazebo_ros_laser.so bu yazılarak sorun çözülebilir.*
 
+Referans Link:
+
+http://moorerobots.com/blog
 
 ## Turtlebot
 
@@ -68,7 +71,9 @@ Haritalandırma ve Konumlandırma (SLAM)
     roslaunch turtlebot_gazebo amcl_demo.launch map_file:=~/test_map.yaml
     roslaunch turtlebot_rviz_launchers view_navigation.launch
 
+Referans Link:
 
+http://learn.turtlebot.com/2015/02/03/8/
 
 
 
@@ -100,9 +105,6 @@ Haritalandırma ve Konumlandırma (SLAM)
 
 
 ## ZED KAMERA
-https://github.com/stereolabs/zed-ros-wrapper
-
-Adresinden zed kamera paketi indirilir.
 
 İlk olarak çalışma dizini oluşturalım.
 
