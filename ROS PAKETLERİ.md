@@ -51,7 +51,7 @@ Haritalandırma ve Konumlandırma (SLAM)
     roslaunch mybot_description mybot_rviz_amcl.launch      -rviz üzerinden artık robotumuzu otomatik yönlendire biliriz.
                                                             -2D Nav Goal kullanılarak robotu istenilen noktaya otomatik götürtebiliriz. (hedef nokta ve yönü belirler.)
                                                             
-*Eğer lidar ile haritalama yapmıyorsa mybot.gazebo pekti içerisindeki  libgazebo_ros_gpu_laser.so yerine libgazebo_ros_laser.so bu yazılarak sorun çözülebilir.*
+*Eğer lidar ile haritalama yapmıyorsa mybot.gazebo paketi içerisindeki  libgazebo_ros_gpu_laser.so yerine libgazebo_ros_laser.so bu yazılarak sorun çözülebilir.*
 
 Referans Link:
 
