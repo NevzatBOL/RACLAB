@@ -76,10 +76,25 @@ Referans Link:
 http://learn.turtlebot.com/2015/02/03/8/
 
 
+## rplidar
 
+    mkdir -p rplidar/src
+    cd rplidar
+    catkin_make
+    source devel/setup.bash
+    gedit ~/.bashrc
+      source /home/nevzat/rplidar/devel/setup.bash
 
+    cd ~/rplidar/src/
+    git clone https://github.com/robopeak/rplidar_ros.git
+    
+    roslaunch rplidar_ros view_rplidar.launch
+    roslaunch rplidar_ros rplidar.launch
+    rosrun rplidar_ros rplidarNodeClient
 
+Referans Link:
 
+https://github.com/robopeak/rplidar_ros
 
 
 
