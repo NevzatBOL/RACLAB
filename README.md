@@ -59,6 +59,16 @@ Referans Link:
 
 https://www.tensorflow.org/install/install_linux
 
+## KERAS KURULUMU
+
+python 2.7 için paket kurulumu
+	
+	sudo pip install keras
+
+Referans Link:
+
+https://keras.io/
+
 ## ZED KAMERA SDK KURULUMU
 
 https://www.stereolabs.com/developers/release/2.2/
