@@ -92,15 +92,25 @@ http://learn.turtlebot.com/2015/02/03/8/
       source /home/nevzat/rplidar/devel/setup.bash
 
     cd ~/rplidar/src/
-    git clone https://github.com/robopeak/rplidar_ros.git
+    git clone -b slam https://github.com/robopeak/rplidar_ros.git   -paketin slam kolunu indirdik.
     
-    roslaunch rplidar_ros view_rplidar.launch
-    roslaunch rplidar_ros rplidar.launch
-    rosrun rplidar_ros rplidarNodeClient
+
+    sudo chmod 666 /dev/ttyUSB0                 -rplidarı çalıştırabilmek için usb portu yapılandırdık.
+
+    roslaunch rplidar_ros rplidar.launch        -rplidar çalıştırmak için kullanılabilir.
+    roslaunch rplidar_ros view_rplidar.launch   -rvizde rplidar'ı çalıştırmak için kullanılabilir.
+    rosrun rplidar_ros rplidarNodeClient        -rplidar'dan gelen verileri yazdırır.
+
+Rplidar ile Haritalandırma
+
+     roslaunch rplidar_ros view_slam.launch     -rplidar ve hector mapping ile haritalandırma yapılabilir.
+
 
 Referans Link:
 
 https://github.com/robopeak/rplidar_ros
+
+https://hollyqood.wordpress.com/2015/12/01/ros-slam-2-hector-slam-2d%E5%9C%B0%E5%9C%96%E5%BB%BA%E7%BD%AE/
 
 
 
