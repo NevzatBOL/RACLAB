@@ -53,13 +53,19 @@ Haritalandırma ve Konumlandırma (SLAM)
                                                             
 *Eğer lidar ile haritalama yapmıyorsa mybot.gazebo paketi içerisindeki  libgazebo_ros_gpu_laser.so yerine libgazebo_ros_laser.so bu yazılarak sorun çözülebilir.*
 
+*Haritalama için Turtlebot paketleri kurulu olması gerekir kurulu değilse öncelikle Turtlebot paketini kurmalısınız.
+
 Referans Link:
 
 http://moorerobots.com/blog
 
 ## Turtlebot
 
-    Turtlebot ile haritalama
+Turtlebot Kurma
+    
+    sudo apt-get install ros-kinetic-turtlebot*
+
+Turtlebot ile haritalama
     
     roslaunch turtlebot_gazebo turtlebot_world.launch 
     roslaunch turtlebot_gazebo gmapping_demo.launch  
