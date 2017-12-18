@@ -20,6 +20,8 @@
 
 [Deep Learning and Opencv](http://www.learnopencv.com/)
 
+[IntelAIWorkshop](https://github.com/mstfldmr/IntelAIWorkshop)
+
 [Deep Learning Türkiye](https://github.com/deeplearningturkiye/turkce-yapay-zeka-kaynaklari)
 
 
