@@ -112,29 +112,6 @@ https://github.com/robopeak/rplidar_ros
 
 https://hollyqood.wordpress.com/2015/12/01/ros-slam-2-hector-slam-2d%E5%9C%B0%E5%9C%96%E5%BB%BA%E7%BD%AE/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## ZED KAMERA
 
 İlk olarak çalışma dizini oluşturalım.
@@ -227,6 +204,51 @@ Referans Linkler;
 https://www.stereolabs.com/documentation/integrations/ros/getting-started.html
 
 http://wiki.ros.org/zed-ros-wrapper
+
+## ZED KAMERA RTABMAP İLE HARİTALANDIRMA
+
+Haritalandırma için rtabmap paketi indirilir.
+
+     sudo apt-get install ros-kinetic-rtabmap-ros 
+
+ZED Kamera Odemetrisi kullanarak haritalandırma
+
+    export ROS_NAMESPACE=camera
+    roslaunch zed_wrapper zed_camera.launch
+
+    roslaunch rtabmap_ros rtabmap.launch rtabmap_args:="--delete_db_on_start" depth_topic:=/camera/depth/depth_registered frame_id:=zed_center approx_sync:=false visual_odometry:=false odom_topic:=/camera/odom
+    
+Rtabmap Odemetrisi kullanarak haritalandırma
+
+    export ROS_NAMESPACE=camera
+    roslaunch zed_wrapper zed_camera.launch publish_tf:=false
+
+    roslaunch rtabmap_ros rtabmap.launch rtabmap_args:="--delete_db_on_start" depth_topic:=/camera/depth/depth_registered frame_id:=zed_center approx_sync:=false
+
+*Egeer haritala maparken, haritanın arka planı kırmızıya dönerse odemetri kaybolur. Bu durumda Kamerayı kırmızı belirmeden önce ki  konumuna getirin ve odometriyi yeniden hesaplansın yada haritayı sıfırlayın.*
+
+Haritayı sıfırlamak için
+
+    rosservice call /rtabmap/reset
+
+*Harita oluştulmaya başlandığında otomaktik olarak ~/.ros/ konumuna kaydedilir.*
+
+*Haritayı üç boyutlu olarak kaydetmek için File -> Export 3D Clouds seçeneği kullanılabilir.*
+
+*PLY formatına kaydedildiğinde bulut, MeshLab* 
+
+*PCD formatında kaydedildiğinde nokta bulutlarını pcl_viewer ile açabilirsiniz.*
+
+Haritayı incelemek için
+
+    rtabmap-databaseViewer ~/.ros/rtabmap.db
+
+Referans Linkler;
+
+http://wiki.ros.org/rtabmap_ros/Tutorials/HandHeldMapping
+
+https://github.com/introlab/rtabmap/wiki/Kinect-mapping
+    
 
 ## SCANSE SWEEP LİDAR
 
