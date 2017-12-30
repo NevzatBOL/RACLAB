@@ -144,6 +144,18 @@ listeler
 
     (topla q r)
     
-    
+Ağaçlar    
+   
+    (list 1 '() '())
+    (define a1 (list 1 (list 2 '() '()) (list 3 '() '())))
+    (define (kok agac) (first agac))
+    (kok a1)
+
+    (define (topla agac) (if (empty? agac) 0
+                          (+ (first agac)
+                            (topla (car (cdr agac)))
+                            (topla (car (cdr (cdr agac)))))))
+    (topla a1)
+   
 
 https://docs.racket-lang.org/quick/index.html
