@@ -177,6 +177,6 @@ Ağaçlar
          (enbuyuk (sol agac))
          (enbuyuk (sag agac)) )))
 
-   (enbuyuk myTree)
+    (enbuyuk myTree)
 
 https://docs.racket-lang.org/quick/index.html
