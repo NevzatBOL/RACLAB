@@ -179,4 +179,62 @@ Ağaçlar
 
     (enbuyuk myTree)
 
+Ağırlık ve Graflar UCS algoritması
+
+    (define harita (list (list 1 2 1)
+          (list 1 3 3)
+          (list 2 3 2)
+          (list 3 2 2)
+          (list 2 4 12)
+          (list 2 7 8)
+          (list 3 5 1)
+          (list 5 12 1)))
+
+    ;bir dugumden gidilebilecek alternatiflerin listesi
+    ;dugum numaralari ve agirlikleri ile dondurulur.
+    (define (alt alist dugum)
+      (if(empty? alist)
+         alist
+         (if(= dugum (first(first alist)))
+            (cons (rest (first alist)) (alt (rest alist) dugum))
+            (alt (rest alist) dugum)
+            )
+         )
+      )
+
+    (alt harita 2)
+
+    ;iki alternatiften ucuz olanı dondurur.
+    (define (karsilastir alt1 alt2)
+      (if (empty? alt2)
+          alt1
+      (if(> (first(rest alt1)) (first (rest alt2)))
+         alt2
+         alt1)))
+
+    ;alternatiflerden minimumunu bulan foksiyon
+    (define (min-alt alist)
+      (if (empty? alist)
+          alist
+          (karsilastir (first alist) (min-alt (rest alist)))
+          )
+      )
+
+    (min-alt (alt harita 2))
+    (define (ucs alist baslangic bitis) (if (empty? alist)
+                                            alist
+                                            (cons baslangic
+                                                  (if (empty? (alt alist baslangic)); hala listede eleman varsa
+                                                      null
+                                                      (if ( = bitis (first (min-alt (alt alist baslangic)))) ;gidebileceğimiz dugum varsa
+                                                          ;aradigimiz dugumu bulduysak
+                                                          (list (first (min-alt (alt alist baslangic))))
+                                                          (ucs alist (first (min-alt (alt alist baslangic)))
+                                                 bitis))))))
+
+    (ucs harita 1 5)
+    
+
 https://docs.racket-lang.org/quick/index.html
+
+https://youtu.be/1xOe1vc-dJw
