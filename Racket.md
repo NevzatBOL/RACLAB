@@ -233,7 +233,62 @@ Ağırlık ve Graflar UCS algoritması
                                                  bitis))))))
 
     (ucs harita 1 5)
-    
+ 
+Koşul Tatmin Problemleri(CSP)
+ 
+    (define kenarlar (list (list 1 3)
+                         (list 1 2)
+                         (list 2 4)
+                         (list 3 2)
+                         (list 3 4)))
+
+    (define dugumler (list 1 2 3 4))
+
+    (define renkler (list 1 2 3))
+
+    (define cozum (list (list 1 1)
+                        (list 2 2)
+                        (list 3 3)
+                        (list 4 2)))
+
+    (define (birinci k) (first (first k)))
+    (define (ikinci k) (first (rest (first k))))
+
+    ;komsularin listesini donduren fonksiyon (komsular dugum kenarlar_listesi)
+    (define (komsular d k)
+      (if (empty? k) null
+          ;listede hala eleman varsa ilk siradaki dugum aranan dugume esitmi?
+          (if (= (birinci k) d)
+              (cons (ikinci k) (komsular d (rest k)))
+              (if (= (ikinci k) d)
+                  (cons (birinci k) (komsular d (rest k)))
+                  (komsular d (rest k))
+                  ))))
+
+    (komsular 2 kenarlar)
+
+    ;verilen cozum icerisindeki aranan dugumun rengini donduren fonksiyon.
+    (define (renk d c)(if (empty? c) null
+                          (if (= (birinci c) d)
+                              (ikinci c)
+                              (renk d (rest c)))))
+    (renk 4 cozum)
+
+    (define (kontrol-yardim d kl c) (if (empty? kl) #true
+                                        (if (= (renk d c) (renk (first kl) c))
+                                            #false
+                                            (kontrol-yardim d (rest kl) c))))
+
+    ;verilen kenarlar listesi ve cozum icin verilen komsulari ile uyumuna bak.
+    (define (kontrol d k c) (kontrol-yardim d (komsular d k) c))
+
+    (kontrol 2 kenarlar cozum)
+
+    (define (csp ds ks c) (if (empty? ds) #true
+                              (and (kontrol (first ds) ks c)
+                              (csp (rest ds) ks c))))
+
+    (csp dugumler kenarlar cozum)  
 
 https://docs.racket-lang.org/quick/index.html
 
