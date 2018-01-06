@@ -353,7 +353,54 @@ BFS Algoritmasının binary ağaçta kodlanması
 
     (BFS myTree 23)
 
+Oyun Ağaçları ve Tic Tac Toe
 
+    (define tahta (list (list 1 0 -1)
+          (list 0 -1 0)
+          (list -1 0 1)))
+
+    (define (satirkontrol satir) (if (= (first satir) (second satir) (third satir))
+                                     (first satir)
+                                     0))
+
+    (satirkontrol (first tahta))
+
+    (map satirkontrol tahta)
+
+    (define (dondur atahta) (list (map first tahta)
+                                  (map second tahta)
+                                  (map third tahta)))
+
+    (dondur tahta)
+
+    (map satirkontrol (dondur tahta))
+
+    (define (kosegen atahta) (if (= (first (first atahta))
+                                    (second (second atahta))
+                                    (third (third atahta)))
+                                 (first (first atahta))
+                                 0))
+
+    (define (tkosegen atahta) (if (= (first (third atahta))
+                                    (second (second atahta))
+                                    (third (first atahta)))
+                                 (second (second atahta))
+                                 0))
+    (define (kazananlistesi atahta) (append (map satirkontrol atahta)
+                              (map satirkontrol (dondur atahta))
+                              (list (kosegen atahta))
+                              (list (tkosegen atahta))))
+
+    (kazananlistesi tahta)
+
+    (define (bireindir alist) (if (empty? alist) 0
+                                  (if (not (= (first alist) 0))
+                                      (first alist)
+                                      (bireindir (rest alist)))))
+
+    (define (kazanan atahta) (bireindir (kazananlistesi atahta)))
+
+    (kazanan tahta)
 
 https://docs.racket-lang.org/quick/index.html
 
