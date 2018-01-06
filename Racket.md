@@ -320,6 +320,39 @@ DFS Algoritmasının binary ağaçta kodlanması
 
     (DFS myTree 4)                        
 
+BFS Algoritmasının binary ağaçta kodlanması  
+
+    (define myTree (list 53
+                         (list 23
+                               (list 11 '() '())
+                               (list 4 '() '()))
+                         (list 17 '() '())
+                         ))
+
+    (define (root tree) (first tree))
+    (define (left tree) (first (rest tree)))
+    (define (right tree) (first (rest (rest tree))))
+
+    (define (countl atree limit) (if (empty? atree) 0
+                                     (if (= limit 0) 0
+                                         (+ 1 (countl (left atree) (- limit 1))
+                                            (countl (right atree) (- limit 1))))))
+
+    (countl myTree 3)
+
+    (define (level atree anode) (if (empty? atree) 0
+                                    (if (= (root atree) anode) 1
+                                        (+ (level (left atree) anode)
+                                           (level (right atree) anode)
+                                           (if (> (+ (level (left atree) anode) (level (right atree) anode)) 0)
+                                           1
+                                           0)))))
+    (level myTree 17)
+
+    (define (BFS atree anode) (+ (countl atree (level atree anode))))
+
+    (BFS myTree 23)
+
 
 
 https://docs.racket-lang.org/quick/index.html
