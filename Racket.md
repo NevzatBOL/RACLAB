@@ -402,6 +402,77 @@ Oyun Ağaçları ve Tic Tac Toe
 
     (kazanan tahta)
 
+First Order Logic
+
+    (require racklog)
+
+    (%which () %true)
+    (%which () %fail)
+
+    (define %knowbase
+      (%rel ()
+        [('Odysseus 'TeX)]
+        [('Odysseus 'Racket)]
+        [('Odysseus 'Prolog)]
+        [('Odysseus 'Penelope)]
+        [('Penelope 'TeX)]
+        [('Penelope 'Prolog)]
+        [('Penelope 'Odysseus)]
+        [('Telemachus 'TeX)]
+        [('Telemachus 'calculus)]))
+
+    (%which ()
+            (%knowbase 'Odysseus 'TeX))
+
+    (%which ()
+            (%knowbase 'Odysseus 'calculus))
+    ;Odysseus'un bildigi dillerden birini getirir.
+    (%which (what) 
+            (%knowbase 'Odysseus what))
+
+    (%more) ;daha fazla degisken dondurur.
+    (%more)
+
+    (%which (who)
+            (%knowbase who 'calculus))
+
+    (define %computer-literate
+      (%rel (person)
+        [(person)
+          (%knowbase person 'TeX)
+          (%knowbase person 'Racket)]
+        [(person)
+          (%knowbase person 'TeX)
+          (%knowbase person 'Prolog)]))
+
+    (%which ()
+            (%computer-literate 'Penelope))
+
+    (%which ()
+            (%computer-literate 'Telemachus))
+
+    (%which (who)
+            (%computer-literate who))
+
+    (%more)
+    (%more)
+    (%more)
+
+    (%assert! %knowbase ()
+              [('Odysseus 'archery)])
+
+    (%which (who)
+            (%knowbase who 'archery))
+
+    (%assert! %knowbase ()
+              [('Telemachus 'Prolog)])
+
+    (%which () (%computer-literate 'Telemachus))
+
+Referans Linkler
+
 https://docs.racket-lang.org/quick/index.html
 
-https://youtu.be/1xOe1vc-dJw
+https://docs.racket-lang.org/racklog/index.html
+
+https://www.youtube.com/watch?v=4fXewRNBJUE&list=PLh9ECzBB8tJMNe6hHxv5ztxh5e5bUHShA
