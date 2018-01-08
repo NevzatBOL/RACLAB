@@ -471,7 +471,7 @@ First Order Logic
 
 Referans Linkler
 
-https://docs.racket-lang.org/quick/index.html
+http://www.ccs.neu.edu/home/matthias/HtDP2e/
 
 https://docs.racket-lang.org/racklog/index.html
 
