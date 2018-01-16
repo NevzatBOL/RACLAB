@@ -103,8 +103,9 @@ http://learn.turtlebot.com/2015/02/03/8/
 
 Rplidar ile Haritalandırma
 
-     roslaunch rplidar_ros view_slam.launch     -rplidar ve hector mapping ile haritalandırma yapılabilir.
+    roslaunch rplidar_ros view_slam.launch      -rplidar ve hector mapping ile haritalandırma yapılabilir.
 
+    rosrun map_server map_saver -f test_map     -oluşturduğumuz haritayı kaydederiz.
 
 Referans Link:
 
