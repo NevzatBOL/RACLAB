@@ -123,3 +123,30 @@ root_mean_square_error
 ![RMSE](http://file.scirp.org/Html/htmlimages/5-2601289x/fcdba7fc-a40e-4019-9e95-aca3dc2db149.png)
 
 Referans link: [Keras Loss Function](https://keras.io/losses/)
+
+## Optimizasyon Fonksiyonları
+
+optimizasyon fonksiyonları, Loss değerine göre yapay sinir ağlarının ağırlık değerlerini düzenleyen fonksiyonlardır. Hata(loss) minimize edilmeye çalışılır.
+
+    from keras import optimizers
+
+    optimizer=optimizers.adam()	#parametre girilmezse default paremetreler kullanılır.
+    model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+Bazı Optimizasyon Fonksiyonları;
+
+    optimizer=optimizers.SGD(lr=0.01, momentum=0.0, decay=0.0, nesterov=False)
+    optimizer=optimizers.RMSprop(lr=0.001, rho=0.9, epsilon=None, decay=0.0)
+    optimizer=optimizers.Adagrad(lr=0.01, epsilon=None, decay=0.0)
+    optimizer=optimizers.Adadelta(lr=1.0, rho=0.95, epsilon=None, decay=0.0)
+    optimizer=optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+
+Referans link: [Keras Optimizer Function](https://keras.io/optimizers/)
+
+### Learning Rate
+
+hatayı minimize ederken optimizasyon fonksiyonun nekdar büyüklükteki adımlar ile minimize edeceğini belirten değerdir.
+Çok büyük olması hatanın belirli bir değerden sonra azalmamasına neden olur. Çok küçük değer seçilmesi durumunda hatnın minimize edilmesi için epoch sayısı artılması gerekir.
+
+    optimizer=optimizers.sgd(lr=0.1)
+    
