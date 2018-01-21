@@ -141,8 +141,6 @@ Bazı Optimizasyon Fonksiyonları;
     optimizer=optimizers.Adadelta(lr=1.0, rho=0.95, epsilon=None, decay=0.0)
     optimizer=optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
 
-Referans link: [Keras Optimizer Function](https://keras.io/optimizers/)
-
 ### Learning Rate
 
 hatayı minimize ederken optimizasyon fonksiyonun nekdar büyüklükteki adımlar ile minimize edeceğini belirten değerdir.
@@ -150,3 +148,49 @@ hatayı minimize ederken optimizasyon fonksiyonun nekdar büyüklükteki adımla
 
     optimizer=optimizers.sgd(lr=0.1)
     
+Referans link: [Keras Optimizer Function](https://keras.io/optimizers/)
+
+## Metric Fonksiyonu
+
+Metric fonksiyonu modelinizin performansını değerlendirmek için kullanılır. Bir metric fonksiyonu bir hata(loss) fonksiyonuna benzer ancak bir metric'in değerlendirilmesiyle elde edilen sonuçlar model eğitilirken kullanılmaz. 
+ 
+Kullanılan Metric fonksiyonu 'accuracy' dir. Size 0-1 arasında bir doğruluk değerini gösterir. 
+
+Referans link: [Keras Metric Function](https://keras.io/metrics/)
+
+## Fit Fonksiyonu
+
+    mode.fit( x, y, batch_size=32, epoch=10, verbose=1, callbacks=[],
+    validation_split=0.0, validation_data=None, shuffle=True,
+    class_weight=None, sample_weight=None)
+    
+x: Giriş verisi 
+
+y: Giriş verisine ait Etiketler
+
+batch_size: Bir ileri çalışma ve geri yayılma esnasında kullanılacak örnek sayısı
+
+epoch: iterasyon sayısı Bütün veri setinin kaç kez tekrar eğitimde kullanılacağı
+
+verbose: eğitim esnasında verilecek ilerleme bilgisini ayarlayan parametre
+
+0 : stdout a bir çıkış yok
+
+1 : ilerleme çubuğuyla göster ‘[=====>............]’
+
+2 : her iterasyon için tek ilerleme çubuğu gösterir
+
+callbacks: Eğitim esnasında çalışıtırılan fonksiyonlar
+
+validation_split: (0. < x < 1). bir oran da verinin bir kısmını eğitimde kullanmayıp doğrulama -validation – için kullanılır. Meseala 0.2 demek Eğitim verisinin %20 sinin doğrulama işlemi için kullanılacağı anlamına gelir.
+
+validation_data: Doğrulama verisini Eğitim verisinden ayrı olarak da verebiliriz.
+
+shuffle: Her iterasyonda eğitim verisinin sırasının karıştırılmasını sağlar. (True)
+
+class_weight: Eğitim esnasında loss hesaplanırken her sınıf için ayrı ağırlık parametresi (dict)
+
+sample_weight: Eğitim veri setinde loss hesabında her örnek için ayrı bir katsayı kullanımına imkan verir
+
+Referans link: [Derin Deli Mavi Keras](http://derindelimavi.blogspot.com.tr/2017/01/keras-giris-1.html)
+
