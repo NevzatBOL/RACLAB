@@ -187,3 +187,12 @@ Referans link: [Keras Metric Function](https://keras.io/metrics/)
 
 Referans link: [Derin Deli Mavi Keras](http://derindelimavi.blogspot.com.tr/2017/01/keras-giris-1.html)
 
+## Dropout Metodu
+
+Dropout hiden layer'daki bazı düğümlerin rastgele iptal edilmesi prensibine dayanır. Eğitim hatasını azaltır.
+
+![dropout](https://cdn-images-1.medium.com/max/1044/1*iWQzxhVlvadk6VAJjsgXgg.png)
+
+    model.add(Dropout(0.5)) hiden layerlarda düğümlerin %50'sini siler.
+
+Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
