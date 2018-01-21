@@ -110,4 +110,16 @@ Referans link: [Keras Aktivation Function](https://keras.io/activations/)
     
 Bazı Hata Fonksiyonları;
 
-    
+mean_squared_error
+
+![MSE](https://cdn-images-1.medium.com/max/1600/1*5B-_uIK9ULfzx5sV-aBmiA@2x.png)
+
+mean_absolute_error
+
+![MAE](http://www.statisticshowto.com/wp-content/uploads/2016/10/MAE.png)
+
+root_mean_square_error
+
+![RMSE](http://file.scirp.org/Html/htmlimages/5-2601289x/fcdba7fc-a40e-4019-9e95-aca3dc2db149.png)
+
+Referans link: [Keras Loss Funtion](https://keras.io/losses/)
