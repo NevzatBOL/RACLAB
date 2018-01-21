@@ -465,7 +465,7 @@
     rosrun beginner_tutorials listener.py
 
 
-## ROS Basit Hizmet ve İştemci Yazma C++    
+## ROS Basit Hizmet ve İstemci Yazma C++    
 	roscd beginner_tutorials/src
 	touch add_two_ints_server.cpp
 	touch add_two_ints_client.cpp
@@ -552,7 +552,7 @@
 	rosrun beginner_tutorials add_two_ints_server
 	rosrun beginner_tutorials add_two_ints_client 1 3		say1+say2 toplanır.
 	
-## ROS Basit Hizmet ve İştemci Yazma Python
+## ROS Basit Hizmet ve İstemci Yazma Python
 	roscd beginner_tutorials/scripts
 	touch add_two_ints_server.py
 	touch add_two_ints_client.py
