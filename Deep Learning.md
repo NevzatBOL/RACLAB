@@ -122,4 +122,4 @@ root_mean_square_error
 
 ![RMSE](http://file.scirp.org/Html/htmlimages/5-2601289x/fcdba7fc-a40e-4019-9e95-aca3dc2db149.png)
 
-Referans link: [Keras Loss Funtion](https://keras.io/losses/)
+Referans link: [Keras Loss Function](https://keras.io/losses/)
