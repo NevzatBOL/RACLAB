@@ -164,33 +164,26 @@ Referans link: [Keras Metric Function](https://keras.io/metrics/)
     validation_split=0.0, validation_data=None, shuffle=True,
     class_weight=None, sample_weight=None)
     
-x: Giriş verisi 
+    x: Giriş verisi 
+    y: Giriş verisine ait Etiketler
 
-y: Giriş verisine ait Etiketler
+    batch_size: Bir ileri çalışma ve geri yayılma esnasında kullanılacak örnek sayısı
+    epoch: iterasyon sayısı Bütün veri setinin kaç kez tekrar eğitimde kullanılacağı
 
-batch_size: Bir ileri çalışma ve geri yayılma esnasında kullanılacak örnek sayısı
+    verbose: eğitim esnasında verilecek ilerleme bilgisini ayarlayan parametre
+        0 : stdout a bir çıkış yok
+        1 : ilerleme çubuğuyla göster ‘[=====>............]’
+        2 : her iterasyon için tek ilerleme çubuğu gösterir
 
-epoch: iterasyon sayısı Bütün veri setinin kaç kez tekrar eğitimde kullanılacağı
+    callbacks: Eğitim esnasında çalışıtırılan fonksiyonlar
 
-verbose: eğitim esnasında verilecek ilerleme bilgisini ayarlayan parametre
+    validation_split: (0. < x < 1). bir oran da verinin bir kısmını eğitimde kullanmayıp doğrulama -validation – için kullanılır. Meseala 0.2 demek Eğitim verisinin %20 sinin doğrulama işlemi için kullanılacağı anlamına gelir.    
+    validation_data: Doğrulama verisini Eğitim verisinden ayrı olarak da verebiliriz.
 
-0 : stdout a bir çıkış yok
+    shuffle: Her iterasyonda eğitim verisinin sırasının karıştırılmasını sağlar. (True)
 
-1 : ilerleme çubuğuyla göster ‘[=====>............]’
-
-2 : her iterasyon için tek ilerleme çubuğu gösterir
-
-callbacks: Eğitim esnasında çalışıtırılan fonksiyonlar
-
-validation_split: (0. < x < 1). bir oran da verinin bir kısmını eğitimde kullanmayıp doğrulama -validation – için kullanılır. Meseala 0.2 demek Eğitim verisinin %20 sinin doğrulama işlemi için kullanılacağı anlamına gelir.
-
-validation_data: Doğrulama verisini Eğitim verisinden ayrı olarak da verebiliriz.
-
-shuffle: Her iterasyonda eğitim verisinin sırasının karıştırılmasını sağlar. (True)
-
-class_weight: Eğitim esnasında loss hesaplanırken her sınıf için ayrı ağırlık parametresi (dict)
-
-sample_weight: Eğitim veri setinde loss hesabında her örnek için ayrı bir katsayı kullanımına imkan verir
+    class_weight: Eğitim esnasında loss hesaplanırken her sınıf için ayrı ağırlık parametresi (dict)
+    sample_weight: Eğitim veri setinde loss hesabında her örnek için ayrı bir katsayı kullanımına imkan verir
 
 Referans link: [Derin Deli Mavi Keras](http://derindelimavi.blogspot.com.tr/2017/01/keras-giris-1.html)
 
