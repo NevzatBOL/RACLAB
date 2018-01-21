@@ -70,16 +70,44 @@ Sitesinden 	*breast-cancer-wisconsin.data* dataset'imizi indiriyoruz.
     model.fit(giris,cikis,epochs=5,batch_size=32,validation_split=0.13)
     #fit ile oluşturduğumuz modeli çalıştırma parametrelerini girdik.
     #epochs kaç defa sistemin eğitileceği
-    #batch_size aynı anda kaç bitlik veriyi, veri setine sokarak işlem gerçekleştireceğini belirtik.
+    #batch_size Tek seferde ne kadar verimizin ağdan geçeğini belirtir.
     #validation_split data setimizin % kaçını test için ayıracağımızı belirtiriz.
 
-    #Eğitim çıktıları loss: Kayıp miktarı, acc: Doğruluk oranı, 
-    #val_loss: test datasına göre kayıp miktarı, val_acc: test datasına göre doğruluk oranı
+    #Eğitim çıktıları 
+    #loss: Train verisi üzerindeki hata oranı
+    #acc: Train verisi üzerindeki doğruluk oranı 
+    #val_loss: test datasına göre hata oranı
+    #val_acc: test datasına göre doğruluk oranı
 
     tahmin1=np.array([6,1,1,1,2,1,3,1]).reshape(1,8) #tahmin datası oluşturduk.
     print model.predict_classes(tahmin1) #oluşturduğumuz tahmin hatrisini modelimize verdik.
 
     tahmin2=np.array([10,5,5,3,6,7,7,10]).reshape(1,8)
     print model.predict_classes(tahmin2)
-    
  
+## Neural Network modeli Oluşturma
+
+    model = Sequential() #Ardışık Model oluşturduk.
+    
+    model.add(Dense(128,input_dim=8)) #Dense(Node Sayısı, input_dim=input sayısı)
+    model.add(Activation('relu')) #Aktivasyon fonksiyonunu belirledik.
+    
+    model.add(Dense(128,input_dim=8,activation='relu')) #Dense(Node Sayısı, input_dim=input sayısı, activation=Aktivasyon fonksiyonu) şeklinde tek satırda da oluşturulabilir.
+    
+## Aktivasyon Fonksiyonları
+
+Bazı Aktivasyon fonksiyonları;
+
+    model.add(Activation('relu'))
+    model.add(Activation('sigmoid'))
+    model.add(Activation('tanh'))
+    model.add(Activation('linear'))
+    model.add(Activation('softmax'))
+    
+Referans link: [Keras Aktivation Function](https://keras.io/activations/)  
+    
+## Hata(Loss) Fonsiyonları 
+    
+Bazı Hata Fonksiyonları;
+
+    
