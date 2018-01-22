@@ -204,3 +204,9 @@ Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdro
 ![Conv](http://cs231n.github.io/assets/cnn/convnet.jpeg)
 
 [Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
+
+## Pooling
+
+![pooling](https://www.embedded-vision.com/sites/default/files/technical-articles/CadenceCNN/Figure7.jpg)
+
+![conv and pooling](https://saitoxu.io/images/2017-01-01-convolution-and-pooling.png)
