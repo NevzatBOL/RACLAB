@@ -203,6 +203,10 @@ Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdro
 
 ![Conv](http://cs231n.github.io/assets/cnn/convnet.jpeg)
 
+# Convolution Kernel
+
+![conv kernel](https://sipl.eelabs.technion.ac.il/wp-content/uploads/sites/6/2016/10/project-image-1599-2-13.png)
+
 [Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
 
 ## Pooling
