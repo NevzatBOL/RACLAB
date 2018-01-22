@@ -196,3 +196,9 @@ Dropout hiden layer'daki bazı düğümlerin rastgele iptal edilmesi prensibine 
     model.add(Dropout(0.5)) hiden layerlarda düğümlerin %50'sini siler.
 
 Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
+
+# Convolution Neural Networks
+
+![Convolution Neural Networks](https://adeshpande3.github.io/assets/Cover.png)
+
+![Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
