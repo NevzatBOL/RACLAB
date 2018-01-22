@@ -201,4 +201,4 @@ Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdro
 
 ![Convolution Neural Networks](https://adeshpande3.github.io/assets/Cover.png)
 
-![Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
+[Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
