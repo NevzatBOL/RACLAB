@@ -9,4 +9,4 @@ Makine öğrenimi istatistik, olasılık kuramı, veri madenciliği, örüntü t
 	Takviyeli Öğrenme: Öğreticinin, sistemin ürettiği sonuç için doğru ya da yanlış olarak bir değerlendirmesidir.
 	Yoğun Öğrenme: Hiyerarşik öğrenme olarak da bilinir. Bu öğrenme yöntemi derin grafiklerde birçok doğrusal ve doğrusal olmayan dönüşümlerden ve çoklu işlem katmanlarından oluşturulmuş verilerde, üst düzey soyutlamalar kullanılarak elde edilen model girişimlerine dayalı bir dizi algoritmalarla geliştirilmiş makine öğrenmesidir.
 
-http://ahmetcevahircinar.com.tr/wp-content/uploads/2017/05/makine-ogrenmesi-algoritmalari.jpg
+
