@@ -17,6 +17,15 @@ Hiyerarşik öğrenme olarak da bilinir. Bu öğrenme yöntemi derin grafiklerde
   
 ![Denetimli ve Denetimsiz öğrenme alt sınıfları](http://ahmetcevahircinar.com.tr/wp-content/uploads/2017/05/makine-ogrenmesi-algoritmalari.jpg)
 
+## Terimler
+
+### Underfitting (tam uyumsuzluk)
+Veri setinin istenilen tahmini yapamaması durumudur.
+### Overfitting  (aşırı uyumluluk)
+Veri setinin tahmin yerini tamamen doğru sonucları vermesi durumudur.
+
+![overfitting and underfitting](https://qph.ec.quoracdn.net/main-qimg-b4112b5d856f4f0da349460aeed854d8)
+
 ## Linear(Doğrusal) Regresyon
 Elimizde bulunun tüm verilerin bir grafik üzerine oturtulup, doğrusal çizgi çizilmesi ve tahmin yapılması işlemidir.
 Çizgi çizilirken ilk önce rastgele bir noktadan çizilir ve elimizde bulunan verilere olan uzakları hesaplanır. Hesaplanan bu uzaklıklar bizim hata değerimiz olur ve hatayı en aza indirecek şekilde doğrumuzun konumunun yeri değiştirilir.
