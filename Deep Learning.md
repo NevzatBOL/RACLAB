@@ -207,6 +207,16 @@ Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdro
 
 ![conv kernel](https://sipl.eelabs.technion.ac.il/wp-content/uploads/sites/6/2016/10/project-image-1599-2-13.png)
 
+Görüntü işlemede konvolüsyon, görüntü matrisleri üzerinde filtre matrislerin dolaştırılarak çarpılması işlemidir. Bu işlem görüntü üzerindeki farklı detayların ortaya çıkarılmasında kullanır. Oluşturulan filtre matrislerinin yani kernellerin parametreleri deep learning uygulamalarında rastgele olarak belirlenir. 
+
+![depth](https://image.slidesharecdn.com/adriasthesispresentation-170324182901/95/skin-lesion-detection-from-dermoscopic-images-using-convolutional-neural-networks-17-638.jpg?cb=1490380205)
+
+Filtre kernelleri ile görüntü matrislerinin derinlik değerleri eşit olmalıdır. 
+
+![depth](http://slideplayer.com/slide/12213532/72/images/45/Convolutions:+More+detail.jpg)
+
+Görüntüye uygulanan kernel sayısı elde edilen yeni çıktının derinlik değerini verir.
+
 [Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
 
 ## Pooling
