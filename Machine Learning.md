@@ -75,6 +75,8 @@ Hatanın doğrunun her konumuna göre hesaplanması ve hatayı azaltacak şekild
 	print('Y de kesistigi yer: ', lineerregresyon.intercept_)
 	print("Denklem")
 	print("m=",m,"b+",b) # y=mx+b dogrusunun katsayilari
+	
+linear.csv dosyasını https://drive.google.com/open?id=1mDpK7w5JQJ_9Qhk5u5jinO9lRFf76lTs adresinde indirebilirsiniz
 
 ## Polynominal(Polinom) Regresyon
 ![Polinom Regresyon](http://www.datascience.istanbul/wp-content/uploads/2017/06/Lineer_Regresyon_Notlar%C4%B1_10_Polinom_Regresyon_with_R_Polinom_Model_Grafik.png)
