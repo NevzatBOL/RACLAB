@@ -209,6 +209,14 @@ Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdro
 
 Görüntü işlemede konvolüsyon, görüntü matrisleri üzerinde filtre matrislerin dolaştırılarak çarpılması işlemidir. Bu işlem görüntü üzerindeki farklı detayların ortaya çıkarılmasında kullanır. Oluşturulan filtre matrislerinin yani kernellerin parametreleri deep learning uygulamalarında rastgele olarak belirlenir. 
 
+![out size](http://slideplayer.com/slide/12213532/72/images/47/Convolutions+with+some+stride.jpg)
+
+konvolüsyon işleminden sonra elde edilen yeni görüntü matrisinin boyutu (Görüntü_Matrisi - Filtre_Matrisi)/Stride + 1 formülü ile bulunur. Stride filtre matrisinin dolaştırıldığı piksel aralık değeridir.
+
+![padding](http://slideplayer.com/slide/12213532/72/images/48/In+practice:+Common+to+zero+pad+the+border.jpg)
+
+Görüntü matrisine direk kernel uyulanması durumunda görüntün kenarları yoksayılmış olur. Görüntünün kenar piksellerinde önemli bilgiler içerebileceğinden istenmeyen bir durumdur ve kenar ekleme işlemi uygulanır. Kenar ekleme işlemi için görüntün kenarlarını sıfır ekleme (padding) ile sağlanır.
+
 ![depth](https://image.slidesharecdn.com/adriasthesispresentation-170324182901/95/skin-lesion-detection-from-dermoscopic-images-using-convolutional-neural-networks-17-638.jpg?cb=1490380205)
 
 Filtre kernelleri ile görüntü matrislerinin derinlik değerleri eşit olmalıdır. 
@@ -217,7 +225,7 @@ Filtre kernelleri ile görüntü matrislerinin derinlik değerleri eşit olmalı
 
 Görüntüye uygulanan kernel sayısı elde edilen yeni çıktının derinlik değerini verir.
 
-[Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
+Örnek konvolüsyon uygulaması: [Convolutin Demo](http://cs231n.github.io/assets/conv-demo/index.html)
 
 ## Pooling
 
