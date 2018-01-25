@@ -16,3 +16,4 @@ Hiyerarşik öğrenme olarak da bilinir. Bu öğrenme yöntemi derin grafiklerde
   
 ![](http://ahmetcevahircinar.com.tr/wp-content/uploads/2017/05/makine-ogrenmesi-algoritmalari.jpg)
 
+ghgh
