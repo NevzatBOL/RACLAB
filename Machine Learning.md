@@ -49,6 +49,33 @@ Hatanın doğrunun her konumuna göre hesaplanması ve hatayı azaltacak şekild
 	plt.show()
 	print("m=",m,"b+",b) #y=mx+b dogrusunun hesaplanan m ve b katsayilari
 
+### Sk-Learn Kütüphanesi ile Linear Regresyon Örneği
+
+	import numpy as np
+	import pandas as pd
+	from sklearn.linear_model import LinearRegression as lr
+	import matplotlib.pyplot as plt
+	data = pd.read_csv("linear.csv")
+	x = data["metrekare"]
+	y = data["fiyat"]
+	x = x.reshape(99,1) #matris boyutumuzu belirttik
+	y = y.reshape(99,1) #matris boyutumuzu belirttik
+	lineerregresyon = lr() # Lineer Regresyonu cagirdik.
+	lineerregresyon.fit(x,y) # Verilerimizi x ve y eksenine oturttuk.
+	lineerregresyon.predict(x) #x'e gore, yani metrekareye gore ev fiyatlarini tahmin edecegiz.
+	m = lineerregresyon.coef_ 
+	# Coefficient - yani katsayi, bu komutla egimimizi Yani m i buluyoruz.
+	b= lineerregresyon.intercept_
+	# Intercept - b dir. yani y = mx+b 'de x'e sifir verdigimizde kalan deger.
+	a = np.arange(150)
+	plt.scatter(x,y) # Gercek verilerimizi nokta nokta, scatter ile cizdiriyoruz.
+	plt.scatter(a,m*a+b, c="red",marker=">") # dogrumuzu kirmizi noktalar ile ciziyor
+	plt.show()
+	print('Egim: ', lineerregresyon.coef_)
+	print('Y de kesistigi yer: ', lineerregresyon.intercept_)
+	print("Denklem")
+	print("m=",m,"b+",b) # y=mx+b dogrusunun katsayilari
+
 ## Polynominal(Polinom) Regresyon
 ![Polinom Regresyon](http://www.datascience.istanbul/wp-content/uploads/2017/06/Lineer_Regresyon_Notlar%C4%B1_10_Polinom_Regresyon_with_R_Polinom_Model_Grafik.png)
 
