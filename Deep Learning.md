@@ -231,4 +231,7 @@ Görüntüye uygulanan kernel sayısı elde edilen yeni çıktının derinlik de
 
 ![pooling](https://www.embedded-vision.com/sites/default/files/technical-articles/CadenceCNN/Figure7.jpg)
 
-![conv and pooling](https://saitoxu.io/images/2017-01-01-convolution-and-pooling.png)
+pooling görüntün boyutlarını küçülterek datayları azaltmak için kullanılır. Genel itibari ile iki farklı pooling metodu vardır. 
+Average Pooling: matrisin ortalama değerini alır. Ortalama değer çoğu durumda görüntüde olmayan değerlere karşılık geldiği için çok sık kullanılmaz.
+Max Pooling: matrisin maksimum değerini alır. matrislerin en büyük değerleri en önemli piksellere karşılık geldiği için çok uygulanan metodtur.
+
