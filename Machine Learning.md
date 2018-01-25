@@ -3,11 +3,16 @@
 	Makine öğrenimi istatistik, olasılık kuramı, veri madenciliği, örüntü tanıma, yapay zekâ, uyarlamalı denetim ve kuramsal bilgisayar bilimi gibi alanlarla yakından bağlantılıdır.
 	
 ## ÖĞRENME YAKLAŞIMLARI
-### Denetimli(Supervised) Öğrenme: Veri,etkiye tepki prensibiyle çalısan sistemlerden alınır ve giris-çıkıs düzeninde organize edilir.
-### Denetimsiz(Unsupervised) Öğrenme: Sınıf bilgisi olmayan veya verilmeyen veri içerisindeki grupları kesfetmeyi hedefler.
-### Yarı Denetimli Öğrenme: Bu kavram tam olarak yukarıdaki iki kavramın arasında yer alır ve etiketlenmemiş büyük miktarda bir veri ile etiketlenmiş küçük miktarda bir verinin beraber kullanılmasıdır.
-### Takviyeli Öğrenme: Öğreticinin, sistemin ürettiği sonuç için doğru ya da yanlış olarak bir değerlendirmesidir.
-### Yoğun Öğrenme: Hiyerarşik öğrenme olarak da bilinir. Bu öğrenme yöntemi derin grafiklerde birçok doğrusal ve doğrusal olmayan dönüşümlerden ve çoklu işlem katmanlarından oluşturulmuş verilerde, üst düzey soyutlamalar kullanılarak elde edilen model girişimlerine dayalı bir dizi algoritmalarla geliştirilmiş makine öğrenmesidir.
+### Denetimli(Supervised) Öğrenme:
+Veri,etkiye tepki prensibiyle çalısan sistemlerden alınır ve giris-çıkıs düzeninde organize edilir.
+### Denetimsiz(Unsupervised) Öğrenme:
+Sınıf bilgisi olmayan veya verilmeyen veri içerisindeki grupları kesfetmeyi hedefler.
+### Yarı Denetimli Öğrenme:
+Bu kavram tam olarak yukarıdaki iki kavramın arasında yer alır ve etiketlenmemiş büyük miktarda bir veri ile etiketlenmiş küçük miktarda bir verinin beraber kullanılmasıdır.
+### Takviyeli Öğrenme:
+Öğreticinin, sistemin ürettiği sonuç için doğru ya da yanlış olarak bir değerlendirmesidir.
+### Yoğun Öğrenme:
+Hiyerarşik öğrenme olarak da bilinir. Bu öğrenme yöntemi derin grafiklerde birçok doğrusal ve doğrusal olmayan dönüşümlerden ve çoklu işlem katmanlarından oluşturulmuş verilerde, üst düzey soyutlamalar kullanılarak elde edilen model girişimlerine dayalı bir dizi algoritmalarla geliştirilmiş makine öğrenmesidir.
   
   
 ![](http://ahmetcevahircinar.com.tr/wp-content/uploads/2017/05/makine-ogrenmesi-algoritmalari.jpg)
