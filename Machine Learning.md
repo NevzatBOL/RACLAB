@@ -1,6 +1,6 @@
 # MAKİNE ÖĞRENMESİ
-	Makine öğrenmesi esas olarak 1959 yılında bilgisayar biliminin yapay zekada sayısal öğrenme ve model 
-tanımaçalışmalarından geliştirilmiş bir alt dalıdır. Makine öğrenimi, bilgisayarların algılayıcı verisi 
+Makine öğrenmesi esas olarak 1959 yılında bilgisayar biliminin yapay zekada sayısal öğrenme ve model 
+tanıma çalışmalarından geliştirilmiş bir alt dalıdır. Makine öğrenimi, bilgisayarların algılayıcı verisi 
 ya da veritabanları gibi veri türlerine dayalı öğrenimini olanaklı kılan algoritmaların tasarım ve 
 geliştirme süreçlerini konu edinen bir bilim dalıdır.Makine öğreniminde araştırmalarının odaklandığı 
 konu bilgisayarlara karmaşık örüntüleri algılama ve veriye dayalı akılcı kararlar verebilme becerisi 
