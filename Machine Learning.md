@@ -23,6 +23,32 @@ Elimizde bulunun tüm verilerin bir grafik üzerine oturtulup, doğrusal çizgi 
 Hatanın doğrunun her konumuna göre hesaplanması ve hatayı azaltacak şekilde yerinin değiştirilmesi işlemine  **Gradient Descent(kademeli düşürme)** adı verilir. Genellikle bu işlem en küçük kareler yöntemi kullanılarak yapılmaktadır.
 ![Doğrusal Regresyon](https://mertricks.files.wordpress.com/2015/06/18.png)
 
+### Numpy Kütüphanesi ile Linear Regresyon Örneği
+
+	import numpy as np
+	import pandas as pd #csv dosyasi okumak icin gerekli kutuphane
+	import matplotlib.pyplot as plt
+	data = pd.read_csv("linear.csv")  # Verimizi okuyalim
+	print(data) # Veriyi inceleyelim.
+	x = data["metrekare"] # Metrekareleri bir axis' e cekelim, panda nin ozelligi.
+	y = data["fiyat"] 
+	print(x)
+	print(y) # Ne olusturdugumuza bakmak onemli.
+	plt.scatter(x,y) # verileri 2 boyutlu grafik uzerine yerlestirir
+	#Dogrumuzun denklemi y = m*a+b , Biz ise en uygun m ve b yi ariyoruz. m Egim, b kesim noktasi
+	m,b = np.polyfit(x,y,1)# NumPy bizim icin grafige oturtuyor cizgimizi.
+	# np.polyfit(x ekseni, y ekseni, kacinci dereceden polinom denklemi) 
+	#lineer regresyonda birinci dereceden kullanacagiz.
+	a = np.arange(150) # Denklemimiz hazir. a nin araligini ayarlayalim.
+	plt.scatter(x,y) # Scatter ile nokta cizdirimi yapiyoruz.
+	plt.plot(m*a+b) 
+	z = int(input("Kac metrekare?"))
+	tahmin = m*z+b
+	print(tahmin)	#tahmin edilen degeri yazdirdik
+	plt.scatter(z,tahmin,c="red",marker=">")  #tahmin degerini kirmizi nokta ile gosterir
+	plt.show()
+	print("m=",m,"b+",b) #y=mx+b dogrusunun hesaplanan m ve b katsayilari
+
 ## Polynominal(Polinom) Regresyon
 ![Polinom Regresyon](http://www.datascience.istanbul/wp-content/uploads/2017/06/Lineer_Regresyon_Notlar%C4%B1_10_Polinom_Regresyon_with_R_Polinom_Model_Grafik.png)
 
