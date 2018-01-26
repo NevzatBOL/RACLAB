@@ -32,6 +32,9 @@ Elimizde bulunun tüm verilerin bir grafik üzerine oturtulup, doğrusal çizgi 
 Hatanın doğrunun her konumuna göre hesaplanması ve hatayı azaltacak şekilde yerinin değiştirilmesi işlemine  **Gradient Descent(kademeli düşürme)** adı verilir. Genellikle bu işlem en küçük kareler yöntemi kullanılarak yapılmaktadır.
 ![Doğrusal Regresyon](https://mertricks.files.wordpress.com/2015/06/18.png)
 
+![maliyet fonksiyonu](https://i.hizliresim.com/azMoWR.png)
+Yukarıda bulunan fonksiyon lineer regresyon için hata hesaplamasında kullanılan maliyet fonksiyonudur. Tüm veriler için gerçek değer(y) eksi tahmini değerin(f(x)) kareleri alınıp ikiye bölünerek hesaplanır.
+
 ### Numpy Kütüphanesi ile Linear Regresyon Örneği
 
 	import numpy as np
@@ -88,12 +91,39 @@ Hatanın doğrunun her konumuna göre hesaplanması ve hatayı azaltacak şekild
 linear.csv dosyasını https://drive.google.com/open?id=1mDpK7w5JQJ_9Qhk5u5jinO9lRFf76lTs adresinde indirebilirsiniz
 
 ### Lasso Regresyon
-mutlak değerlere göre
+Lineer regresyonda hesaplanan maliyet fonksiyonuna gerçek değer eksi tahmini değerlerimizin mutlak değerlerinin toplamının bir alfa aşırı parametresi ile çarpılmış fonksiyonun eklenmesiyle bulunur.
 ### Ridge Regresyon
-karelere göre
+Lineer regresyonda hesaplanan maliyet fonksiyonuna gerçek değer eksi tahmini değerlerimizin karelerinin toplamının bir alfa aşırı parametresi ile çarpılmış fonksiyonun eklenmesiyle bulunur.
 
 ## Polynominal(Polinom) Regresyon
 ![Polinom Regresyon](http://www.datascience.istanbul/wp-content/uploads/2017/06/Lineer_Regresyon_Notlar%C4%B1_10_Polinom_Regresyon_with_R_Polinom_Model_Grafik.png)
+
+### Numpy Kütüphanesi ile Polinom Regresyon Örneği
+
+	import numpy as np
+	import pandas as pd #csv dosyasi okumak icin gerekli kutuphane
+	import matplotlib.pyplot as plt
+	data = pd.read_csv("linear.csv")  # Verimizi okuyalim
+	print(data) # Veriyi inceleyelim.
+	x = data["metrekare"] # Metrekareleri bir axis' e cekelim, panda nin ozelligi.
+	y = data["fiyat"] 
+	print(x)
+	print(y) # Ne olusturdugumuza bakmak onemli.
+	plt.scatter(x,y) # verileri 2 boyutlu grafik uzerine yerlestirir
+	#Dogrumuzun denklemi y = m*a+b , Biz ise en uygun m ve b yi ariyoruz. m Egim, b kesim noktasi
+	a, b, c, d = np.polyfit(x,y,3)# NumPy bizim icin grafige oturtuyor cizgimizi.
+	#derecemiz arti bir tane degiskene np.polyfit() fonksiyonunun degerini gonderdik.
+	# np.polyfit(x ekseni, y ekseni, kacinci dereceden polinom denklemi) 
+	#lineer regresyonda birinci dereceden kullanacagiz.
+	z = np.arange(150) # Denklemimiz hazir. z nin araligini ayarlayalim.
+	plt.scatter(x,y) # Scatter ile nokta cizdirimi yapiyoruz.
+	plt.plot(z,a*z*z*z+b*z*z+c*z+d)
+	#bir eksene aralik bir eksene 3. derece icin denkelemi yazdirdik y=ax^3+bx^2+cx+d 
+	plt.show()
+	print(a,"x^3+",b,"x^2+",c,"x+",d) #dogrunun hesaplanan a b c d katsayilari
+
+
+	
 
 
 
