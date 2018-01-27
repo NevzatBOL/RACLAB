@@ -235,3 +235,34 @@ pooling görüntün boyutlarını küçülterek datayları azaltmak için kullan
 Average Pooling: matrisin ortalama değerini alır. Ortalama değer çoğu durumda görüntüde olmayan değerlere karşılık geldiği için çok sık kullanılmaz.
 Max Pooling: matrisin maksimum değerini alır. matrislerin en büyük değerleri en önemli piksellere karşılık geldiği için çok uygulanan metodtur.
 
+# ImageNet
+
+![image net history](https://cdn-images-1.medium.com/max/1600/1*q-QBvvvz-uOxYq0OR2Zibg.jpeg)
+
+## ImageNet Algorithms
+
+### AlexNet - 2012 
+
+![Alexnet](https://www.researchgate.net/profile/Walid_Aly/publication/312188377/figure/fig4/AS:448996423540740@1484060497977/Figure-7-An-illustration-of-the-architecture-of-AlexNet-CNN-14.ppm)
+
+![Alexnet paralel](https://world4jason.gitbooks.io/research-log/content/deepLearning/CNN/Model%20&%20ImgNet/alexnet/img/alexnet2.png)
+
+### ZfNet - 2013
+
+![Zfnet](https://adeshpande3.github.io/assets/zfnet.png)
+
+### VggNet - 2014
+
+![Vggnet](https://m2dsupsdlclass.github.io/lectures-labs/slides/03_conv_nets/images/vgg.png)
+
+### LeNet - 2014
+
+![Lenet](https://software.intel.com/sites/default/files/managed/a0/90/dlsdk-lenet-image-recognition-img-03.png)
+
+### ResNet - 2015
+
+![ResNet](http://book.paddlepaddle.org/03.image_classification/image/resnet.png)
+
+![ResNet-50](http://ethereon.github.io/netscope/#/gist/db945b393d40bfa26006)
+![ResNet-101](http://ethereon.github.io/netscope/#/gist/b21e2aae116dc1ac7b50)
+![ResNet-152](http://ethereon.github.io/netscope/#/gist/d38f3e6091952b45198b)
