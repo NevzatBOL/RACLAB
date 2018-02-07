@@ -277,8 +277,7 @@ https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-pytho
 	PIL(Pillow)	sudo pip install Pillow
 
 
-	zbar		sudo apt-get install libzbar-dev	
-			sudo pip install zbar			qr kod okuma kütüphanesi
+	zbar		sudo apt-get install python-zbar	qr kod okuma kütüphanesi
 
 
 	sklearn 	sudo pip install sklearn		yapay zeka kütüphanesi
