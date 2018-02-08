@@ -32,6 +32,7 @@
     mkdir -p a/b && touch a/a.txt 	bulunduğumuz dizinde iç içe klasör oluşturur ve a klasörü içine a.txt dosyasını oluşturur.
     mkdir touch a/b/b.txt		a klasörü içindeki b klasörü içine b.txt dosyasını oluşturur. 
     cp dosya klasor 		dosyayı klasor dizinine kopyalar.
+    cp -r klasor klasor		klasorü klasor dizinine kopyalar.
     mv dosya klasor 		dosyayı klasor dizinine taşır.
     rm dosya			dosyayı siler.
     rm -rf klasor			klasörü siler.	
