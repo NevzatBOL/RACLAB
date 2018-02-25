@@ -515,6 +515,346 @@ oluşturduğumuz modeli çalıştıralım.
     roslaunch models view_urdf.launch model:=sekil5.urdf
 ![sekil5](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/visual.png)    
 
+# Hareketli Model
+
+Sabit ve hareketli olmak üzere fakrlı eklem türleri vardır. ilk yaptığımız örneklerde oluşturduğumuz eklemler sabitti şimdi ise hareketli eklemler oluşturarak modelimizin nasıl hareket ettiğini görelim.
+
+Continuous - Sürekli Eklemler
+
+Herhangi bir eksen üzerinde negatif ve pozitif yönde sınırsız dönenbilen eklemlerdir.
+
+    <joint name="head_swivel" type="continuous">
+      <parent link="base_link"/>
+      <child link="head"/>
+      <axis xyz="0 0 1"/>
+      <origin xyz="0 0 0.3"/>
+    </joint>
+
+
+Revolute - Dönen Eklemler
+
+Herhangi bir eksen üzerinde belirli açı değerleri arasında dönenbilen eklemlerdir.
+
+    <joint name="left_gripper_joint" type="revolute">
+      <axis xyz="0 0 1"/>
+      <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+      <origin rpy="0 0 0" xyz="0.2 0.01 0"/>
+      <parent link="gripper_pole"/>
+      <child link="left_gripper"/>
+    </joint>
+    
+Prismatic  Eklemler
+
+Tek bir eksen üzerinde düz hareket edebilen eklemlerdir.
+
+    <joint name="gripper_extension" type="prismatic">
+      <parent link="base_link"/>
+      <child link="gripper_pole"/>
+      <limit effort="1000.0" lower="-0.38" upper="0" velocity="0.5"/>
+      <origin rpy="0 0 0" xyz="0.19 0 0.2"/>
+    </joint>
+
+Son oluşturduğumuz modeli hareket edebilir şekilde düzenleyelim.
+
+    roscd models/urdf
+    gedit sekil6.urdf
+    
+    <?xml version="1.0"?>
+    <robot name="visual">
+
+     <!-- Renk meteryallerini tanimladik -->
+     <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+     </material>
+
+     <material name="black">
+        <color rgba="0 0 0 1"/>
+     </material>
+
+     <material name="white">
+        <color rgba="1 1 1 1"/>
+     </material>
+
+     <!-- Robotun gonvesini silindirden olusturduk -->
+     <link name="base_link">
+        <visual>
+          <geometry>
+            <cylinder length="0.6" radius="0.2"/>
+          </geometry>
+          <material name="blue"/>
+        </visual>
+     </link>
+
+     <!-- Robotun sag bacagini olusturduk -->
+     <link name="right_leg">
+        <visual>
+          <geometry>
+            <box size="0.6 0.1 0.2"/>
+          </geometry>
+          <origin rpy="0 1.57075 0" xyz="0 0 -0.3" />
+          <material name="white"/>
+        </visual>
+     </link>
+
+     <!-- Robotun govdesine sag bacagini birlestirdik -->
+     <joint name="base_to_right_leg" type="fixed">
+        <parent link="base_link"/>
+        <child link="right_leg"/>
+        <origin xyz="0 -0.22 0.25"/>
+     </joint>
+
+     <!-- Robotun sag ayagini olusturduk -->
+     <link name="right_base">
+        <visual>
+          <geometry>
+            <box size="0.4 0.1 0.1"/>
+          </geometry>
+          <material name="white"/>
+        </visual>
+     </link>
+
+     <!-- Robotun sag bacagina ayagini birlestirdik -->
+     <joint name="right_base_joint" type="fixed">
+        <parent link="right_leg"/>
+        <child link="right_base"/>
+        <origin xyz="0 0 -0.6"/>
+     </joint>
+
+     <!-- Robotun sag on tekerlerini olusturduk -->
+     <link name="right_front_wheel">
+        <visual>
+          <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+          <geometry>
+            <cylinder length="0.1" radius="0.035"/>
+          </geometry>
+          <material name="black"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+     </link>
+
+     <!-- Robotun sag ayagina on tekerlerini birlestirdik -->
+     <joint name="right_front_wheel_joint" type="continuous">
+        <parent link="right_base"/>
+        <child link="right_front_wheel"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="0.133333333333 0 -0.085"/>
+     </joint>
+
+     <!-- Robotun sag arka tekerlerini olusturduk -->
+     <link name="right_back_wheel">
+        <visual>
+          <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+          <geometry>
+            <cylinder length="0.1" radius="0.035"/>
+          </geometry>
+          <material name="black"/>
+        </visual>
+     </link>
+
+     <!-- Robotun sag ayagina arka tekerlerini birlestirdik -->
+     <joint name="right_back_wheel_joint" type="continuous">
+        <parent link="right_base"/>
+        <child link="right_back_wheel"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="-0.133333333333 0 -0.085"/>
+     </joint>
+
+
+     <!-- Robotun sol bacagini olusturduk -->
+     <link name="left_leg">
+        <visual>
+          <geometry>
+            <box size="0.6 0.1 0.2"/>
+          </geometry>
+          <origin rpy="0 1.57075 0" xyz="0 0 -0.3"/>
+          <material name="white"/>
+        </visual>
+     </link>
+
+     <!-- Robotun govdesine sol bacagini birlestirdik -->
+     <joint name="base_to_left_leg" type="fixed">
+        <parent link="base_link"/>
+        <child link="left_leg"/>
+        <origin xyz="0 0.22 0.25"/>
+     </joint>
+
+     <!-- Robotun sol ayagini olusturduk -->
+     <link name="left_base">
+        <visual>
+          <geometry>
+            <box size="0.4 0.1 0.1"/>
+          </geometry>
+          <material name="white"/>
+        </visual>
+     </link>
+
+     <!-- Robotun sol bacagina ayagini birlestirdik -->
+     <joint name="left_base_joint" type="fixed">
+        <parent link="left_leg"/>
+        <child link="left_base"/>
+        <origin xyz="0 0 -0.6"/>
+     </joint>
+
+     <!-- Robotun sol on tekerlerini olusturduk -->
+     <link name="left_front_wheel">
+        <visual>
+          <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+          <geometry>
+            <cylinder length="0.1" radius="0.035"/>
+          </geometry>
+          <material name="black"/>
+        </visual>
+     </link>
+
+     <!-- Robotun sol ayagina on tekerlerini birlestirdik -->
+     <joint name="left_front_wheel_joint" type="continuous">
+        <parent link="left_base"/>
+        <child link="left_front_wheel"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="0.133333333333 0 -0.085"/>
+     </joint>
+
+     <!-- Robotun sol arka tekerlerini olusturduk -->
+     <link name="left_back_wheel">
+        <visual>
+          <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+          <geometry>
+            <cylinder length="0.1" radius="0.035"/>
+          </geometry>
+          <material name="black"/>
+        </visual>
+     </link>
+
+     <!-- Robotun sol ayagina arka tekerlerini birlestirdik -->
+     <joint name="left_back_wheel_joint" type="continuous">
+        <parent link="left_base"/>
+        <child link="left_back_wheel"/>
+        <axis xyz="0 1 0"/>
+        <origin rpy="0 0 0" xyz="-0.133333333333 0 -0.085"/>
+     </joint>
+
+     <!-- Gripper kolu olusturduk -->
+     <link name="gripper_pole">
+        <visual>
+          <geometry>
+            <cylinder length="0.2" radius="0.02"/>
+          </geometry>
+          <material name="white"/>
+          <origin rpy="0 1.57075 0 " xyz="0.1 0 0"/>
+        </visual>
+     </link>
+
+     <!-- Robotun govdesine gripper kolunu birlestirdik -->
+     <joint name="gripper_extension" type="prismatic">
+        <parent link="base_link"/>
+        <child link="gripper_pole"/>
+        <limit effort="1000.0" lower="-0.15" upper="0" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="0.19 0 0.2"/>
+     </joint>
+
+     <!-- Gripperin solidworks cizimlerini yukledik -->
+     <link name="left_gripper">
+        <visual>
+          <origin rpy="0.0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://urdf_tutorial/meshes/l_finger.dae"/>
+          </geometry>
+        </visual>
+     </link>
+
+     <joint name="left_gripper_joint" type="revolute">
+        <axis xyz="0 0 1"/>
+        <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="0.2 0.01 0"/>
+        <parent link="gripper_pole"/>
+        <child link="left_gripper"/>
+     </joint>
+
+     <link name="left_tip">
+        <visual>
+          <origin rpy="0.0 0 0" xyz="0.09137 0.00495 0"/>
+          <geometry>
+            <mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
+          </geometry>
+        </visual>
+     </link>
+
+     <joint name="left_tip_joint" type="fixed">
+        <parent link="left_gripper"/>
+        <child link="left_tip"/>
+     </joint>
+
+     <link name="right_gripper">
+        <visual>
+          <origin rpy="-3.1415 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://urdf_tutorial/meshes/l_finger.dae"/>
+          </geometry>
+        </visual>
+     </link>
+
+     <joint name="right_gripper_joint" type="revolute">
+        <axis xyz="0 0 -1"/>
+        <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="0.2 -0.01 0"/>
+        <parent link="gripper_pole"/>
+        <child link="right_gripper"/>
+     </joint>
+
+     <link name="right_tip">
+        <visual>
+          <origin rpy="-3.1415 0 0" xyz="0.09137 0.00495 0"/>
+          <geometry>
+            <mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
+          </geometry>
+        </visual>
+     </link>
+
+     <joint name="right_tip_joint" type="fixed">
+        <parent link="right_gripper"/>
+        <child link="right_tip"/>
+     </joint>
+
+     <!-- Robotun kafasini olusturduk -->
+     <link name="head">
+        <visual>
+          <geometry>
+            <sphere radius="0.2"/>
+          </geometry>
+          <material name="white"/>
+        </visual>
+     </link>
+
+     <!-- Robotun govdesine kafasini birlestirdik -->
+     <joint name="head_swivel" type="continuous">
+        <parent link="base_link"/>
+        <child link="head"/>
+        <axis xyz="0 0 1"/>
+        <origin xyz="0 0 0.3"/>
+     </joint>
+
+     <link name="box">
+        <visual>
+          <geometry>
+            <box size="0.08 0.08 0.08"/>
+          </geometry>
+          <material name="blue"/>
+        </visual>
+     </link>
+
+     <joint name="tobox" type="fixed">
+        <parent link="head"/>
+        <child link="box"/>
+        <origin xyz="0.16 0 0.1"/>
+     </joint>
+
+    </robot>
+
+Modelimizi çalıştırarak hareketlerini inceleyelim.
+
+    roslaunch models view_urdf.launch model:=sekil6.urdf gui:=true
+
+![sekil6](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/flexible.png)
 
 check_urdf my_robot.urdf
 
