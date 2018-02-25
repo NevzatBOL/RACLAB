@@ -856,6 +856,85 @@ Modelimizi çalıştırarak hareketlerini inceleyelim.
 
 ![sekil6](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/flexible.png)
 
+# Modelin Fiziksel Özeliklerinin Ve Çarpışma Özeliğinin Tanımlanması
+
+**Çarpışma algılamasının çalışabilmesi için bir çarpışma ögesi tanımlanması gereklidir.**
+
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <cylinder length="0.6" radius="0.2"/>
+        </geometry>
+        <material name="blue">
+        <color rgba="0 0 .8 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.6" radius="0.2"/>
+        </geometry>
+      </collision>
+    </link>
+    
+Çarpışma ögesi bağlantılı nesnenin bir alt ögesidir. Bağlantılı nesne ile aynı şekilde tanımlanır.
+Çarpışma ögesi çoğu durum için bağlantılı nesne ile aynı boyutlarda olurken bazı durumlarda hassas ekipmanları korumak için bir koruma alanı oluşturacak şekilde tanımlanabilir. Çarpma algılamanın daha hızlı çalışabilmesi için bağlantılı nesnelerin karmaşık geometrilerini kullanmak yerine daha basit geometrik şekiller kullanılarak tanımlanabilir.
+
+**Modelin doğru şekilde taklit edilebilmesi için robotun çeşitli fiziksel özelliklerinin tanımlanması gerekir.**
+
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <cylinder length="0.6" radius="0.2"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 .8 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.6" radius="0.2"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="10"/>
+        <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+      </inertial>
+    </link>
+
+Bu ögede bağlantı nesnesinin alt ögesidir. 
+
+**mass(kütle)** kilogram olarak tanımlanır.
+
+**inertial(hareketsizlik)** 3x3'lük atalet matrisi ile belirtilir. Bu bilgi 3 boyutlu modelleme programı ile sağlanabilir yada basit geometriler için [atalet momentleri listesi](http://www.wiki-zero.com/index.php?q=aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9tb21lbnRfb2ZfaW5lcnRpYV90ZW5zb3Jz) kullanılabilir.
+
+Atalet momenti cismin kütlesine ve dağılımına bağlıdır. 
+
+**Temas katsayıları**
+
+bağlantıların birbirleri ile temas halinde nasıl davrandıkları tanımlanabilir. 
+Bu tanımlama çarpışma etiketinin alt ögesi olan contact_coefficients ile yapılabilir. 
+
+Temas katsayısı tanımlanırken; 
+
+**mu** - Sürtünme katsayısı
+
+**kp** - Sertlik katsayısı
+
+**kd** - Sönümleme katsayısı
+
+bu üç nitelik belirtilir.
+
+**Ortak dinamikler**
+
+Eklem hareketleri, eklem için dinamik hareketler ile tanımlanır. Burada iki nitelik vardır.
+
+**sürtünme** - Fiziksel statik sürtünme. Prizmatik derzlerde birimler Newton'dur. Dönen eklemler için birimler Newton metredir.
+
+**sönüm** - Fiziksel sönümleme değeri. Prizmatik derzlerde birimler metre başına Newton saniyedir. Dönen eklemler için, radyan başına Newton metre saniyedir.
+
+**Enson oluşturduğumuz modele çarpışma ve fiziksel özellikleri [burada](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/urdf/07-physics.urdf) olduğu gibi ekleyebiliriz.**
+
+
 check_urdf my_robot.urdf
 
 urdf_to_graphiz my_robot.urdf
