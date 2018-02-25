@@ -934,6 +934,377 @@ Eklem hareketleri, eklem için dinamik hareketler ile tanımlanır. Burada iki n
 
 **Enson oluşturduğumuz modele çarpışma ve fiziksel özellikleri [burada](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/urdf/07-physics.urdf) olduğu gibi ekleyebiliriz.**
 
+# URDF Dosyasını XACRO İle Kısaltma
+
+ilk olarak xacro ile yaptığımız modeli çalıştırabileceğimiz launch dosyamızı oluşturalım.
+    
+    roscd models/launch
+    gedit view_xacro.lauch
+    
+    <?xml version="1.0"?>
+    <launch>
+        <arg name="model" />
+        <arg name="gui" default="false" />
+        <arg name="rvizconfig" default="$(find models)/rviz/urdf.rviz" />
+
+        <param name="robot_description" command="$(find xacro)/xacro $(find models)/urdf/$(arg model)" />
+        <param name="use_gui" value="$(arg gui)"/>
+
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+    </launch>
+
+Xacro ile değişken oluşturarak modelimizi değiştirilmesi daha kolay ve daha kısa hale getirebiliriz.
+
+    <?xml version="1.0"?>
+    <robot name="myfirst" xmlns:xacro="http://ros.org/wiki/xacro">
+
+      <xacro:property name="width" value="0.2" />
+      <xacro:property name="bodylen" value="0.6" />
+      <link name="base_link">
+          <visual>
+              <geometry>
+                  <cylinder radius="${width}" length="${bodylen}"/>
+              </geometry>
+          </visual>
+          <collision>
+              <geometry>
+                  <cylinder radius="${width}" length="${bodylen}"/>
+              </geometry>
+          </collision>
+      </link>
+    </robot>
+
+sadece urdf olarak yazdığımız dosyada silindirin boyunu ve yarıçapını değiştirmek isteseydik iki yerde de aynı değişiklikleri yapmak zorunda kalacaktır. xacro ile değişken olarak tanımlamamız değişiklik yapmak istediğimiz durumlarda işimizi kolaylaştırır.
+
+ayrıca değişkenler sonradan değiştirilmeye ve ekleme yapılmasına olanak tanır.
+
+    <xacro:property name=”robotname” value=”marvin” />
+    <link name=”${robotname}s_leg” />
+    
+    Çıktı aşağıdaki gibi olacaktır.
+    <link name=”marvins_leg” />
+
+farklı matematiksel işlemler yapmamızada olanak tanır.
+
+    <cylinder radius="${wheeldiam/2}" length="0.1"/>
+    <origin xyz="${reflect*(width+.02)} 0 0.25" />
+
+    <link name="${5/6}"/>
+    Çıktı;
+    <link name="0.833333333333"/>
+    
+Makrolar tanımlanarak aynı etiketleri tekrar oluşturmaya gerek kalmayacak şekilde tanımlanarak kullanılabilir.
+
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+                <mass value="${mass}" />
+                <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                     iyy="1.0" iyz="0.0"
+                     izz="1.0" />
+        </inertial>
+    </xacro:macro>    
+    
+oluşturulan makro aşağıdaki kod ile kullanılabilir.
+
+    <xacro:default_inertial mass="10"/>
+   
+Tüm bloglarda parmetre olarak kullanılabilir.
+
+    <xacro:macro name="blue_shape" params="name *shape">
+        <link name="${name}">
+            <visual>
+                <geometry>
+                    <xacro:insert_block name="shape" />
+                </geometry>
+                <material name="blue"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <xacro:insert_block name="shape" />
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro> 
+
+Bir blok parametresi belirtmek için, parametre adından önce bir yıldız eklenir. 
+
+Bir blok, insert_block komutu kullanılarak eklenebilir
+
+Oluşturduğumuz blogu aşağıdaki gibi kullanabiliriz. 
+
+    <xacro:blue_shape name="base_link">
+        <cylinder radius=".42" length=".01" />
+    </xacro:blue_shape>   
+ 
+Şimdi ise urdf ile olusturdugumuz modelimizi xacro kullanarak daha kullanışlı hale getirelim.
+
+    roscd models/urdf
+    gedit sekil8.urdf.xacro
+
+    <?xml version="1.0"?>
+    <robot name="macroed" xmlns:xacro="http://ros.org/wiki/xacro">
+
+      <!-- Kullanacagimiz degiskenleri tanimladik -->
+      <xacro:property name="width" value="0.2" />
+      <xacro:property name="leglen" value="0.6" />
+      <xacro:property name="polelen" value="0.2" />
+      <xacro:property name="bodylen" value="0.6" />
+      <xacro:property name="baselen" value="0.4" />
+      <xacro:property name="wheeldiam" value="0.07" />
+      <xacro:property name="pi" value="3.1415" />
+
+      <!-- Renk materyallerini tanimladik -->
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+
+
+      <!-- Fiziksel degerler blogunu makro olarak tanimladik -->
+      <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+          <mass value="${mass}" />
+          <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        </inertial>
+      </xacro:macro>
+
+
+     <!-- Robotumuzun govdesini olusturalim -->
+      <link name="base_link">
+        <visual>
+          <geometry>
+            <cylinder radius="${width}" length="${bodylen}"/>
+          </geometry>
+          <material name="blue"/>
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder radius="${width}" length="${bodylen}"/>
+          </geometry>
+        </collision>
+        <xacro:default_inertial mass="10"/>
+      </link>
+
+      <!-- Tekerler icin makro blogu tanimladik -->
+      <xacro:macro name="wheel" params="prefix suffix reflect">
+        <link name="${prefix}_${suffix}_wheel">
+          <visual>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+            <geometry>
+              <cylinder radius="${wheeldiam/2}" length="0.1"/>
+            </geometry>
+            <material name="black"/>
+          </visual>
+          <collision>
+            <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+            <geometry>
+              <cylinder radius="${wheeldiam/2}" length="0.1"/>
+            </geometry>
+          </collision>
+          <xacro:default_inertial mass="1"/>
+        </link>
+        <joint name="${prefix}_${suffix}_wheel_joint" type="continuous">
+          <axis xyz="0 1 0" rpy="0 0 0" />
+          <parent link="${prefix}_base"/>
+          <child link="${prefix}_${suffix}_wheel"/>
+          <origin xyz="${baselen*reflect/3} 0 -${wheeldiam/2+.05}" rpy="0 0 0"/>
+        </joint>
+      </xacro:macro>
+
+      <!-- bacaklar ve ayaklar icin makro blogu tanimladik -->
+      <xacro:macro name="leg" params="prefix reflect">
+        <link name="${prefix}_leg">
+          <visual>
+            <geometry>
+              <box size="${leglen} 0.1 0.2"/>
+            </geometry>
+            <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/>
+            <material name="white"/>
+          </visual>
+          <collision>
+            <geometry>
+              <box size="${leglen} 0.1 0.2"/>
+            </geometry>
+            <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/>
+          </collision>
+          <xacro:default_inertial mass="10"/>
+        </link>
+
+        <joint name="base_to_${prefix}_leg" type="fixed">
+          <parent link="base_link"/>
+          <child link="${prefix}_leg"/>
+          <origin xyz="0 ${reflect*(width+.02)} 0.25" />
+        </joint>
+
+        <link name="${prefix}_base">
+          <visual>
+            <geometry>
+              <box size="${baselen} 0.1 0.1"/>
+            </geometry>
+            <material name="white"/>
+          </visual>
+          <collision>
+            <geometry>
+              <box size="${baselen} 0.1 0.1"/>
+            </geometry>
+          </collision>
+          <xacro:default_inertial mass="10"/>
+        </link>
+
+        <joint name="${prefix}_base_joint" type="fixed">
+          <parent link="${prefix}_leg"/>
+          <child link="${prefix}_base"/>
+          <origin xyz="0 0 ${-leglen}" />
+        </joint>
+
+        <!-- Tekerleri ekledik -->
+        <xacro:wheel prefix="${prefix}" suffix="front" reflect="1"/>
+        <xacro:wheel prefix="${prefix}" suffix="back" reflect="-1"/>
+      </xacro:macro>
+
+      <!-- bacaklaro ve ayaklari ekledik -->
+      <xacro:leg prefix="right" reflect="-1" />
+      <xacro:leg prefix="left" reflect="1" />
+
+
+      <!-- Gripper kolu ekledik -->
+      <joint name="gripper_extension" type="prismatic">
+        <parent link="base_link"/>
+        <child link="gripper_pole"/>
+        <limit effort="1000.0" lower="-${width-.05}" upper="0" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="${width-.01} 0 0.2"/>
+      </joint>
+
+      <link name="gripper_pole">
+        <visual>
+          <geometry>
+            <cylinder length="${polelen}" radius="0.02"/>
+          </geometry>
+          <material name="white"/>
+          <origin xyz="${polelen/2} 0 0" rpy="0 ${pi/2} 0 "/>
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder length="${polelen}" radius="0.01"/>
+          </geometry>
+          <origin xyz="${polelen/2} 0 0" rpy="0 ${pi/2} 0 "/>
+        </collision>
+        <xacro:default_inertial mass="0.05"/>
+      </link>
+
+
+      <!-- Gripperi olusturmak icin makro tanimladik -->
+      <xacro:macro name="gripper" params="prefix reflect">
+        <joint name="${prefix}_gripper_joint" type="revolute">
+          <axis xyz="0 0 ${reflect}"/>
+          <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+          <origin rpy="0 0 0" xyz="${polelen} ${reflect*0.01} 0"/>
+          <parent link="gripper_pole"/>
+          <child link="${prefix}_gripper"/>
+        </joint>
+        <link name="${prefix}_gripper">
+          <visual>
+            <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0 0 0"/>
+            <geometry>
+              <mesh filename="package://urdf_tutorial/meshes/l_finger.dae"/>
+            </geometry>
+          </visual>
+          <collision>
+            <geometry>
+              <mesh filename="package://urdf_tutorial/meshes/l_finger.dae"/>
+            </geometry>
+            <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0 0 0"/>
+          </collision>
+          <xacro:default_inertial mass="0.05"/>
+        </link>
+
+        <joint name="${prefix}_tip_joint" type="fixed">
+          <parent link="${prefix}_gripper"/>
+          <child link="${prefix}_tip"/>
+        </joint>
+        <link name="${prefix}_tip">
+          <visual>
+            <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0.09137 0.00495 0"/>
+            <geometry>
+              <mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
+            </geometry>
+          </visual>
+          <collision>
+            <geometry>
+              <mesh filename="package://urdf_tutorial/meshes/l_finger_tip.dae"/>
+            </geometry>
+            <origin rpy="${(reflect-1)/2*pi} 0 0" xyz="0.09137 0.00495 0"/>
+          </collision>
+          <xacro:default_inertial mass="0.05"/>
+        </link>
+      </xacro:macro>
+
+      <!-- gripperin sag ve sol ceneyisini ekledik -->
+      <xacro:gripper prefix="left" reflect="1" />
+      <xacro:gripper prefix="right" reflect="-1" />
+
+
+      <!-- Robotun kafasini ekledik -->
+      <link name="head">
+        <visual>
+          <geometry>
+            <sphere radius="${width}"/>
+          </geometry>
+          <material name="white"/>
+        </visual>
+        <collision>
+          <geometry>
+            <sphere radius="${width}"/>
+          </geometry>
+        </collision>
+        <xacro:default_inertial mass="2"/>
+      </link>
+
+      <joint name="head_swivel" type="continuous">
+        <parent link="base_link"/>
+        <child link="head"/>
+        <axis xyz="0 0 1"/>
+        <origin xyz="0 0 ${bodylen/2}"/>
+      </joint>
+
+      <link name="box">
+        <visual>
+          <geometry>
+            <box size="0.08 0.08 0.08"/>
+          </geometry>
+          <material name="blue"/>
+          <origin xyz="-0.04 0 0"/>
+        </visual>
+        <collision>
+          <geometry>
+            <box size="0.08 0.08 0.08"/>
+          </geometry>
+        </collision>
+        <xacro:default_inertial mass="1"/>
+      </link>
+
+      <joint name="tobox" type="fixed">
+        <parent link="head"/>
+        <child link="box"/>
+        <origin xyz="${.707*width+0.04} 0 ${.707*width}"/>
+      </joint>
+
+    </robot>
+
+oluşturduğumuz modeli çalıştıralım.
+
+    roslaunch models view_xacro.launch model:=sekil8.urdf.xacro gui:=true
+
 
 check_urdf my_robot.urdf
 
