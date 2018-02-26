@@ -1555,6 +1555,115 @@ Gripperı kapatmak ve kolu içeri çekmek için
       data_offset: 0
     data: [-0.4, 0, 0]"
 
+Son olarak robotun tekerlerine harket eklentilerini yaparak modelimizi tamamlayalım.
+
+urdf dosyamıza tekerlerin hareketi için actuator ekleyelim.
+
+    <transmission name="${prefix}_${suffix}_wheel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="${prefix}_${suffix}_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="${prefix}_${suffix}_wheel_joint">
+        <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+
+Yer ile tekerler arasındaki sürtünmeyi tanımlayalım.
+
+    <gazebo reference="${prefix}_${suffix}_wheel">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+
+urdf dosyamızın son hali [burdaki](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/13-diffdrive.urdf.xacro) gibi olmalıdır.
+
+Tekerlerimizin hareketi için DiffDriveController kullanarak yaml dosyamızı oluşturalım.
+
+    roscd models/config
+    gedit diffdrive.yaml
+    
+    type: "diff_drive_controller/DiffDriveController"
+    publish_rate: 50
+
+    left_wheel: ['left_front_wheel_joint', 'left_back_wheel_joint']
+    right_wheel: ['right_front_wheel_joint', 'right_back_wheel_joint']
+
+    wheel_separation: 0.44
+
+    # Odometry covariances for the encoder output of the robot. These values should
+    # be tuned to your robot's sample odometry data, but these values are a good place
+    # to start
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+
+    # Top level frame (link) of the robot description
+    base_frame_id: base_link
+
+    # Velocity and acceleration limits for the robot
+    linear:
+      x:
+        has_velocity_limits    : true
+        max_velocity           : 0.2   # m/s
+        has_acceleration_limits: true
+        max_acceleration       : 0.6   # m/s^2
+    angular:
+      z:
+        has_velocity_limits    : true
+        max_velocity           : 2.0   # rad/s
+        has_acceleration_limits: true
+        max_acceleration       : 6.0   # rad/s^2
+
+oluşturduğumuz dosyaları çalıştırmak için yeni bir launch dosyası oluşturalım.
+
+    roscd models/launch
+    gedit diffdrive.launch
+    
+    <?xml version="1.0"?>
+    <launch>
+      <arg name="model" default="$(find models)/urdf/sekil8.urdf.xacro"/>
+      <arg name="rvizconfig" default="$(find models)/rviz/urdf.rviz" />
+
+      <include file="$(find models)/launch/gazebo.launch">
+        <arg name="model" value="$(arg model)" />
+      </include>
+
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+
+      <rosparam command="load"
+                file="$(find models)/config/joints.yaml"
+                ns="r2d2_joint_state_controller" />
+      <rosparam command="load"
+                file="$(find models)/config/head.yaml"
+                ns="r2d2_head_controller" />
+      <rosparam command="load"
+                file="$(find models)/config/gripper.yaml"
+                ns="r2d2_gripper_controller" />
+      <rosparam command="load"
+                file="$(find models)/config/diffdrive.yaml"
+                ns="r2d2_diff_drive_controller" />
+
+      <node name="r2d2_controller_spawner" pkg="controller_manager" type="spawner"
+        args="r2d2_joint_state_controller
+              r2d2_head_controller
+              r2d2_gripper_controller
+              r2d2_diff_drive_controller
+              --shutdown-timeout 3"/>
+
+      <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+        <param name="default_topic" value="/r2d2_diff_drive_controller/cmd_vel"/>
+      </node>
+    </launch>
+
+robotumuzu oluşturduğumuz launch dosyasını çalıştıralım.
+
+    roslaunch models diffdrive.launch
+
+![gazebo2](http://wiki.ros.org/urdf/Tutorials/Using%20a%20URDF%20in%20Gazebo?action=AttachFile&do=get&target=DrivingInterface.png)
+
 check_urdf my_robot.urdf
 
 urdf_to_graphiz my_robot.urdf
