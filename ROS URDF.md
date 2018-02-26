@@ -1485,7 +1485,75 @@ son oluşturduğumuz urdf dosyasındaki head_swivel'i aşağıdaki gibi düzenle
 
 Yukarıda kullanımını gösterdiğimiz kodlar ile robotun kafasının kademeli olarak hareket ettiğini görebilirsiniz.
 
+Şimdi ise gripper hareketlerini için urdf dosyamızı [burada](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/12-gripper.urdf.xacro) olduğu gibi düzenleyelim.
 
+Her eklenti için ayrı bir ros konusu oluşturmak yerine onları bir araya getirebiliriz.
+
+    roscd models/config
+    gedit gripper.yaml
+    
+    type: "position_controllers/JointGroupPositionController"
+    joints:
+     - gripper_extension
+     - left_gripper_joint
+     - right_gripper_joint
+
+oluşturduğumuz yaml dosyasını çalıştırmak için yeni bir launch dosyası oluşturalım.
+
+    roscd models/launch
+    gedit gripper.launch
+    
+    <?xml version="1.0"?>
+    <launch>
+      <arg name="model" default="$(find models)/urdf/sekil8.urdf.xacro"/>
+      <arg name="rvizconfig" default="$(find models)/rviz/urdf.rviz" />
+
+      <include file="$(find models)/launch/gazebo.launch">
+        <arg name="model" value="$(arg model)" />
+      </include>
+
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+
+      <rosparam command="load"
+                file="$(find models)/config/joints.yaml"
+                ns="r2d2_joint_state_controller" />
+      <rosparam command="load"
+                file="$(find models)/config/head.yaml"
+                ns="r2d2_head_controller" />
+      <rosparam command="load"
+                file="$(find models)/config/gripper.yaml"
+                ns="r2d2_gripper_controller" />
+
+      <node name="r2d2_controller_spawner" pkg="controller_manager" type="spawner"
+        args="r2d2_joint_state_controller
+              r2d2_head_controller
+              r2d2_gripper_controller
+              --shutdown-timeout 3"/>
+    </launch>
+
+oluşturduğumuz launch dosyasını çalıştırarak gripper'ın hareketlerini gözlemleyelim.
+
+    roslaunch models gripper.launch
+    
+Gripperı açmak ve kolu dışarı itmek için
+
+    rostopic pub  /r2d2_gripper_controller/command std_msgs/Float64MultiArray "layout:
+      dim:
+      - label: ''
+        size: 3
+        stride: 1
+      data_offset: 0
+    data: [0, 0.5, 0.5]"
+
+Gripperı kapatmak ve kolu içeri çekmek için
+    
+    rostopic pub  /r2d2_gripper_controller/command std_msgs/Float64MultiArray "layout:
+      dim:
+      - label: ''
+        size: 3
+        stride: 1
+      data_offset: 0
+    data: [-0.4, 0, 0]"
 
 check_urdf my_robot.urdf
 
