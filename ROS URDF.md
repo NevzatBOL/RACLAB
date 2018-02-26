@@ -1305,6 +1305,187 @@ oluşturduğumuz modeli çalıştıralım.
 
     roslaunch models view_xacro.launch model:=sekil8.urdf.xacro gui:=true
 
+# Gazebo'da URDF Kullanma
+
+ilk olarak oluşturduğumuz modeli çalıştırabileceğimiz bir launch dosyası oluşturmalıyız.
+
+    roscd models/launch
+    gedit gazebo.launch
+    
+    <?xml version="1.0"?>
+    <launch>
+      <arg name="paused" default="false"/>
+      <arg name="use_sim_time" default="true"/>
+      <arg name="gui" default="true"/>
+      <arg name="headless" default="false"/>
+      <arg name="debug" default="false"/>
+      <arg name="model" default="$(find models)/urdf/sekil8.urdf.xacro"/>
+
+      <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+      </include>
+
+      <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+
+      <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+            args="-z 1.0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+
+      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+      <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="30.0" />
+      </node>
+    </launch>
+
+gazebo.launch dosyasını çalıştırarak oluşturduğumuz modelin gazebo ortamında hareketsiz bir versiyonunu görürüz.
+
+    roslaunc models gazebo.launch
+
+![gazebo](http://wiki.ros.org/urdf/Tutorials/Using%20a%20URDF%20in%20Gazebo?action=AttachFile&do=get&target=Gazebo.png)
+
+Şimdi de ROS'un Gazebo ile etkileşime girmesi için, Gazebo'ya ne yapılacağını söyleyen ROS kitaplığına dinamik olarak bağlantı kurmalıyız. Gazebo ve ROS'u birbirine bağlamak için oluşturmuş olduğumuz urdf dosyasının sonuna, aşağıdaki satırlar eklenir. [Burada](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/09-publishjoints.urdf.xacro#L238)
+
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+    
+Artık ROS ve Gazebo'yu birbirine bağladık, Gazebo'da çalışmak istediğimiz, denetleyicilerini genel olarak adlandırdığımız bazı ROS kodu belirtmeliyiz.
+
+Bunun için bir yaml dosyası oluştururuz.
+
+    roscd models
+    mkdir config
+    cd config
+    gedit joints.yaml
+    
+    type: "joint_state_controller/JointStateController"
+    publish_rate: 50
+    
+Bu kontrol cihazı, joint_state_controller paketinde bulunur ve robot eklemlerin durumunu doğrudan Gazebo'dan ROS'a yayınlar.
+
+oluşturduğumuz yaml dosyasını ve gazebo.launch dosyasını çalıştıracak yenibir launch dosyası oluşturalım.
+
+    roscd models/launch
+    gedit joints.launch
+    
+    <?xml version="1.0"?>
+    <launch>
+      <arg name="model" default="$(find models)/urdf/sekil9.urdf.xacro"/>
+      <arg name="rvizconfig" default="$(find models)/rviz/urdf.rviz" />
+
+      <include file="$(find models)/launch/gazebo.launch">
+        <arg name="model" value="$(arg model)" />
+      </include>
+
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+
+      <rosparam command="load"
+                file="$(find models)/config/joints.yaml"
+                ns="r2d2_joint_state_controller" />
+
+      <node name="r2d2_controller_spawner" pkg="controller_manager" type="spawner"
+        args="r2d2_joint_state_controller
+              --shutdown-timeout 3"/>
+    </launch>
+
+joints.launch dosyasını çalıştırıp joint_states konusunu dinlediğimizde bize robot eklemlerinin durumunu yayınlayacaktır fakat eklemleri halen tanımlamadığımız için çıktı boş olacaktır.
+
+Her sabit olmayan eklem için, Gazebo'ya eklem ile ne yapılacağını bildiren bir iletim belirtmeliyiz. Kafa eklemiyle başlayalım. Son oluşturduğumuz urdf dosyasına aşağıdaki satırları ekleyelim. [Burda](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/10-firsttransmission.urdf.xacro#L216)
+
+    <transmission name="head_swivel_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="$head_swivel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="head_swivel">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+
+Oluşturduğumuz bu paketleri çalıştırarak inceleyelim.
+
+    roslaunch models joints.launch
+    
+    Yeni bir terminalde
+    rostopic list
+    rostopic echo /joint_states
+    
+    Çıktı;
+    header:
+      seq: 220
+      stamp:
+        secs: 4
+        nsecs: 707000000
+      frame_id: ''
+    name: ['head_swivel']
+    position: [-2.9051283156888985e-08]
+    velocity: [7.575990694887896e-06]
+    effort: [0.0]
+    
+Şimdide tanımladığımız eklemi çalıştırmak için bir denetleyici yapılandırmalıyız. Kafa eklemini kontrol etmek için position_controllers paketinden bir JointPositionController kullanalım.
+
+    roscd models/config
+    gedit head.yaml
+    
+    type: "position_controllers/JointPositionController"
+    joint: head_swivel
+    
+oluşturduğumuz yeni yaml dosyasını çalıştırabilmek için yeni bir launch dosyası oluşturmalıyız.
+
+    roscd models/launch
+    gedit head.launch
+    
+    <?xml version="1.0"?>
+    <launch>
+      <arg name="model" default="$(find models)/urdf/sekil8.urdf.xacro"/>
+      <arg name="rvizconfig" default="$(find models)/rviz/urdf.rviz" />
+
+      <include file="$(find models)/launch/gazebo.launch">
+        <arg name="model" value="$(arg model)" />
+      </include>
+
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+
+      <rosparam command="load"
+                file="$(find models)/config/joints.yaml"
+                ns="r2d2_joint_state_controller" />
+      <rosparam command="load"
+                file="$(find models)/config/head.yaml"
+                ns="r2d2_head_controller" />
+
+      <node name="r2d2_controller_spawner" pkg="controller_manager" type="spawner"
+        args="r2d2_joint_state_controller
+              r2d2_head_controller
+              --shutdown-timeout 3"/>
+    </launch>
+
+oluşturduğumuz bu launch dosyasını kullanarak artık robotumuzun kafasını hareket ettirebiliriz.
+
+    roslaunch models head.launch
+
+    yeni bir terminalde
+    rostopic pub /r2d2_head_controller/command std_msgs/Float64 "data: -0.707"
+
+Kafanın hareketini sağlamış olduk. Fakat kafa eklemini oluştururken herkangi bir fiziksel limit koymadığımzdan dolayı hareket komutunun gönderilmesiyle hemen belirtilen konuma hareket etti. Kademeli hareket için kafa eklemini limitlendirelim.
+
+son oluşturduğumuz urdf dosyasındaki head_swivel'i aşağıdaki gibi düzenleyelim.
+
+    <joint name="head_swivel" type="continuous">
+      <parent link="base_link"/>
+      <child link="head"/>
+      <axis xyz="0 0 1"/>
+      <origin xyz="0 0 ${bodylen/2}"/>
+      <limit effort="30" velocity="1.0"/>
+    </joint>
+
+Yukarıda kullanımını gösterdiğimiz kodlar ile robotun kafasının kademeli olarak hareket ettiğini görebilirsiniz.
+
+
 
 check_urdf my_robot.urdf
 
