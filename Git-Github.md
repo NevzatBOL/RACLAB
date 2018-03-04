@@ -126,3 +126,5 @@ Tablo oluşturma
 ------------ | -------------
 Hücre 1'den gelen içerik | 2. hücreden gelen içerik
 İlk sütundaki içerik | İkinci sütundaki içerik    
+
+**Referans Link:** [git-github eğitim videoları](https://www.youtube.com/watch?v=rWG70T7fePg&list=PLPrHLaayVkhnNstGIzQcxxnj6VYvsHBHy)
