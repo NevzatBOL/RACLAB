@@ -79,7 +79,7 @@ oluşturduğumuz dosyaları çalıştırmak artık daha kolay.
 
     roslaunch models view_urdf.launch model:=sekil.urdf
 
- ![sekil](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/myfirst.png)   
+ ![sekil](https://github.com/raclab/RACLAB/blob/master/images/ROS/myfirst.png)   
  
  
  Şimdide birden fazla şekil oluşturma ve bu şekiller arası ilişkiyi görelim.
@@ -118,7 +118,7 @@ oluşturduğumuz modeli çalıştıralım.
     
     roslaunch models view_urdf.launch model:=sekil2.urdf
 
-![sekil2](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/multipleshapes.png)
+![sekil2](https://github.com/raclab/RACLAB/blob/master/images/ROS/multipleshapes.png)
 
 oluşturduğumuz iki nesneninde merkezleri aynı nokta idi robotumuzu şekillendirmek için oluşturduğumuz nesneleri birbirine bağlantılı olarak konumlandıralım.
 
@@ -156,7 +156,7 @@ oluşturduğumuz modeli çalıştıralım.
 
     roslaunch models view_urdf.launch model:=sekil3.urdf
     
-![sekil3](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/origins.png)
+![sekil3](https://github.com/raclab/RACLAB/blob/master/images/ROS/origins.png)
 
 oluşturduğumuz parçalar aynı renkte oluşmuştu şimdi ise bu parçaları renklendirelim.
 
@@ -221,7 +221,7 @@ oluşturduğumuz modeli çalıştıralım.
 
     roslaunch models view_urdf.launch model:=sekil4.urdf
     
-![sekil4](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/materials.png)   
+![sekil4](https://github.com/raclab/RACLAB/blob/master/images/ROS/materials.png)   
 
 
 oluşturduğumuz modele birkaç ekleme daha yaparak tamamlayalım.
@@ -513,7 +513,7 @@ oluşturduğumuz modele birkaç ekleme daha yaparak tamamlayalım.
 oluşturduğumuz modeli çalıştıralım.
 
     roslaunch models view_urdf.launch model:=sekil5.urdf
-![sekil5](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/visual.png)    
+![sekil5](https://github.com/raclab/RACLAB/blob/master/images/ROS/visual.png)    
 
 # Hareketli Model
 
@@ -854,7 +854,7 @@ Modelimizi çalıştırarak hareketlerini inceleyelim.
 
     roslaunch models view_urdf.launch model:=sekil6.urdf gui:=true
 
-![sekil6](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/images/flexible.png)
+![sekil6](https://github.com/raclab/RACLAB/blob/master/images/ROS/flexible.png)
 
 # Modelin Fiziksel Özeliklerinin Ve Çarpışma Özeliğinin Tanımlanması
 
@@ -1344,7 +1344,7 @@ gazebo.launch dosyasını çalıştırarak oluşturduğumuz modelin gazebo ortam
 
     roslaunc models gazebo.launch
 
-![gazebo](http://wiki.ros.org/urdf/Tutorials/Using%20a%20URDF%20in%20Gazebo?action=AttachFile&do=get&target=Gazebo.png)
+![gazebo](https://github.com/raclab/RACLAB/blob/master/images/ROS/pr2gazebo.png)
 
 Şimdi de ROS'un Gazebo ile etkileşime girmesi için, Gazebo'ya ne yapılacağını söyleyen ROS kitaplığına dinamik olarak bağlantı kurmalıyız. Gazebo ve ROS'u birbirine bağlamak için oluşturmuş olduğumuz urdf dosyasının sonuna, aşağıdaki satırlar eklenir. [Burada](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/09-publishjoints.urdf.xacro#L238)
 
@@ -1678,4 +1678,4 @@ urdf dosyamızın bağlantı grafiğini çıkaralım.
     urdf_to_graphiz sekil7.urdf
     evince physics.pdf 
     
-![robot_tree]()
+![robot_tree](https://github.com/raclab/RACLAB/blob/master/images/ROS/pr2physics.pdf)
