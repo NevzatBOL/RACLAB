@@ -1664,6 +1664,18 @@ robotumuzu oluşturduğumuz launch dosyasını çalıştıralım.
 
 ![gazebo2](http://wiki.ros.org/urdf/Tutorials/Using%20a%20URDF%20in%20Gazebo?action=AttachFile&do=get&target=DrivingInterface.png)
 
-check_urdf my_robot.urdf
+# PR2 Modelinin İncelenmesi
 
-urdf_to_graphiz my_robot.urdf
+yukarıda anlatılanların tamamı pr2 modelini oluşturmaya yönelikti, pr2 modelinde urdf kullanımın kalkması ve gazebo bağımlılıklarının değişmesiyle değişiklik yapıldı. Son modelin tamamını [buradan](http://wiki.ros.org/urdf/Tutorials/UnderstandingPR2URDF) inceleyebilir ve pr2 paketinin tamamına [burdan](https://github.com/PR2/pr2_common/tree/kinetic-devel/pr2_description) ulaşabilirsiniz.
+
+# URDF dosyasının doğruluğunu kontrol etme
+
+    roscd models/urdf
+    check_urdf sekil7.urdf
+
+urdf dosyamızın bağlantı grafiğini çıkaralım.
+
+    urdf_to_graphiz sekil7.urdf
+    evince physics.pdf 
+    
+![robot_tree]()
