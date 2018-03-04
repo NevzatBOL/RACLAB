@@ -932,7 +932,7 @@ Eklem hareketleri, eklem için dinamik hareketler ile tanımlanır. Burada iki n
 
 **sönüm** - Fiziksel sönümleme değeri. Prizmatik derzlerde birimler metre başına Newton saniyedir. Dönen eklemler için, radyan başına Newton metre saniyedir.
 
-**Enson oluşturduğumuz modele çarpışma ve fiziksel özellikleri [burada](https://raw.githubusercontent.com/ros/urdf_tutorial/master/urdf_tutorial/urdf/07-physics.urdf) olduğu gibi ekleyebiliriz.**
+**Enson oluşturduğumuz modele çarpışma ve fiziksel özellikleri [burada](https://github.com/ros/urdf_tutorial/blob/master/urdf/07-physics.urdf) olduğu gibi ekleyebiliriz.**
 
 # URDF Dosyasını XACRO İle Kısaltma
 
@@ -1346,7 +1346,7 @@ gazebo.launch dosyasını çalıştırarak oluşturduğumuz modelin gazebo ortam
 
 ![gazebo](https://github.com/raclab/RACLAB/blob/master/images/ROS/pr2gazebo.png)
 
-Şimdi de ROS'un Gazebo ile etkileşime girmesi için, Gazebo'ya ne yapılacağını söyleyen ROS kitaplığına dinamik olarak bağlantı kurmalıyız. Gazebo ve ROS'u birbirine bağlamak için oluşturmuş olduğumuz urdf dosyasının sonuna, aşağıdaki satırlar eklenir. [Burada](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/09-publishjoints.urdf.xacro#L238)
+Şimdi de ROS'un Gazebo ile etkileşime girmesi için, Gazebo'ya ne yapılacağını söyleyen ROS kitaplığına dinamik olarak bağlantı kurmalıyız. Gazebo ve ROS'u birbirine bağlamak için oluşturmuş olduğumuz urdf dosyasının sonuna, aşağıdaki satırlar eklenir. [Burada](https://github.com/ros/urdf_sim_tutorial/blob/master/urdf/09-publishjoints.urdf.xacro#L238)
 
     <gazebo>
       <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -1395,7 +1395,7 @@ oluşturduğumuz yaml dosyasını ve gazebo.launch dosyasını çalıştıracak 
 
 joints.launch dosyasını çalıştırıp joint_states konusunu dinlediğimizde bize robot eklemlerinin durumunu yayınlayacaktır fakat eklemleri halen tanımlamadığımız için çıktı boş olacaktır.
 
-Her sabit olmayan eklem için, Gazebo'ya eklem ile ne yapılacağını bildiren bir iletim belirtmeliyiz. Kafa eklemiyle başlayalım. Son oluşturduğumuz urdf dosyasına aşağıdaki satırları ekleyelim. [Burda](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/10-firsttransmission.urdf.xacro#L216)
+Her sabit olmayan eklem için, Gazebo'ya eklem ile ne yapılacağını bildiren bir iletim belirtmeliyiz. Kafa eklemiyle başlayalım. Son oluşturduğumuz urdf dosyasına aşağıdaki satırları ekleyelim. [Burda](https://github.com/ros/urdf_sim_tutorial/blob/master/urdf/10-firsttransmission.urdf.xacro#L216)
 
     <transmission name="head_swivel_trans">
       <type>transmission_interface/SimpleTransmission</type>
@@ -1485,7 +1485,7 @@ son oluşturduğumuz urdf dosyasındaki head_swivel'i aşağıdaki gibi düzenle
 
 Yukarıda kullanımını gösterdiğimiz kodlar ile robotun kafasının kademeli olarak hareket ettiğini görebilirsiniz.
 
-Şimdi ise gripper hareketlerini için urdf dosyamızı [burada](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/12-gripper.urdf.xacro) olduğu gibi düzenleyelim.
+Şimdi ise gripper hareketlerini için urdf dosyamızı [burada](https://github.com/ros/urdf_sim_tutorial/blob/master/urdf/12-gripper.urdf.xacro) olduğu gibi düzenleyelim.
 
 Her eklenti için ayrı bir ros konusu oluşturmak yerine onları bir araya getirebiliriz.
 
@@ -1579,7 +1579,7 @@ Yer ile tekerler arasındaki sürtünmeyi tanımlayalım.
       <material>Gazebo/Grey</material>
     </gazebo>
 
-urdf dosyamızın son hali [burdaki](https://github.com/ros/urdf_tutorial/blob/master/urdf_sim_tutorial/urdf/13-diffdrive.urdf.xacro) gibi olmalıdır.
+urdf dosyamızın son hali [burdaki](https://github.com/ros/urdf_sim_tutorial/blob/master/urdf/13-diffdrive.urdf.xacro) gibi olmalıdır.
 
 Tekerlerimizin hareketi için DiffDriveController kullanarak yaml dosyamızı oluşturalım.
 
