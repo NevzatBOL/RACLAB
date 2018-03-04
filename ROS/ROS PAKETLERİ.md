@@ -113,6 +113,22 @@ https://github.com/robopeak/rplidar_ros
 
 https://hollyqood.wordpress.com/2015/12/01/ros-slam-2-hector-slam-2d%E5%9C%B0%E5%9C%96%E5%BB%BA%E7%BD%AE/
 
+## ZED KAMERA SDK KURULUMU
+
+İlk olarak zed kamera kullanımı için Yapay Zeka kısmında anlatılan CUDA 8 kurulumu yapılmalıdır.
+
+https://www.stereolabs.com/developers/release/2.2/
+
+Adresinden CUDA 8 için ZED SDK for Linux paketi indirilir.
+
+indirilen pakete çalışma izni verilir.
+
+	sudo chmod +x ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run
+
+indirilen paket çalıştırılarak kurulum tamamlanır.
+
+	./ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run
+
 ## ZED KAMERA
 
 İlk olarak çalışma dizini oluşturalım.

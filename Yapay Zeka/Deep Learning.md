@@ -2,21 +2,21 @@
 
 ## Single Layer Neural Networks
 
-![Single Layer](http://neuroph.sourceforge.net/tutorials/images/perceptron.jpg)
+![Single Layer](https://github.com/raclab/RACLAB/blob/master/images/AI/singlelayer.jpeg)
 
-![Perseptrons](https://codesachin.files.wordpress.com/2015/12/actfn001.jpg)
+![Perseptrons](https://github.com/raclab/RACLAB/blob/master/images/AI/node.jpeg)
 
 ## Multi Layer Neural Networks
 
-![Multi Layer](http://www.mdpi.com/sensors/sensors-09-02586/article_deploy/html/images/sensors-09-02586f6-1024.png)
+![Multi Layer](https://github.com/raclab/RACLAB/blob/master/images/AI/multilayer.png)
 
-![Function](https://www.analyticsvidhya.com/wp-content/uploads/2016/07/SLP.png)
+![Function](https://github.com/raclab/RACLAB/blob/master/images/AI/node2.png)
 
 ## Aktivasyon Fonksiyonları
 
-![Atiactivation Function](http://www.turingfinance.com/wp-content/uploads/2014/04/Activations-Functions.png)
+![Atiactivation Function](https://github.com/raclab/RACLAB/blob/master/images/AI/activationfunction.png)
 
-![Relu](https://www.learnopencv.com/wp-content/uploads/2017/10/relu-activation-function-1.png)
+![Relu](https://github.com/raclab/RACLAB/blob/master/images/AI/relu.png)
 
 # Keras ile Deep Learning
 
@@ -112,15 +112,15 @@ Bazı Hata Fonksiyonları;
 
 mean_squared_error
 
-![MSE](https://cdn-images-1.medium.com/max/1600/1*5B-_uIK9ULfzx5sV-aBmiA@2x.png)
+![MSE](https://github.com/raclab/RACLAB/blob/master/images/AI/mse.png)
 
 mean_absolute_error
 
-![MAE](http://www.statisticshowto.com/wp-content/uploads/2016/10/MAE.png)
+![MAE](https://github.com/raclab/RACLAB/blob/master/images/AI/mae.png)
 
 root_mean_square_error
 
-![RMSE](http://file.scirp.org/Html/htmlimages/5-2601289x/fcdba7fc-a40e-4019-9e95-aca3dc2db149.png)
+![RMSE](https://github.com/raclab/RACLAB/blob/master/images/AI/rmse.png)
 
 Referans link: [Keras Loss Function](https://keras.io/losses/)
 
@@ -191,7 +191,7 @@ Referans link: [Derin Deli Mavi Keras](http://derindelimavi.blogspot.com.tr/2017
 
 Dropout hiden layer'daki bazı düğümlerin rastgele iptal edilmesi prensibine dayanır. Eğitim hatasını azaltır.
 
-![dropout](https://cdn-images-1.medium.com/max/1044/1*iWQzxhVlvadk6VAJjsgXgg.png)
+![dropout](https://github.com/raclab/RACLAB/blob/master/images/AI/dropout.png)
 
     model.add(Dropout(0.5)) hiden layerlarda düğümlerin %50'sini siler.
 
@@ -199,29 +199,29 @@ Referans link: [Dropout Makale](https://www.cs.toronto.edu/~hinton/absps/JMLRdro
 
 # Convolution Neural Networks
 
-![Convolution Neural Networks](https://adeshpande3.github.io/assets/Cover.png)
+![Convolution Neural Networks](https://github.com/raclab/RACLAB/blob/master/images/AI/convolutionlayer.png)
 
-![Conv](http://cs231n.github.io/assets/cnn/convnet.jpeg)
+![Conv](https://github.com/raclab/RACLAB/blob/master/images/AI/convolutionlayer2.jpeg)
 
 # Convolution Kernel
 
-![conv kernel](https://sipl.eelabs.technion.ac.il/wp-content/uploads/sites/6/2016/10/project-image-1599-2-13.png)
+![conv kernel](https://github.com/raclab/RACLAB/blob/master/images/AI/convolutoin1.png)
 
 Görüntü işlemede konvolüsyon, görüntü matrisleri üzerinde filtre matrislerin dolaştırılarak çarpılması işlemidir. Bu işlem görüntü üzerindeki farklı detayların ortaya çıkarılmasında kullanır. Oluşturulan filtre matrislerinin yani kernellerin parametreleri deep learning uygulamalarında rastgele olarak belirlenir. 
 
-![out size](http://slideplayer.com/slide/12213532/72/images/47/Convolutions+with+some+stride.jpg)
+![out size](https://github.com/raclab/RACLAB/blob/master/images/AI/convolutoin2.jpeg)
 
 konvolüsyon işleminden sonra elde edilen yeni görüntü matrisinin boyutu (Görüntü_Matrisi - Filtre_Matrisi)/Stride + 1 formülü ile bulunur. Stride filtre matrisinin dolaştırıldığı piksel aralık değeridir.
 
-![padding](http://slideplayer.com/slide/12213532/72/images/48/In+practice:+Common+to+zero+pad+the+border.jpg)
+![padding](https://github.com/raclab/RACLAB/blob/master/images/AI/convolutoin3.jpeg)
 
 Görüntü matrisine direk kernel uyulanması durumunda görüntün kenarları yoksayılmış olur. Görüntünün kenar piksellerinde önemli bilgiler içerebileceğinden istenmeyen bir durumdur ve kenar ekleme işlemi uygulanır. Kenar ekleme işlemi için görüntün kenarlarını sıfır ekleme (padding) ile sağlanır.
 
-![depth](https://image.slidesharecdn.com/adriasthesispresentation-170324182901/95/skin-lesion-detection-from-dermoscopic-images-using-convolutional-neural-networks-17-638.jpg?cb=1490380205)
+![depth](https://github.com/raclab/RACLAB/blob/master/images/AI/convolutoin4.jpeg)
 
 Filtre kernelleri ile görüntü matrislerinin derinlik değerleri eşit olmalıdır. 
 
-![depth](http://slideplayer.com/slide/12213532/72/images/45/Convolutions:+More+detail.jpg)
+![depth](https://github.com/raclab/RACLAB/blob/master/images/AI/convolutoin5.jpeg)
 
 Görüntüye uygulanan kernel sayısı elde edilen yeni çıktının derinlik değerini verir.
 
@@ -229,7 +229,7 @@ Görüntüye uygulanan kernel sayısı elde edilen yeni çıktının derinlik de
 
 ## Pooling
 
-![pooling](https://www.embedded-vision.com/sites/default/files/technical-articles/CadenceCNN/Figure7.jpg)
+![pooling](https://github.com/raclab/RACLAB/blob/master/images/AI/pooling.jpeg)
 
 pooling görüntün boyutlarını küçülterek datayları azaltmak için kullanılır. Genel itibari ile iki farklı pooling metodu vardır. 
 Average Pooling: matrisin ortalama değerini alır. Ortalama değer çoğu durumda görüntüde olmayan değerlere karşılık geldiği için çok sık kullanılmaz.
@@ -339,30 +339,30 @@ Max Pooling: matrisin maksimum değerini alır. matrislerin en büyük değerler
 
 # ImageNet
 
-![image net history](https://cdn-images-1.medium.com/max/1600/1*q-QBvvvz-uOxYq0OR2Zibg.jpeg)
+![image net history](https://github.com/raclab/RACLAB/blob/master/images/AI/imagenet.jpeg)
 
 ## ImageNet Algorithms
 
 ### AlexNet - 2012 
 
-![Alexnet](https://www.researchgate.net/profile/Walid_Aly/publication/312188377/figure/fig4/AS:448996423540740@1484060497977/Figure-7-An-illustration-of-the-architecture-of-AlexNet-CNN-14.ppm)
+![Alexnet](https://github.com/raclab/RACLAB/blob/master/images/AI/alexnet1.png)
 
-![Alexnet paralel](https://world4jason.gitbooks.io/research-log/content/deepLearning/CNN/Model%20&%20ImgNet/alexnet/img/alexnet2.png)
+![Alexnet paralel](https://github.com/raclab/RACLAB/blob/master/images/AI/alexnet2.png)
 
 ### ZfNet - 2013
 
-![Zfnet](https://adeshpande3.github.io/assets/zfnet.png)
+![Zfnet](https://github.com/raclab/RACLAB/blob/master/images/AI/zfnet.png)
 
 ### VggNet - 2014
 
-![Vggnet](https://m2dsupsdlclass.github.io/lectures-labs/slides/03_conv_nets/images/vgg.png)
+![Vggnet](https://github.com/raclab/RACLAB/blob/master/images/AI/vggnet.png)
 
 ### LeNet - 2014
 
-![Lenet](https://software.intel.com/sites/default/files/managed/a0/90/dlsdk-lenet-image-recognition-img-03.png)
+![Lenet](https://github.com/raclab/RACLAB/blob/master/images/AI/lenet.png)
 
 ### ResNet - 2015
 
-![ResNet](http://book.paddlepaddle.org/03.image_classification/image/resnet.png)
+![ResNet](https://github.com/raclab/RACLAB/blob/master/images/AI/resnet.jpeg)
 
 [ResNet-50](http://ethereon.github.io/netscope/#/gist/db945b393d40bfa26006)     [ResNet-101](http://ethereon.github.io/netscope/#/gist/b21e2aae116dc1ac7b50)        [ResNet-152](http://ethereon.github.io/netscope/#/gist/d38f3e6091952b45198b)

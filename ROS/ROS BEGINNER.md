@@ -112,7 +112,7 @@
     rosrun rqt_graph rqt_graph			-sistemde neler olup bittiğinin dinamik bir grafiğini oluşturur.
     rqt_graph					-aynı komutu bu şekilde de çalışıtabiliriz.
     
-![rqt graph](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_graph_turtle_key2.png)
+![rqt graph](https://github.com/raclab/RACLAB/blob/master/images/ROS/rosgraph.png)
     
     rostopic echo /turtle1/cmd_vel			    -cmd_vel konusunu dinlenir.
     
@@ -142,7 +142,7 @@
     rosrun rqt_plot rqt_plot		        -takip etmek istediğimiz değerleri grafikte çizdirebiliriz.
       topic /turtle1/pose/x	
       
-![rqt plot](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics?action=AttachFile&do=get&target=rqt_plot.png)
+![rqt plot](https://github.com/raclab/RACLAB/blob/master/images/ROS/matplot.png)
     
 
 ## ROS Hizmetleri ve Parametreleri
@@ -197,12 +197,12 @@
 						        -günlükçü düzeyi ayarlanarak, ayarlanan öncelik sıralamasına göre;
 						        -ölümcül, hata, uyarı, bilgi ve hata ayıklama iletilerini alırız.
     
- ![rpt_console](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_console%28start%29.png)
-  ![rqt_rqt_logger_level](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_logger_level%28error%29.png)
+ ![rpt_console](https://github.com/raclab/RACLAB/blob/master/images/ROS/console.png)
+  ![rqt_rqt_logger_level](https://github.com/raclab/RACLAB/blob/master/images/ROS/loggerlevel.png)
      
       rosrun turtlesim turtlesim_node
      
-  ![rqt_consol_warn](http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch?action=AttachFile&do=get&target=rqt_console%28turtlesimerror%29.png)
+  ![rqt_consol_warn](https://github.com/raclab/RACLAB/blob/master/images/ROS/console2.png)
   
       roslaunch paket_ismi file_name    -Birden fazla paketi tek seferde çalıştırmak için .launch pekiti oluşturulur.
                                         -Bu paketin çalıştırılması ile birden fazla Node çalıştırılmış olur.

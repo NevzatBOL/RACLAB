@@ -15,7 +15,7 @@ Bu kavram tam olarak yukarıdaki iki kavramın arasında yer alır ve etiketlenm
 Hiyerarşik öğrenme olarak da bilinir. Bu öğrenme yöntemi derin grafiklerde birçok doğrusal ve doğrusal olmayan dönüşümlerden ve çoklu işlem katmanlarından oluşturulmuş verilerde, üst düzey soyutlamalar kullanılarak elde edilen model girişimlerine dayalı bir dizi algoritmalarla geliştirilmiş makine öğrenmesidir.
   
   
-![Denetimli ve Denetimsiz öğrenme alt sınıfları](http://ahmetcevahircinar.com.tr/wp-content/uploads/2017/05/makine-ogrenmesi-algoritmalari.jpg)
+![Denetimli ve Denetimsiz öğrenme alt sınıfları](https://github.com/raclab/RACLAB/blob/master/images/AI/machinelearningalgorithm.jpeg)
 
 ## Terimler
 
@@ -24,15 +24,16 @@ Veri setinin istenilen tahmini yapamaması durumudur.
 ### Overfitting  (aşırı uyumluluk)
 Veri setinin tahmin yerini tamamen doğru sonucları vermesi durumudur.
 
-![overfitting and underfitting](https://qph.ec.quoracdn.net/main-qimg-b4112b5d856f4f0da349460aeed854d8)
+![overfitting and underfitting](https://github.com/raclab/RACLAB/blob/master/images/AI/underfitting.png)
 
 ## Linear(Doğrusal) Regresyon
 Elimizde bulunun tüm verilerin bir grafik üzerine oturtulup, doğrusal çizgi çizilmesi ve tahmin yapılması işlemidir.
 Çizgi çizilirken ilk önce rastgele bir noktadan çizilir ve elimizde bulunan verilere olan uzakları hesaplanır. Hesaplanan bu uzaklıklar bizim hata değerimiz olur ve hatayı en aza indirecek şekilde doğrumuzun konumunun yeri değiştirilir.
 Hatanın doğrunun her konumuna göre hesaplanması ve hatayı azaltacak şekilde yerinin değiştirilmesi işlemine  **Gradient Descent(kademeli düşürme)** adı verilir. Genellikle bu işlem en küçük kareler yöntemi kullanılarak yapılmaktadır.
-![Doğrusal Regresyon](https://mertricks.files.wordpress.com/2015/06/18.png)
+![Doğrusal Regresyon](https://github.com/raclab/RACLAB/blob/master/images/AI/linearregression.png)
 
-![maliyet fonksiyonu](https://i.hizliresim.com/azMoWR.png)
+![maliyet fonksiyonu](https://github.com/raclab/RACLAB/blob/master/images/AI/maliyetfonksiyonu.png)
+
 Yukarıda bulunan fonksiyon lineer regresyon için hata hesaplamasında kullanılan maliyet fonksiyonudur. Tüm veriler için gerçek değer(y) eksi tahmini değerin(f(x)) kareleri alınıp ikiye bölünerek hesaplanır.
 
 ### Numpy Kütüphanesi ile Linear Regresyon Örneği
@@ -96,7 +97,10 @@ Lineer regresyonda hesaplanan maliyet fonksiyonuna gerçek değer eksi tahmini d
 Lineer regresyonda hesaplanan maliyet fonksiyonuna gerçek değer eksi tahmini değerlerimizin karelerinin toplamının bir alfa aşırı parametresi ile çarpılmış fonksiyonun eklenmesiyle bulunur.
 
 ## Polynominal(Polinom) Regresyon
-![Polinom Regresyon](http://www.datascience.istanbul/wp-content/uploads/2017/06/Lineer_Regresyon_Notlar%C4%B1_10_Polinom_Regresyon_with_R_Polinom_Model_Grafik.png)
+
+Verilerin bir grafik üzerinde doğrusal bir şekilde dağılmadığı durumlarda tahmin yapabilmemizi sağlanayan bir yöntemdir. Tahmin derecesi ve denklemi belirli olan bir eğriye bakılarak yapılır. Eğrimizin derecesini belirlerken çok düşük dereceler kullanmak **Underfitting (tam uyumsuzluk)** problemine, çok yüksek dereceler kullanmak ise **Overfitting  (aşırı uyumluluk)** problemine neden olur. 
+
+![Polinom Regresyon](https://github.com/raclab/RACLAB/blob/master/images/AI/polinomregresyon.png)
 
 ### Numpy Kütüphanesi ile Polinom Regresyon Örneği
 
@@ -122,14 +126,16 @@ Lineer regresyonda hesaplanan maliyet fonksiyonuna gerçek değer eksi tahmini d
 	plt.show()
 	print(a,"x^3+",b,"x^2+",c,"x+",d) #dogrunun hesaplanan a b c d katsayilari
 
+## Logistics (Lojistik) Regresyon
 
-	
+Lojistik regresyon cevap değişkeninin kategorik olarak ikili ve çoklu kategorilerde gözlendiği durumlarda açıklayıcı değişkenlerle sebep-sonuç ilişkisini belirlemede kullanılan bir yöntemdir.
 
+![Lojistik Regresyon](https://github.com/raclab/RACLAB/blob/master/images/AI/logiscticregression.jpeg)
 
+Yukarıdaki resimde doğru ve yanlış olan veriler lojistik regresyon yöntemi ile sınıflandırılmıştır.
 
+## K-Nearest Neighbor (K- En Yakın Komşular) Algoritması ile Sınıflandırma
 
+Elimizde olan ve hangi sınıftan olduğunu bildiğimiz verileri kullanarak yeni gelen ve sınıfı belirli olmayan verilerin sınıflarını tahmin etmek için kullanılan bir yöntemdir. Sınıfı belirli olan ve sınıfı tahmin edilecek olan verilerimizi grafik üzerine yerleştirilir. Tahmin edilecek noktaya en yakın K sayısı kadar noktaya olan uzaklıkları öklit bağıntısı ile hesaplanır. En yakın K adet noktalarda hangi sınıf fazla ise yeni gelen verimizin sınıfı o kabul edilir. K sayısı belirlerken sonuçta 2 sınıfın sayıları eşit çıkmayacak şekilde belirlenmesi gerekmektedir. Örneğin iki sınıfımız varsa belirlenen noktaların sayıları eşit çıkabileceğinden dolayı K değerimize çift bir değer yerine tek bir değer vermemiz gerekir. K'nin en çok kullanılan değerleri 3 ile 10 arasındadır.
 
-
-
-
-
+![KNN](https://github.com/raclab/RACLAB/blob/master/images/AI/knn.gif)
