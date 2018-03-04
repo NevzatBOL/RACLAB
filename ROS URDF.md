@@ -1662,7 +1662,7 @@ robotumuzu oluşturduğumuz launch dosyasını çalıştıralım.
 
     roslaunch models diffdrive.launch
 
-![gazebo2](http://wiki.ros.org/urdf/Tutorials/Using%20a%20URDF%20in%20Gazebo?action=AttachFile&do=get&target=DrivingInterface.png)
+![gazebo2](https://github.com/raclab/RACLAB/blob/master/images/ROS/pr2gazebo2.png)
 
 # PR2 Modelinin İncelenmesi
 
@@ -1678,4 +1678,4 @@ urdf dosyamızın bağlantı grafiğini çıkaralım.
     urdf_to_graphiz sekil7.urdf
     evince physics.pdf 
     
-![robot_tree](https://github.com/raclab/RACLAB/blob/master/images/ROS/pr2physics.pdf)
+![robot_tree](https://github.com/raclab/RACLAB/blob/master/images/ROS/pr2physics.png)
