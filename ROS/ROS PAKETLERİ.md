@@ -284,6 +284,8 @@ Kamra görüntüsüni incelemek için rviz i açalım.
 	
 **Fized Frame /Camera_lik** olarak ayarlayalım. Add ile **PointCloud2** ekleyelim. pointcloud2'nin konusunu **/camera/depth/points** seçelim.	 **Color Transformer  AxisColor** olarak ayarlayalım.	
 
+![rviz](https://github.com/raclab/RACLAB/blob/master/images/ROS/RvizWithDisplaysPanel.png)
+
 Kameradan gelen götüntüleri image_view üzerinden inceleyelim.
 
 	rosrun image_view image_view image:=/camera/rgb/image_color
