@@ -266,6 +266,36 @@ http://wiki.ros.org/rtabmap_ros/Tutorials/HandHeldMapping
 
 https://github.com/introlab/rtabmap/wiki/Kinect-mapping
     
+  
+## Kinect Kamera
+
+ilk olarak kinect kamera sürücüsü kurulması gereklidir. Bu openni veya freenect iki sürücü kullanılabilir.
+
+	sudo apt-get install ros-kinetic-openni-*
+	sudo apt-get install ros-kinetic-freenect-*
+
+openni sürücüsünü çalıştırarak kamaramızı deneyelim.	
+
+	roslaunch openni_launch openni.launch
+	
+Kamra görüntüsüni incelemek için rviz i açalım. 
+
+	rviz
+	
+**Fized Frame /Camera_lik** olarak ayarlayalım. Add ile **PointCloud2** ekleyelim. pointcloud2'nin konusunu **/camera/depth/points** seçelim.	 **Color Transformer  AxisColor** olarak ayarlayalım.	
+
+Kameradan gelen götüntüleri image_view üzerinden inceleyelim.
+
+	rosrun image_view image_view image:=/camera/rgb/image_color
+	rosrun image_view image_view image:=/camera/depth/image
+	rosrun image_view disparity_view image:=/camera/depth/disparity
+
+freenect sürücüsü ile kameramızı çalıltırmak için;
+
+	roslaunch freenect_launch freenect.launch
+	rviz
+	
+Referasn link: http://wiki.ros.org/openni_launch/Tutorials/QuickStart
 
 ## SCANSE SWEEP LİDAR
 
