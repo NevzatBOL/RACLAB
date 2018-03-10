@@ -8,7 +8,8 @@
     
 Turtlebot üzerinde kullacağımız kinect kamera sensörünün sürücüsünü kuralım.
 
-    sudo apt-get install ros-kinetic-openni-*    
+    sudo apt-get install ros-kinetic-openni-*  
+    sudo apt-get install ros-kinetic-freenect-*
   
 ## Simülasyon
 
@@ -77,6 +78,76 @@ Rviz'i başlatalım.
 
 **2D Nav Goal** seçeneğine tıklayın ve harita üzerinde robotun gideceği hedef noktayı seçin, turtlrbot bu noktaya otomatik olarak güzergah oluşturup kendisi gidecektir.
 
+Sahne simülatörü kullanma
 
+Sahne bir 2D çoklu robot simülatörüdür. Kullanıcıya, .world uzantılı bir dosyada tanımlanan dünyayı gösterir.
+Sahne simülatörünü çalıştıralım.
 
+    roslaunch turtlebot_stage turtlebot_in_stage.launch 
+
+**2D Nav Goal** seçeneğine tıklayın ve harita üzerinde robotun gideceği hedef noktayı seçerek o noktaya robotu otomatik olarak yönlendirin.
+
+![strage](https://github.com/raclab/RACLAB/blob/master/images/ROS/stage_rviz_moving.png)
     
+## Turtlebot Üzerinde Kontrol
+
+Turtlebot'u çalıştıralım.
+
+    roslaunch turtlebot_bringup minimal.launch 
+
+Turtlebot üzerinde kullandığımız 3D sensörün tanımlanması gerekir eğer var sayılan olarak tanımlı değilse aşağıdaki gibi tanımlaya bilirsiniz.
+
+Kinect için;
+
+    export TURTLEBOT_3D_SENSOR=kinect
+
+Asus Xtion Pro için;
+
+    export TURTLEBOT_3D_SENSOR=asus_xtion_pro
+
+**Sürekli olarak bu sensörleri kullanacaksanız her kullanırken yukarıdaki kodları tekrar yazmalısınız yada .bachrc dosyasının sonuna yukarıdaki satırı eklemelisiniz.**
+
+Kameranın çalışırlılığını kontrol ediniz.
+
+    roslaunch freenect_launch freenect.launch
+    rosrun image_view image_view image:=/camera/rgb/image_raw
+    
+Turtlebot ile harita oluşturma
+
+Turtlebot'u çalıştıralım.
+    
+    roslaunch turtlebot_bringup minimal.launch
+
+Harita oluşturmak için gerekli paketi çalıştıralım.    
+
+    roslaunch turtlebot_navigation gmapping_demo.launch
+    
+Harita oluştururken rviz'de görselleştirelim.    
+
+    roslaunch turtlebot_rviz_launchers view_navigation.launch
+    
+Turtlebot'u hareket ettirmek için joystic kullanabiliriz. Kullandığınız joystic turtlebot paketleri içerisinde tanımlı değil ise kendiniz konfigürasyon ayarlarını yapmalısınız. Yada turtlebotun kontrolü için klavye'de kullanabilirsiniz.
+
+    roslaunch turtlebot_teleop logitech.launch 
+    
+Oluşturduğumuz haritayı kaydedelim.
+
+    rosrun map_server map_saver -f test_map   
+    
+Navigation ile turtlebotu yönlendirelim.
+   
+Turtlebot'u çalıştıralım.
+    
+    roslaunch turtlebot_bringup minimal.launch
+
+Navigation paketini çalıştıralım.
+
+    roslaunch turtlebot_navigation amcl_demo.launch map_file:=~/test_map.yaml
+
+Rviz'i çalıştıralım.
+
+    roslaunch turtlebot_rviz_launchers view_navigation.launch
+
+Turtlebotun haritada konumunu bulabilmesi için rviz üzerinde robtun bulunduğu konumu yaklaşık olarak **2D Pose Estimate** ile işaretleyelim. 
+
+Turtlebot artık konumunu bildiğine göre **2D Nav Goal** seçeneğini kullanarak harita üzerinden gideceği konuma yönlendirelim.
