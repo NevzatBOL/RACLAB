@@ -101,8 +101,13 @@ Yönlendirilen robot kol Motion Planning -> Planning sekmesi üzerinden Plan(1) 
 
 ![Planning](https://github.com/raclab/RACLAB/blob/master/images/ROS/motionplanning_planning.png)
 
+Robot Kol manipulasyonu, Joint trajectory contoller kullanılarak da gerçekleştirilebilir.
+    
+    roslaunch armadillo2 armadillo2.launch gazebo:=true
+    rqt
+    rqt -> Plugins -> Robot Tools -> Joint trajectory contoller 
 
-
+![Joint contoller](https://github.com/raclab/RACLAB/blob/master/images/ROS/Joint_trajectory%20contoller.png)
 
 
 
