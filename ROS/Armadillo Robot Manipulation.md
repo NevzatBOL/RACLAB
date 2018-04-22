@@ -67,7 +67,9 @@ Robotun kontrolünü klavye üzerinden sağlamak için ilk olarak armedillo2_tel
     
 Robotun başını hareket ettirmek için;
 
-    rosservice call /services/pan_tilt_mover "pan: 0.2 tilt: 0.1" 
+    rosservice call /services/pan_tilt_mover "pan: 0.0
+    tilt: 0.0" 
+    
     pan, kafanın sağa ve sola, titl ise kafanın yukarı ve aşağı kontrolünü sağlar.
 
 Robotun gövdesinin aşağı veya yukarı hareketini sağlamak için;
