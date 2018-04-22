@@ -1,3 +1,5 @@
+# Robotican - Armadillo
+
 Armadillo Kurulumu için aşağıdaki tanimatları izleyiniz. Ubuntu 14 için uyumlu ROS INDIGO sürümü içindir.
 
     sudo apt-get update
@@ -110,12 +112,4 @@ Robot Kol manipulasyonu, Joint trajectory contoller kullanılarak da gerçekleş
 ![Joint contoller](https://github.com/raclab/RACLAB/blob/master/images/ROS/Joint_trajectory%20contoller.png)
 
 
-
-
-
-
-
-
-  
-    
-
+Referans Link: http://wiki.ros.org/armadillo2
