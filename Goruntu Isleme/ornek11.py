@@ -1,28 +1,44 @@
-#-*-coding: cp1254-*-
-###Sekil Algılama1###
+#-*-coding: utf-8-*-
+###Araba Takip Etme###
 
 import numpy as np
 import cv2
 
-img=cv2.imread('resimler/shapes_and_colors.png')
-gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-blur=cv2.GaussianBlur(gray,(5,5),0)
-#resmin arkası siyah şekiller beyaz olmalıdır.
-#thresh=cv2.threshold(blur,60,255,cv2.THRESH_BINARY_INV)[1]
-thresh=cv2.threshold(blur,60,255,cv2.THRESH_BINARY)[1]
+cap = cv2.VideoCapture('videolar/slow.mp4')
+ret,frame = cap.read()
 
-cv2.imshow("blur",blur)
-cv2.imshow("thresh",thresh)
+# pencerenin başlangıç konumunu ayarladık.
+r,h,c,w = 250,90,400,125
+track_window = (c,r,w,h)
 
-_,cntr,_=cv2.findContours(thresh.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-for c in cntr:
-	M=cv2.moments(c)
-	cx=int(M['m10']/M['m00'])
-	cy=int(M['m01']/M['m00'])
+# takip edilecek alanı ayarladık.
+roi = frame[r:r+h, c:c+w]
+hsv_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+mask = cv2.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))
+roi_hist = cv2.calcHist([hsv_roi],[0],mask,[180],[10,180])
+#[10,180] değerler değiştirilerek daha iyi sonuçlar elde edileblir.
+cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)
 
-	cv2.drawContours(img, [c], -1, (0, 255, 0), 2)
-	cv2.circle(img,(cx,cy),7,(0,0,255),-1)
-	cv2.putText(img,"center",(cx-20,cy-20),cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),2)
 
-	cv2.imshow("image",img)
-	cv2.waitKey(0)
+# sonlandırma ölçütleri ayarlandı. 1-10 iterasyon
+term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
+
+while(1):
+	ret ,frame = cap.read()
+	if ret == True:
+		hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+		dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)
+		# pencerenin yeni konumu alındı.
+		ret, track_window = cv2.meanShift(dst, track_window, term_crit)
+		# diktörgen içine aldırdık.
+		x,y,w,h = track_window
+		img = cv2.rectangle(frame, (x,y), (x+w,y+h), 255,2)
+		cv2.imshow('Frame',img)
+
+		
+	if cv2.waitKey(60) & 0xff == 27:
+		break
+
+
+cv2.destroyAllWindows()
+cap.release()

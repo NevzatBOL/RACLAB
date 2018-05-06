@@ -1,33 +1,39 @@
-#-*-coding: cp1254-*-
-###Hareket Algılama3###
+#-*-coding: utf-8-*-
+###Resim Üzerinde Başka Bir Parça Arama###
 
 import numpy as np
 import cv2
+import matplotlib.pyplot as plt
 
-cam=cv2.VideoCapture(0)
+img=cv2.imread('resimler/futbol.jpg',0)
+img2=img.copy()
+template=cv2.imread('resimler/futbol2.jpg',0)
+w,h=template.shape[::-1]
 
-fgbg = cv2.createBackgroundSubtractorMOG2()
+methods = ['cv2.TM_CCOEFF', 'cv2.TM_CCOEFF_NORMED', 'cv2.TM_CCORR',
+           'cv2.TM_CCORR_NORMED', 'cv2.TM_SQDIFF', 'cv2.TM_SQDIFF_NORMED']
 
-_,frame1=cam.read()
-fgmask=fgbg.apply(frame1)
+for meth in methods:
+    method=eval(meth)
+    img=img2.copy()
 
-while(1):
-	_,frame2=cam.read()
-	fgmask=fgbg.apply(frame2)
+    res=cv2.matchTemplate(img,template,method)
+    min_val,max_val,min_loc, max_loc=cv2.minMaxLoc(res)
 
-	thresh=cv2.erode(fgmask,None, iterations=1)
-	thresh=cv2.dilate(fgmask,None, iterations=1)
-	_,cnts,_=cv2.findContours(thresh.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    if method in [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:
+        top_left=min_loc
 
-	for i,c in enumerate(cnts):	
-		if cv2.contourArea(c)<1000:
-			continue
-		x,y,w,h=cv2.boundingRect(c)
-		#cv2.drawContours(frame2, cnts, i, (0,255,0), 3)		
-		cv2.rectangle(frame2,(x,y),(x+w,y+h),(0,255,0),0)
-	cv2.imshow('frame',frame2)
-	if cv2.waitKey(30) & 0xFF ==27:
-		break
+    else:
+        top_left=max_loc
 
-cam.release()
-cv2.destroyAllWindows()
+    bottom_right=(top_left[0]+w,top_left[1]+h)
+
+    cv2.rectangle(img,top_left,bottom_right,255,2)
+
+plt.subplot(121),plt.imshow(res,cmap='gray')
+plt.title('Matching Result'),plt.xticks([]),plt.yticks([])
+plt.subplot(122),plt.imshow(img,cmap='gray')
+plt.title('Detected Point'),plt.xticks([]),plt.yticks([])
+plt.suptitle(meth)
+
+plt.show()

@@ -1,21 +1,30 @@
-#-*-coding: cp1254-*-
-###Resimden Text Cekme###
+#-*-coding: utf-8-*-
+###Resmi 16'ya Böleme ve Parçaları Karıştırıp Tekrar Birleştirme###
 
 import numpy as np
 import cv2
-from PIL import Image
-import pytesseract
+import random
 
-img=cv2.imread('resimler/text2.jpg')
-gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-thres=cv2.threshold(gresimler/ray,0,255,cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
-#gray = cv2.medianBlur(gray, 3)
+img=cv2.imread('resimler/racecar.jpg')
 
-#lang ile farklı diller için resimden text çekilebilir.
-#Türkce paketi (DataSet klasörünün içinde) /usr/share/tesseract-ocr/tessdata/ adresine kopyalanmalıdır.
-#text=pytesseract.image_to_string(Image.fromarray(thres))
-text=pytesseract.image_to_string(Image.fromarray(thres), lang='tur')
-print text
+w,h=img.shape[0:2]
 
-cv2.imshow('image',img)
-cv2.waitKey(0)
+img2=[]
+for i in range(0,w,w/4):
+    for j in range(0,h,h/4):        
+        img2.append(img[i:i+w/4,j:j+h/4])
+
+while(1):
+    random.shuffle(img2)
+    k=0
+    img3=img.copy()
+    for i in range(0,w,w/4):
+        for j in range(0,h,h/4):
+            img3[i:i+w/4,j:j+h/4]=img2[k]
+            k+=1
+        
+    cv2.imshow("random frame",img3)
+    if cv2.waitKey(1000)==27:
+        break
+
+cv2.destroyAllWindows()

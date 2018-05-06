@@ -1,20 +1,21 @@
-#-*-coding: cp1254-*-
-###İnsan Takibi###
+#-*-coding: utf-8-*-
+###Resim Üzerinde Birden Çok Parça Arama###
 
 import numpy as np
 import cv2
 
-hog=cv2.HOGDescriptor()
-hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-cam=cv2.VideoCapture('videolar/test.mp4')
-while(1):
-	_,frame=cam.read()
-	found,w=hog.detectMultiScale(frame,winStride=(8,8),padding=(32,32),scale=1.05)
-	
-	for (x, y, w, h) in found:
-		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)	
-	cv2.imshow('feed',frame)
-	if cv2.waitKey(1) & 0xff ==27:
-		break
-cam.release()
+img_rgb=cv2.imread('resimler/mario.jpg')
+img_gray=cv2.cvtColor(img_rgb,cv2.COLOR_BGR2GRAY)
+template=cv2.imread('resimler/mario2.jpg',0)
+w,h=template.shape[::-1]
+
+res=cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
+#Eşik değeri değiştirilerek resim üzerindeki nesne yakalama hataları düzeltile bilir.
+threshold=0.75
+loc=np.where(res>=threshold)
+for pt in zip(*loc[::-1]):
+    cv2.rectangle(img_rgb,pt,(pt[0]+w,pt[1]+h),(0,0,255),2)
+
+cv2.imshow('select image', img_rgb)
+cv2.waitKey(0)
 cv2.destroyAllWindows()

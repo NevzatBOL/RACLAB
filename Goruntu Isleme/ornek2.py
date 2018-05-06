@@ -1,21 +1,40 @@
-#-*-coding: cp1254-*-
-###Resim Üzerinde Birden Çok Parça Arama###
+#-*-coding: utf-8-*-
+###Renk Filtresi###
 
 import numpy as np
 import cv2
 
-img_rgb=cv2.imread('resimler/mario.jpg')
-img_gray=cv2.cvtColor(img_rgb,cv2.COLOR_BGR2GRAY)
-template=cv2.imread('resimler/mario2.jpg',0)
-w,h=template.shape[::-1]
+greenLower = np.array([50, 100, 100])
+greenUpper = np.array([70, 255, 255])	
 
-res=cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
-#Eşik değeri değiştirilerek resim üzerindeki nesne yakalama hataları düzeltile bilir.
-threshold=0.75
-loc=np.where(res>=threshold)
-for pt in zip(*loc[::-1]):
-    cv2.rectangle(img_rgb,pt,(pt[0]+w,pt[1]+h),(0,0,255),2)
+cam=cv2.VideoCapture(0)
 
-cv2.imshow('select image', img_rgb)
-cv2.waitKey(0)
+while(1):
+	ret,frame=cam.read()
+	if ret:
+		blurred=cv2.GaussianBlur(frame,(11,11),0)
+		hsv=cv2.cvtColor(blurred,cv2.COLOR_BGR2HSV)
+
+		mask=cv2.inRange(hsv,greenLower,greenUpper)
+		mask=cv2.erode(mask,None,iterations=2)
+		mask=cv2.dilate(mask,None,iterations=2)
+
+		_,cnts,_=cv2.findContours(mask.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+		center= None
+
+		if len(cnts)>0:
+			c=max(cnts,key=cv2.contourArea)
+			((x,y),radius)=cv2.minEnclosingCircle(c)
+			M = cv2.moments(c)
+			center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+			if radius >10:
+				cv2.circle(frame,(int(x),int(y)),int(radius),(0,255,255),2)
+				cv2.circle(frame,center,5,(0,0,255),-1)
+
+		cv2.imshow("frame",frame)
+
+	if cv2.waitKey(1) & 0xff == 27:
+		break
+
+cam.release()
 cv2.destroyAllWindows()

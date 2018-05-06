@@ -1,24 +1,44 @@
-#-*-coding: cp1254-*-
-###Hareket Algılama1###
+#-*-coding: utf-8-*-
+###Sekil Algılama2###
 
 import numpy as np
 import cv2
 
-cam=cv2.VideoCapture('videolar/test.mp4')
+def detect(c):
+	peri=cv2.arcLength(c,True)
+	approx=cv2.approxPolyDP(c,0.04*peri,True)
 
-ret, frame1 = cam.read()
-prvs = cv2.cvtColor(frame1,cv2.COLOR_BGR2GRAY)
-hsv = np.zeros_like(frame1)
-hsv[...,1] = 255
+	if len(approx)==3:
+		shape="Ucgen"
+	elif len(approx)==4:
+		x,y,w,h=cv2.boundingRect(approx)
+		ar=w/float(h)
+		shape="Kare" if ar>=0.95 and ar<=1.05 else "Dikdortgen"
+	elif len(approx)==5:
+		shape="Besgen"
+	else:
+		shape="Daire"
 
-while(1):
-	ret, frame2 = cam.read()
-	next = cv2.cvtColor(frame2,cv2.COLOR_BGR2GRAY)
-	flow = cv2.calcOpticalFlowFarneback(prvs,next,None,0.5,3,15,3,5,1.2,0)
-	mag, ang = cv2.cartToPolar(flow[...,0],flow[...,1])
-	cv2.imshow('frame', mag)
-	if cv2.waitKey(60) & 0xFF == 27:
-		break
+	return shape
 
-cam.release()
-cv2.destroyAllWindows()
+img=cv2.imread('resimler/sekiller.png')
+
+gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+blur=cv2.GaussianBlur(gray,(5,5),0)
+thresh=cv2.threshold(blur,60,255,cv2.THRESH_BINARY)[1]
+
+_,cntr,_=cv2.findContours(thresh.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+for c in cntr:
+	M = cv2.moments(c)
+	cX = int((M["m10"] / M["m00"]))
+	cY = int((M["m01"] / M["m00"]))
+	shape = detect(c)
+
+	c=c.astype("float")
+	c=c.astype("int")
+	cv2.drawContours(img, [c], -1, (0, 255, 0), 2)
+	cv2.putText(img, shape, (cX, cY), cv2.FONT_HERSHEY_SIMPLEX,
+		0.5, (255, 255, 255), 2)
+ 
+	cv2.imshow("Image", img)
+cv2.waitKey(0)
