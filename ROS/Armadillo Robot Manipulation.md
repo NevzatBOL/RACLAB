@@ -114,4 +114,6 @@ Robot Kol manipulasyonu, Joint trajectory contoller kullanılarak da gerçekleş
 ![Joint contoller](https://github.com/raclab/RACLAB/blob/master/images/ROS/Joint_trajectory%20contoller.png)
 
 
+Proje Anlatımı: https://youtu.be/vWFtQEISBAg
+
 Referans Link: http://wiki.ros.org/armadillo2
