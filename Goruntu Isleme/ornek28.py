@@ -1,5 +1,5 @@
 #-*-coding: utf-8-*-
-###Şerit Takibi5###
+###Şerit Takibi6###
 
 import numpy as np
 import cv2
@@ -49,7 +49,6 @@ def sliding_window_polyfit(img):
     right_lane_inds = []
     rectangle_data = []
 
-
     for window in range(nwindows):  
         win_y_low = img.shape[0] - (window+1)*window_height
         win_y_high = img.shape[0] - window*window_height
@@ -84,106 +83,92 @@ def sliding_window_polyfit(img):
     if len(rightx) != 0:
         right_fit = np.polyfit(righty, rightx, 2)
     
-    visualization_data = (rectangle_data, histogram)
-    
-    return left_fit, right_fit, left_lane_inds, right_lane_inds, visualization_data
+    return left_fit, right_fit
 
-
-def calc_curv_rad_and_center_dist(bin_img, l_fit, r_fit, l_lane_inds, r_lane_inds):
-    # Define conversions in x and y from pixels space to meters
-    ym_per_pix = 3.048/100 # meters per pixel in y dimension, lane line is 10 ft = 3.048 meters
-    xm_per_pix = 3.7/378 # meters per pixel in x dimension, lane width is 12 ft = 3.7 meters
-    left_curverad, right_curverad, center_dist = (0, 0, 0)
-    # Define y-value where we want radius of curvature
-    # I'll choose the maximum y-value, corresponding to the bottom of the image
-    h = bin_img.shape[0]
-    ploty = np.linspace(0, h-1, h)
-    y_eval = np.max(ploty)
-  
-    # Identify the x and y positions of all nonzero pixels in the image
-    nonzero = bin_img.nonzero()
-    nonzeroy = np.array(nonzero[0])
-    nonzerox = np.array(nonzero[1])
-    # Again, extract left and right line pixel positions
-    leftx = nonzerox[l_lane_inds]
-    lefty = nonzeroy[l_lane_inds] 
-    rightx = nonzerox[r_lane_inds]
-    righty = nonzeroy[r_lane_inds]
-    
-    if len(leftx) != 0 and len(rightx) != 0:
-        # Fit new polynomials to x,y in world space
-        left_fit_cr = np.polyfit(lefty*ym_per_pix, leftx*xm_per_pix, 2)
-        right_fit_cr = np.polyfit(righty*ym_per_pix, rightx*xm_per_pix, 2)
-        # Calculate the new radii of curvature
-        left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
-        right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2*right_fit_cr[0])
-        # Now our radius of curvature is in meters
-    
-    # Distance from center is image x midpoint - mean of l_fit and r_fit intercepts 
-    if r_fit is not None and l_fit is not None:
-        car_position = bin_img.shape[1]/2
-        l_fit_x_int = l_fit[0]*h**2 + l_fit[1]*h + l_fit[2]
-        r_fit_x_int = r_fit[0]*h**2 + r_fit[1]*h + r_fit[2]
-        lane_center_position = (r_fit_x_int + l_fit_x_int) /2
-        center_dist = (car_position - lane_center_position) * xm_per_pix
-    return left_curverad, right_curverad, center_dist
 
 def draw_lane(original_img, binary_img, l_fit, r_fit, Minv):
     new_img = np.copy(original_img)
     if l_fit is None or r_fit is None:
         return original_img
-    # Create an image to draw the lines on
+
     warp_zero = np.zeros_like(binary_img).astype(np.uint8)
     color_warp = np.dstack((warp_zero, warp_zero, warp_zero))
-    
+
     h,w = binary_img.shape
-    ploty = np.linspace(0, h-1, num=h)# to cover same y-range as image
+    ploty = np.linspace(0, h-1, num=h)
     left_fitx = l_fit[0]*ploty**2 + l_fit[1]*ploty + l_fit[2]
     right_fitx = r_fit[0]*ploty**2 + r_fit[1]*ploty + r_fit[2]
 
-    # Recast the x and y points into usable format for cv2.fillPoly()
     pts_left = np.array([np.transpose(np.vstack([left_fitx, ploty]))])
     pts_right = np.array([np.flipud(np.transpose(np.vstack([right_fitx, ploty])))])
     pts = np.hstack((pts_left, pts_right))
 
-    # Draw the lane onto the warped blank image
     cv2.fillPoly(color_warp, np.int_([pts]), (0,255, 0))
     cv2.polylines(color_warp, np.int32([pts_left]), isClosed=False, color=(255,0,255), thickness=15)
     cv2.polylines(color_warp, np.int32([pts_right]), isClosed=False, color=(0,255,255), thickness=15)
 
-    # Warp the blank back to original image space using inverse perspective matrix (Minv)
     newwarp = cv2.warpPerspective(color_warp, Minv, (w, h)) 
-    # Combine the result with the original image
     result = cv2.addWeighted(new_img, 1, newwarp, 0.5, 0)
     return result
 
-cam=cv2.VideoCapture('videolar/serit2.mp4')
+
+def green_filter(frame):
+	Lower = np.array([50, 100, 100])
+	Upper = np.array([70, 255, 255])	
+
+	blurred=cv2.GaussianBlur(frame,(11,11),0)
+	hsv=cv2.cvtColor(blurred,cv2.COLOR_BGR2HSV)
+
+	mask=cv2.inRange(hsv,Lower,Upper)
+	mask=cv2.erode(mask,None,iterations=2)
+	mask=cv2.dilate(mask,None,iterations=2)
+
+	_,cnts,_=cv2.findContours(mask.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+	if len(cnts)>0:
+		c=max(cnts,key=cv2.contourArea)
+		x,y,w,h=cv2.boundingRect(c)
+		cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),0)
+		return x,y,w,h
+
+def white_filter(frame):
+	sobel=hls_thresh(frame) 
+
+	_,cnts,_ = cv2.findContours(sobel.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) 
+	for i,c in enumerate(cnts):
+		if cv2.contourArea(c)<300:
+			continue
+		x,y,w,h=cv2.boundingRect(c)
+		cv2.line(frame,(x,y),(x+w,y+h),(0,0,255),5)
+		
+		if x+w > 200:
+    			cv2.putText(frame,'full line',(x+20,y+20), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),2,cv2.LINE_AA)
+
+
+cam=cv2.VideoCapture('videolar/serit1.mp4')
 while(1):
 	ret,frame=cam.read()	
 	if ret:   		
 		h,w=frame.shape[:2]
 
 		#src noktaları ornek29.py kullanılarak tespit edilebilir.
-		src = np.float32([(575,464),
-				  (707,464), 
-				  (258,682), 
-				  (1049,682)])
-		dst = np.float32([(450,h),
-				  (w-450,h),
-				  (450,0),
-				  (w-450,0)])
+		src = np.float32([(130,530),
+				  (885,530), 
+				  (380,350),
+				  (590,350)])
+		dst = np.float32([(400,h),
+				  (w-400,h),
+				  (400,0),
+				  (w-400,0)])
 
 		Img_warp, M, Minv = unwarp(frame, src, dst)
 		sobel=hls_thresh(Img_warp)
 
-		left_fit, right_fit, left_lane_inds, right_lane_inds, visualization_data = sliding_window_polyfit(sobel)
-		rad_l, rad_r, d_center = calc_curv_rad_and_center_dist(sobel, left_fit, right_fit, left_lane_inds, right_lane_inds)
-
-		print('Radius of curvature for example:', rad_l, 'm,', rad_r, 'm')
-		print('Distance from lane center for example:', d_center, 'm')
+		left_fit, right_fit = sliding_window_polyfit(sobel)
 
 		result = draw_lane(frame, sobel, left_fit, right_fit, Minv)
 
+		a,b,c,d=green_filter(result) 
+		white_filter(result[b:b+d,a:a+c])
 		cv2.imshow("frame",result)
 	if cv2.waitKey(10) & 0xFF ==27:
 		break

@@ -21,7 +21,7 @@ def classify_frame(net,inputqueue, outputqueue):
 			outputqueue.put(detections)
 
 #modelnetssd'nin eğitildiği sınıf etikeleri.
-classes=["ArkaPlan","ucak", "bisiklet", "kus", "bot","sise","otobus","araba", "kedi", "sandalye", "inek", "yemekTablasi", "kopek","at","motosiklet", "kisi", "saksibitkisi","koyun","kanepe", "tren", "tvmonitor"]
+classes=["ArkaPlan","ucak", "bisiklet", "kus", "bot","sise","otobus","araba", "...", "sandalye", "...", "yemekTablasi", "...","...","motosiklet", "insan", "saksibitkisi","...","kanepe", "tren", "tvmonitor"]
 #her sınıf etiketi için bir renk oluşturulur.
 colors=np.random.uniform(0,255,size=(len(classes),3))
 
@@ -43,7 +43,7 @@ cam=cv2.VideoCapture(0)
 while(1):
 	ret,frame=cam.read()
 	if ret:
-		frame=cv2.resize(frame,(500,400))
+		#frame=cv2.resize(frame,(500,400))
 		h,w=frame.shape[:2]
 	
 		if inputqueue.empty():
@@ -59,16 +59,17 @@ while(1):
 				if confidence > 0.2:
 					#algılanan nesnelerin kordinatları hesaplanır.
 					idx=int(detections[0,0,i,1])
-					box=detections[0,0,i,3:7]*np.array([w,h,w,h])
+					if classes[idx]=="insan":
+						box=detections[0,0,i,3:7]*np.array([w,h,w,h])
 			
-					startx,starty,endx,endy=box.astype("int")
+						startx,starty,endx,endy=box.astype("int")
 			
-					label = "{}: {:.2f}%".format(classes[idx],
-						confidence * 100)
+						label = "{}: {:.2f}%".format(classes[idx],
+							confidence * 100)
 	
-					cv2.rectangle(frame,(startx,starty),(endx,endy),colors[idx],2)
-					y=starty - 15 if starty -15 > 15 else starty + 15
-					cv2.putText(frame,label,(startx, y),cv2.FONT_HERSHEY_SIMPLEX,0.5,colors[idx],2)
+						cv2.rectangle(frame,(startx,starty),(endx,endy),colors[idx],2)
+						y=starty - 15 if starty -15 > 15 else starty + 15
+						cv2.putText(frame,label,(startx, y),cv2.FONT_HERSHEY_SIMPLEX,0.5,colors[idx],2)
 
 	
 		cv2.imshow("frame",frame)

@@ -47,13 +47,17 @@
 
 **ornk23: Şerit Takibi1**
 
-**ornk24: Şerit Takibi2**
+**ornk24: Şerit Takibi2 - Sobel Filter**
 
-**ornk25: Şerit Takibi3**
+**ornk25: Şerit Takibi3 - Renk Uzayları**
 
 **ornk26: Şerit Takibi4**
 
-**ornk27: Şerit Takibi - pointselect - src**
+**ornk27: Şerit Takibi5**
+
+**ornk28: Şerit Takibi6**
+
+**ornk29: Şerit Takibi - pointselect - src**
 
 # Kaynaklar:
 
