@@ -1,14 +1,14 @@
 # Paket-Kurulumları
 
-## CUDA 8.0 KURULUMU
+## CUDA 9.0 KURULUMU
 
-https://developer.nvidia.com/cuda-80-ga2-download-archive
+https://developer.nvidia.com/cuda-90-download-archive
 
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
-	sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+	sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
 	sudo apt-get update
-	sudo apt-get install cuda-8.0
+	sudo apt-get install cuda-9.0
 
 Komutları ile kurulum tamamlanır.
 
