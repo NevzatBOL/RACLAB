@@ -12,6 +12,10 @@ adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
 Komutları ile kurulum tamamlanır.
 
+Referans Link:
+
+https://github.com/earcz/NVIDIA-GPU-Surucusu-ve-CUDA-Yukleme/wiki/CUDA-Yukleme
+
 ## cuDNN 6.0 KURULUMU
 
 https://developer.nvidia.com/rdp/cudnn-download
