@@ -111,9 +111,6 @@ Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
 	cd PyOpenGL-3.1.1a1
 	python3 setup.py install
 
-opencv kurulumu aşağıda anlatılan uzun yöntemle yapılabileceği gibi görüntü pyzed kütüphanesinden alınacağından dolayı aşağıdaki komut ilede opencv kurulumu yapılabilir.
-
-	sudo install pip3 opencv-python
 	
 ## ROS KİNETİC KURULUMU
 
@@ -152,7 +149,7 @@ Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacakt�
 
 python3 için opencv Kurulumu sadece aşağıdaki satır kullanılarak yapılabilir.
 
-	pip3 install --upgrade opencv-python
+	pip3 install opencv-python
 ### Metod2:
 	sudo apt-get update
 	sudo apt-get upgrade
