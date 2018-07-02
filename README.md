@@ -150,6 +150,9 @@ Kurulum yapmak isteyenler için;
 	sudo apt-get install python-opencv
 Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacaktır.
 
+python3 için opencv Kurulumu sadece aşağıdaki satır kullanılarak yapılabilir.
+
+	pip3 install --upgrade opencv-python
 ### Metod2:
 	sudo apt-get update
 	sudo apt-get upgrade
