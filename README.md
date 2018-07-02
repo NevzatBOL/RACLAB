@@ -78,11 +78,11 @@ Adresinden CUDA 8 için ZED SDK for Linux paketi indirilir.
 
 indirilen pakete çalışma izni verilir.
 
-	sudo chmod +x ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run
+	sudo chmod +x ZED_SDK_Linux_Ubuntu16_v2.2.1.run
 
 indirilen paket çalıştırılarak kurulum tamamlanır.
 
-	./ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run
+	./ZED_SDK_Linux_Ubuntu16_v2.2.1.run
 	
 ### ZED KAMERA PYTHON3 PAKET KURULUMU
 https://github.com/stereolabs/zed-python
