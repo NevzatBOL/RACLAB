@@ -12,10 +12,9 @@ Linux için protoc-3.6.0-linux-x86_64.zip'u [indirelim.](https://github.com/goog
     sudo cp protoc ~ /usr/local/bin/
     sudo chmod 777 protoc
     
-Oluşturduğumuz object_detection klasörüne gidelim.
+Oluşturduğumuz object_detection klasörü içerisinde yer alan models/research klasörüne gidelim.
 
-    cd ~/object_detection
-    cd models/research
+    cd ~/object_detection/models/research
   
     protoc object_detection/protos/*.proto --python_out=.
     export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
@@ -33,6 +32,8 @@ Kod her çalıştığında model dosyasını yeniden indirecektir. Model dosyas�
     #opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
 
 Gerçek zamanlı olarak kameradan alınan anlık görüntü ile örneğimizi çalıştıralım. Bunun için hazır dataset ve model üzerinden çalışan jupyter ile test ettiğimiz kodları aşağıdaki gibi düzenlerek çalıştıralım.
+
+    cd ~/object_detection/models/research/object_detection
 
     gedit object_detection_tutorial.py 
 
@@ -220,7 +221,13 @@ oluşturduğumuz kodu çalıştırarak train ve test klasöründe yer alan xml d
 
     python3 xml_to_csv.py
     
-oluşturduğumuz csv dosyalarını record dosyasına dönüştürmek için aşağıdaki kodları kullanalım.
+Daha önce indirmiş olduğumuz tensorflow'un models paketi içerisinde yer alan object_detection kütüphanesini kuralım.
+
+    cd ~/object_detection/models/research
+    
+    sudo python3 setup.py install
+    
+Oluşturduğumuz csv dosyalarını record dosyasına dönüştürmek için aşağıdaki kodları kullanalım.
 
     cd ~/object_detection/datasets/
     
@@ -334,4 +341,4 @@ oluşturduğumuz kodu çalıştırarak train_labels.csv ve test_labels.csv dosya
       # Create test data:
       python3 generate_tfrecord.py --csv_input=data/test_labels.csv  --output_path=data/test.record
       
-      
+Artık Modelimizi eğitmeye başlayabiliriz.      
