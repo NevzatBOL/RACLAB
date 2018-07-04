@@ -139,9 +139,11 @@ Test için bir video [indirelim.](https://raw.githubusercontent.com/OlafenwaMose
                                     , frames_per_second=20, log_progress=True)
     print(video_path)
 
-Sonuç;
-
-![Video_detection](https://www.youtube.com/embed/S-jgBTQgbd4?rel=0)
+<b><i>Sonuç;</i></b>
+<div style="width: 600px;" >
+<a href="https://www.youtube.com/embed/S-jgBTQgbd4?rel=0" >
+<img src="../../images/video-3.jpg" />
+</a>
 
 Referas Link;
 
