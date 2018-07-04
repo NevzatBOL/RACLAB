@@ -29,7 +29,9 @@ Konumuzu çalıştıralım.
     python FirstDetection.py        
 
 Test Image;
+
 ![Test Image](https://github.com/raclab/RACLAB/blob/master/images/AI/ImageAI_image.jpeg)
 
 Sonuç;
+
 ![Result_Image](https://github.com/raclab/RACLAB/blob/master/images/AI/ImageAI_imagenew.jpg)
