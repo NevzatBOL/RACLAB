@@ -1,4 +1,4 @@
-# ImageAI Kütüğhanesi
+# ImageAI : Object Detection 
 
 ilk olarak ImageAI kütüphanesini kuralım.
 
@@ -74,3 +74,45 @@ extract_detected_objects özelliği True yapılarak algılanan her nesnenin ayr�
         print("Object's image saved in " + eachObjectPath)
         print("--------------------------------")
 
+Sonuç;
+
+![Bus](https://github.com/raclab/RACLAB/blob/master/images/AI/bus-11.jpg)
+
+detector.CustomObjects Özelliği kullanılarak model içerisinde tanımlı neslerden istediklerimizin tesbit edilmesini sağlayabiliriz.
+
+    from imageai.Detection import ObjectDetection
+    import os
+
+    execution_path = os.getcwd()
+
+
+    detector = ObjectDetection()
+    detector.setModelTypeAsRetinaNet()
+    detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
+    detector.loadModel()
+
+
+    custom_objects = detector.CustomObjects(person=True)
+    detections = detector.detectCustomObjectsFromImage(custom_objects=custom_objects, input_image=os.path.join(execution_path , "ImageAI_image.jpeg"), output_image_path=os.path.join(execution_path , "image3custom.jpg"))
+
+
+    for eachObject in detections:
+        print(eachObject["name"] + " : " + eachObject["percentage_probability"] )
+        print("--------------------------------")
+        
+Sonuç;
+
+![custom_images](https://github.com/raclab/RACLAB/blob/master/images/AI/image3custom.jpg)
+
+detection_speed ile modelin çalışma hızını değiştirebiliriz. "normal"(default), "fast", "faster" , "fastest" ve "flash".
+Modelin çalışma hızı artığında algılama oranında düşüş yaşanacaktır.
+
+    detector.loadModel(detection_speed="fastest")
+
+Son örnekte  yukarıdaki satır düzenlenip tekrar çalıştırılırsa;    
+
+![fastest](https://github.com/raclab/RACLAB/blob/master/images/AI/image3_fastest.jpg)
+
+Referans Link;
+
+https://github.com/OlafenwaMoses/ImageAI/tree/master/imageai/Detection
