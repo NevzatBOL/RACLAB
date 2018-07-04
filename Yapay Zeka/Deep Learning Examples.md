@@ -704,3 +704,7 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
           if cv2.waitKey(25) & 0xFF == 27:
             cv2.destroyAllWindows()
             break
+
+Kodumuzu çalıştırarak modelimizi gerçek zamanlı test edelim.
+
+    python3 object_detection.py
