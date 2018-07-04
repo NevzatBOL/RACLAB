@@ -31,6 +31,8 @@ Kod her çalıştığında model dosyasını yeniden indirecektir. Model dosyas�
     #opener = urllib.request.URLopener()
     #opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
 
+![Object_Detection](https://github.com/raclab/RACLAB/blob/master/images/AI/beach_object_detection.png)
+
 Gerçek zamanlı olarak kameradan alınan anlık görüntü ile örneğimizi çalıştıralım. Bunun için hazır dataset ve model üzerinden çalışan jupyter ile test ettiğimiz kodları aşağıdaki gibi düzenlerek çalıştıralım.
 
     cd ~/object_detection/models/research/object_detection
@@ -174,6 +176,8 @@ Datasetimizi oluşturmak için öncelikle models/research/object_detection/ dizi
 Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu images dizinini Open Dir ile açalım. Her resim için resimde algılanmasını istediğimiz nesneyi Create RectBox ile seçelim, etiketleyelim ve kaydedelim. her resim için ayrı ayrı xml dosyası oluşturulacaktır.
 
     python3 labelImg.py
+
+![LabelImages](https://github.com/raclab/RACLAB/blob/master/images/AI/labelimg_example.jpg)
 
 Oluşturduğumuz xml dosyalarını csv formatına dönüştürmeliyiz bunun için aşağıdaki kodları kullanalım.
 
@@ -589,6 +593,8 @@ Eğitim sırasında hata değerlerini grafiksel arayüz üzerinden takip etmek i
     tensorboard --logdir='training'
 
 Termindalde yer alan `http://Bol:6006` benzeri linki açarak internet tarayıcısı üzerinden sonuçlar grafiksel olarak takip edilebilir.
+
+![Tensorboard](https://github.com/raclab/RACLAB/blob/master/images/AI/object_detection_model_loss.png)
 
 Eğitim sonrasında oluşan cgeckpoint'ler ile moeli yapılandırmak için aşağıdaki kod kullanılır.
 
