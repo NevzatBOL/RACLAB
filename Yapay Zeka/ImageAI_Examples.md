@@ -116,3 +116,33 @@ Son örnekte  yukarıdaki satır düzenlenip tekrar çalıştırılırsa;
 Referans Link;
 
 https://github.com/OlafenwaMoses/ImageAI/tree/master/imageai/Detection
+
+# ImageAI : Video Object Detection
+
+Video üzerinde object detection uygulayabiliriz. image object detection bölümünde uyguladıklarımızın benzerlerini burda da uygulamak mümkündür.
+
+Test için bir video [indirelim.](https://raw.githubusercontent.com/OlafenwaMoses/ImageAI/master/videos/traffic.mp4)
+
+    from imageai.Detection import VideoObjectDetection
+    import os
+
+    execution_path = os.getcwd()
+
+    detector = VideoObjectDetection()
+    detector.setModelTypeAsRetinaNet()
+    detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
+    detector.loadModel()
+
+    custom_objects = detector.CustomObjects(person=True, bicycle=True, motorcycle=True)
+    video_path = detector.detectCustomObjectsFromVideo(custom_objects=custom_objects, input_file_path=os.path.join(execution_path, "traffic.mp4"),
+                                    output_file_path=os.path.join(execution_path, "traffic_custom_detected")
+                                    , frames_per_second=20, log_progress=True)
+    print(video_path)
+
+Sonuç;
+
+![Video_detection](https://www.youtube.com/embed/S-jgBTQgbd4?rel=0)
+
+Referas Link;
+
+https://github.com/OlafenwaMoses/ImageAI/blob/master/imageai/Detection/VIDEO.md
