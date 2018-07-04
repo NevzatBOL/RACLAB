@@ -573,7 +573,21 @@ config klasörü içerisine object-detection.pbtxt dosyasını oluşturalım. Bu
           name: 'light'
         }
         
-Modeli train etmek için aşağıdaki kod kullanılır.        
+      
+Her yeni terminal açıldığında train'i çalıştırmak için aşağıdaki iki sayır uygulanmalıdır.
+    
+    cd ~/object_detection/models/research
+    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
+Modeli train etmek için aşağıdaki kod kullanılır.  
 
     cd ~/object_detection/models/research/object_detection
-    python3 train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/ssd_mobilenet_v1_coco.config
+    python3 train.py --logtostderr --train_dir=datasets/training/ --pipeline_config_path=datasets/config/ssd_mobilenet_v1_coco.config
+    
+Eğitim sırasında hata değerlerini grafiksel arayüz üzerinden takip etmek için;
+
+    tensorboard --logdir='training'
+
+Termindalde yer alan `http://Bol:6006` benzeri linki açarak internet tarayıcısı üzerinden sonuçlar grafiksel olarak takip edilebilir.
+
+
