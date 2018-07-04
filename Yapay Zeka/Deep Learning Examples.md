@@ -73,7 +73,7 @@ Gerçek zamanlı olarak kameradan alınan anlık görüntü ile örneğimizi ça
 
     #Download Model
     if os.path.exists(MODEL_FILE):
-      print "-----dosya buldu----"
+      print "-----dosya bulundu----"
     else :
       print "-----dosya indiriliyor----"
       opener = urllib.request.URLopener()
@@ -163,9 +163,9 @@ indirdiğimiz labelImg için gerekli olan paket kurulumlarını yapalım.
     cd ~/object_detection/labelImg/
     make qt5py3
 
-Datasetimizi oluşturmak için öncelikle train ve test klasörleri oluşturalım. oluşturduğumuz bu klasöre labelImg i kullanarak etiketlediğimiz resimleri xml olarak kaydedeceğiz. Etiketlemede kullanacağımız resimlerin images isminde bir klasörde olmasına ve train klasörü ile aynı dizinde olmasına dikkat edelim.
+Datasetimizi oluşturmak için öncelikle models/research/object_detection/ dizininde train ve test klasörleri oluşturalım. oluşturduğumuz bu klasöre labelImg i kullanarak etiketlediğimiz resimleri xml olarak kaydedeceğiz. Etiketlemede kullanacağımız resimlerin images isminde bir klasörde olmasına ve train klasörü ile aynı dizinde olmasına dikkat edelim.
 
-     cd ~/object_detection/
+     cd ~/object_detection/models/research/object_detection/
      mkdir datasets
      cd datasets
      mkdir train
@@ -177,7 +177,7 @@ Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu image
 
 Oluşturduğumuz xml dosyalarını csv formatına dönüştürmeliyiz bunun için aşağıdaki kodları kullanalım.
 
-    cd ~/object_detection/datasets/
+    cd ~/object_detection/models/research/object_detection/datasets/
     mkdir data
     
     gedit xml_to_csv.py
@@ -229,7 +229,7 @@ Daha önce indirmiş olduğumuz tensorflow'un models paketi içerisinde yer alan
     
 Oluşturduğumuz csv dosyalarını record dosyasına dönüştürmek için aşağıdaki kodları kullanalım.
 
-    cd ~/object_detection/datasets/
+    cd ~/object_detection/models/research/object_detection/datasets/
     
     gedit generate_tfrecord.py 
 
@@ -343,26 +343,34 @@ oluşturduğumuz kodu çalıştırarak train_labels.csv ve test_labels.csv dosya
       
 Artık Modelimizi eğitmeye başlayabiliriz.      
 
-ilk olarak object_detection/models/research/object_detection dizinine eğitim paremetrelerini kaydedeceğimiz training klasörünü oluşturalım.
+ilk olarak object_detection/models/research/object_detection dizinine eğitim paremetrelerini kaydedeceğimiz training klasörünü, modellerimizi kaydedeceğimiz models klasörünü ve modellerimizin konfigürasyonlarını kaydedeceğimiz config klasörünü oluşturalım.
 
-    cd ~/object_detection/models/research/object_detection
+    cd ~/object_detection/models/research/object_detection/datasets
     mkdir training
+    mkdir models
+    mkdir config
+    
+Kullanacağımız [modeli indirelim](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). Biz bu örnek için ssd_mobilenet_v1_coco kullanacağız. İndirdiğimiz model dosyasını rardan çıkaralım ve  object_detection/models/research/object_detection/datasets/models/ dizinine kopyalayalım. Yada aşağıdaki kodlar kullanılarak direk object_detection/models/research/object_detection/datasets/models/ klasörüne model indirilebilir. Dosya indikten sonra rardan çıkartılmalıdır.
 
-Kullanacağımız [modeli indirelim](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). Biz bu örnek için ssd_mobilenet_v1_coco kullanacağız. İndirdiğimiz model dosyasını rardan çıkaralım ve  object_detection/models/research/object_detection dizinine kopyalayalım. Yada aşağıdaki kodlar kullanılarak direk object_detection/models/research/object_detection klasörüne model indirilebilir. Dosya indikten sonra rardan çıkartılmalıdır.
-
-    cd ~/object_detection/models/research/object_detection
+    cd ~/object_detection/models/research/object_detection/datasets/models/
     wget http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2018_01_28.tar.gz
     
-model'in config dosyasını object_detection/models/research/object_detection/training klasörüne [indirelim](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs). Bu örnek için /ssd_mobilenet_v1_coco.config dosyasını indirdik. İndirdiğimiz dosyayı güncelleyelim.
+model'in config dosyasını object_detection/models/research/object_detection/datasets/config klasörüne [indirelim](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs). Bu örnek için /ssd_mobilenet_v1_coco.config dosyasını indirdik. İndirdiğimiz dosyayı güncelleyelim.
 
-    cd ~/object_detection/models/research/object_detection/training
+    cd ~/object_detection/models/research/object_detection/datasets/config/
     wget https://raw.githubusercontent.com/tensorflow/models/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config
     
-İndirdiğimiz config dosyasını aşağıdaki gibi güncelleyelim. num_classes, batch_size, num_steps parametreleri, train_input_reader ve eval_input_reader path'leri güncellenmiştir.
+İndirdiğimiz config dosyasını aşağıdaki gibi güncelleyelim. num_classes, batch_size, num_steps (epoch sayısı) parametreleri, train_input_reader ve eval_input_reader path'leri güncellenmiştir.
 
-    cd ~/object_detection/models/research/object_detection/training
+    cd ~/object_detection/models/research/object_detection/datasets/config
     gedit ssd_mobilenet_v1_coco.config
     
+    # SSD with Mobilenet v1, configured for Oxford-IIIT Pets Dataset.
+    # Users should configure the fine_tune_checkpoint field in the train config as
+    # well as the label_map_path and input_path fields in the train_input_reader and
+    # eval_input_reader. Search for "PATH_TO_BE_CONFIGURED" to find the fields that
+    # should be configured.
+
     model {
       ssd {
         num_classes: 1
@@ -514,13 +522,14 @@ model'in config dosyasını object_detection/models/research/object_detection/tr
           epsilon: 1.0
         }
       }
-      fine_tune_checkpoint: "ssd_mobilenet_v1_coco_2018_01_28/model.ckpt"
+      fine_tune_checkpoint: "datasets/models/ssd_mobilenet_v1_coco_2018_01_28/model.ckpt"
       from_detection_checkpoint: true
+      #load_all_detection_checkpoint_vars: true
       # Note: The below line limits the training process to 200K steps, which we
       # empirically found to be sufficient enough to train the pets dataset. This
       # effectively bypasses the learning rate schedule (the learning rate will
       # never decay). Remove the below line to train indefinitely.
-      num_steps: 1000
+      num_steps: 10000
       data_augmentation_options {
         random_horizontal_flip {
         }
@@ -533,9 +542,9 @@ model'in config dosyasını object_detection/models/research/object_detection/tr
 
     train_input_reader: {
       tf_record_input_reader {
-        input_path: "data/train.record"
+        input_path: "datasets/data/train.record"
       }
-      label_map_path: "training/object-detection.pbtxt"
+      label_map_path: "datasets/config/object-detection.pbtxt"
     }
 
     eval_config: {
@@ -547,16 +556,16 @@ model'in config dosyasını object_detection/models/research/object_detection/tr
 
     eval_input_reader: {
       tf_record_input_reader {
-        input_path: "data/test.record"
+        input_path: "datasets/data/test.record"
       }
-      label_map_path: "training/object-detection.pbtxt"
+      label_map_path: "datasets/config/object-detection.pbtxt"
       shuffle: false
       num_readers: 1
     }
     
-Training klasörü içerisine object-detection.pbtxt dosyası oluşturulur. Bu dosya içerisinde eğitimde kaç sınıf kullanılacağı ve sıfların etiketleri yer alır.
+config klasörü içerisine object-detection.pbtxt dosyasını oluşturalım. Bu dosya içerisinde eğitimde kaç sınıf kullanılacağı ve sıfların etiketleri yer alır.
  
-        cd ~/object_detection/models/research/object_detection/training
+        cd ~/object_detection/models/research/object_detection/config
         gedit object-detection.pbtxt 
         
         item {
