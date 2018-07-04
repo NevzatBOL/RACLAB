@@ -139,11 +139,14 @@ Test için bir video [indirelim.](https://raw.githubusercontent.com/OlafenwaMose
                                     , frames_per_second=20, log_progress=True)
     print(video_path)
 
-<b><i>Sonuç;</i></b>
+</div>
+<br><br>
+<b><i>Video Length = 1min 24seconds, Detection Speed = "fastest" , Minimum Percentage Probability = 20 , Frame Detection Interval = 5, Detection Time = 2min 18seconds  </i></b>
 <div style="width: 600px;" >
 <a href="https://www.youtube.com/embed/S-jgBTQgbd4?rel=0" >
 <img src="../../images/video-3.jpg" />
-</a>
+</div>
+<br> <br>
 
 Referas Link;
 
