@@ -235,6 +235,10 @@ Oluşturduğumuz csv dosyalarını record dosyasına dönüştürmek için aşa�
 
     cd ~/object_detection/models/research/object_detection/datasets/
     
+    """if row_label == 'light':
+            return 1"""
+    row_label etiketlerimze göre düzenlenmelidir. Bir den çok etiket için elif oluşturulması ve return'ler birer birer artırılmalıdır. return'lerin döndürdüğü değerler object-detection.pbtxt'in id değerleridir.
+    
     gedit generate_tfrecord.py 
 
     """
@@ -364,7 +368,7 @@ model'in config dosyasını object_detection/models/research/object_detection/da
     cd ~/object_detection/models/research/object_detection/datasets/config/
     wget https://raw.githubusercontent.com/tensorflow/models/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config
     
-İndirdiğimiz config dosyasını aşağıdaki gibi güncelleyelim. num_classes, batch_size, num_steps (epoch sayısı) parametreleri, train_input_reader ve eval_input_reader path'leri güncellenmiştir.
+İndirdiğimiz config dosyasını aşağıdaki gibi güncelleyelim. num_classes, batch_size, num_steps (epoch sayısı) parametreleri, train_input_reader ve eval_input_reader path'leri güncellenmiştir. num_classes etiket sayısı ile aynı olmalıdır.
 
     cd ~/object_detection/models/research/object_detection/datasets/config
     gedit ssd_mobilenet_v1_coco.config
@@ -567,7 +571,7 @@ model'in config dosyasını object_detection/models/research/object_detection/da
       num_readers: 1
     }
     
-config klasörü içerisine object-detection.pbtxt dosyasını oluşturalım. Bu dosya içerisinde eğitimde kaç sınıf kullanılacağı ve sıfların etiketleri yer alır.
+config klasörü içerisine object-detection.pbtxt dosyasını oluşturalım. Bu dosya içerisinde eğitimde kaç sınıf kullanılacağı ve sıfların etiketleri yer alır. Birden fazla etiket kullanılacaksa item {} buloğu alt alta eklenir. item buloğunun id'si ve name'i record dosyasını oluşturken verdiğimiz id ve name ile aynı olmalıdır.
  
         cd ~/object_detection/models/research/object_detection/config
         gedit object-detection.pbtxt 
@@ -613,7 +617,9 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
 
     cd ~/object_detection/models/research/object_detection/datasets/
     
-    gedit object_detection.py 
+    MODEL_NAME ve NUM_CLASSES eğitim datamıza göre düzenlenmelidir.
+    
+    gedit object_detection_test.py 
 
     import numpy as np
     import cv2
@@ -645,7 +651,7 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
     #List of the strings that is used to add correct label for each box.
     PATH_TO_LABELS = os.path.join('config', 'object-detection.pbtxt')
 
-    NUM_CLASSES = 1
+    NUM_CLASSES = 1 #sinif sayisi
 
     #Load a (frozen) Tensorflow model into memory.
     detection_graph = tf.Graph()
@@ -713,4 +719,4 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
 
 Kodumuzu çalıştırarak modelimizi gerçek zamanlı test edelim.
 
-    python3 object_detection.py
+    python3 object_detection_test.py
