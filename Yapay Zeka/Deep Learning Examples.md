@@ -607,9 +607,11 @@ Eğitim sonrasında oluşan cgeckpoint'ler ile moeli yapılandırmak için aşa�
     
     cd ~/object_detection/models/research/object_detection
 
+    kullandığımız config doyasının ismi, kullanmak istediğimiz checkpoint ve kaydetmek istediğimiz dosya ismi aşağıdaki kodda düzenlenir.
+
     python3 export_inference_graph.py \
         --input_type image_tensor \
-        --pipeline_config_path datasets/config/ssd_mobilenet_v1_pets.config \
+        --pipeline_config_path datasets/config/ssd_mobilenet_v1_coco.config \
         --trained_checkpoint_prefix datasets/training/model.ckpt-11535 \
         --output_directory datasets/light_detection
 
