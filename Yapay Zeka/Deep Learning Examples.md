@@ -594,7 +594,7 @@ Modeli train etmek için aşağıdaki kod kullanılır.
     
 Eğitim sırasında hata değerlerini grafiksel arayüz üzerinden takip etmek için;
 
-    tensorboard --logdir='training'
+    tensorboard --logdir='datasets/training'
 
 Termindalde yer alan `http://Bol:6006` benzeri linki açarak internet tarayıcısı üzerinden sonuçlar grafiksel olarak takip edilebilir.
 
@@ -722,3 +722,25 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
 Kodumuzu çalıştırarak modelimizi gerçek zamanlı test edelim.
 
     python3 object_detection_test.py
+
+## Notlar
+
+**Hata, Faster-RCNN-Inception-V2 modelindeki eğitimim için, yaklaşık 3.0'da başladı ve hızla 0.8'in altına düştü. Modelinizin kaybı sürekli olarak 0.05'in altına düşene kadar eğitilmelidir. MobileNet-SSD, yaklaşık 20'lik bir kayıpla başlar ve kayıp sürekli olarak 2'nin altına düşene kadar eğitilmelidir.**
+
+**(SSD-MobileNet modeli gibi) daha hızlı algılama sağlayan ancak daha az doğruluk oranına sahiptir**
+
+**Bazı modeller (Fast-RCNN modeli gibi) daha yavaş algılama sağlarken daha fazla doğruluk oranına sahiptir.** 
+
+**Genellikle hesaplama işlemi daha uzun süren modeller daha çok doğruluk oranına sahiptir fakat real time uygulamalarda işlem gücü yetersizliğinden modelin çalışmasında gecikmeler yaşanabilir.**
+
+## Referanslar
+
+[Linux for object detection](https://pythonprogramming.net/introduction-use-tensorflow-object-detection-api-tutorial/)
+
+[Linux for object detection - youtube](https://www.youtube.com/watch?v=COlbP62-B-U&list=PLQVvvaa0QuDcNK5GeCQnxYnSSaar2tpku)
+
+[Windows for object detection](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10)
+
+[object detection basic theory-1](https://becominghuman.ai/tensorflow-object-detection-api-basics-of-detection-7b134d689c75)
+
+[object detection basic theory-2](https://becominghuman.ai/tensorflow-object-detection-api-basics-of-detection-2-2-28b348495eec)
