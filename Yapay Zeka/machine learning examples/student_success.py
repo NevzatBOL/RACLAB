@@ -34,7 +34,7 @@ not_ortalamasi = sinav_sonucu.sum(axis=1)/3
 #print not_ortalamasi
 
 #sınav sonuclarını datamıza ekledik.
-data["toplam"]=not_ortalamasi
+data["ortalama"]=not_ortalamasi
 #print data
 print data.describe() #data hakkında detaylı bilgi verir.
 
@@ -43,21 +43,21 @@ print data.describe() #data hakkında detaylı bilgi verir.
 #plt.show()
 
 #not ortalamasını iyi,orta,kotu olarak sınıflandırdık.
-birinci = data.toplam<0.425
-ikinci = (data.toplam>=0.425) & (data.toplam<1.788)
-ucuncu = data.toplam>=1.788
+birinci = data.ortalama<0.425
+ikinci = (data.ortalama>=0.425) & (data.ortalama<1.788)
+ucuncu = data.ortalama>=1.788
 #print ikinci
 
-data.loc[birinci,"toplam"] = 0 #toplam kolununda birinci sartını saglayanları 0 yapar.
-data.loc[ikinci,"toplam"] = 1
-data.loc[ucuncu,"toplam"] = 2
+data.loc[birinci,"ortalama"] = 0 #toplam kolununda birinci sartını saglayanları 0 yapar.
+data.loc[ikinci,"ortalama"] = 1
+data.loc[ucuncu,"ortalama"] = 2
 
 print data
 
 train, test = train_test_split(data, test_size=0.2)
 
-train_x = train.drop(["toplam"],axis=1)
-train_y = train.toplam
+train_x = train.drop(["ortalama"],axis=1)
+train_y = train.ortalama
 
-test_x = test.drop(["toplam"],axis=1)
-test_y = test.toplam
+test_x = test.drop(["ortalama"],axis=1)
+test_y = test.ortalama
