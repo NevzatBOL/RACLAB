@@ -1,27 +1,32 @@
 # Paket-Kurulumları
 
-## CUDA 8.0 KURULUMU
+## CUDA 9.0 KURULUMU
 
-https://developer.nvidia.com/cuda-80-ga2-download-archive
+https://developer.nvidia.com/cuda-90-download-archive
 
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
-	sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+	sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
+	sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
 	sudo apt-get update
-	sudo apt-get install cuda-8.0
+	sudo apt-get install cuda-9.0
 
 Komutları ile kurulum tamamlanır.
 
-## cuDNN 6.0 KURULUMU
+Referans Link:
+
+https://github.com/earcz/NVIDIA-GPU-Surucusu-ve-CUDA-Yukleme/wiki/CUDA-Yukleme
+
+## cuDNN 7.1.4 KURULUMU
 
 https://developer.nvidia.com/rdp/cudnn-download
 
-cuDNN v6.0 Library for Linux	Paketi indirilir.
+cuDNN v7.1.4 Library for Linux	Paketi indirilir.
 
 indirilen paket açılır.
 
-	tar -xzvf cudnn-8.0-linux-x64-v6.0.tgz
-
+	tar -xzvf cudnn-9.0-linux-x64-v7.1.tgz
+	
 gerekli paketler cuda dizinine kopyalanır.
 
 
@@ -31,17 +36,17 @@ gerekli paketler cuda dizinine kopyalanır.
 
 Debian dosyaları indirilir ve kurulur.
 
-cuDNN v6.0 Runtime Library for Ubuntu16.04 (Deb)
+cuDNN v7.1.4 Runtime Library for Ubuntu16.04 (Deb)
 
-	sudo dpkg -i libcudnn6_6.0.21-1+cuda8.0_amd64.deb
+	sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb
 
-cuDNN v6.0 Developer Library for Ubuntu16.04 (Deb)
+cuDNN v7.1.4 Developer Library for Ubuntu16.04 (Deb)
 
-	sudo dpkg -i libcudnn6-dev_6.0.21-1+cuda8.0_amd64.deb
+	sudo dpkg -i libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb 
 
-cuDNN v6.0 Code Samples and User Guide for Ubuntu16.04 (Deb)
+cuDNN v7.1.4 Code Samples and User Guide for Ubuntu16.04 (Deb)
 
-	sudo dpkg -i libcudnn6-doc_6.0.21-1+cuda8.0_amd64.deb
+	sudo dpkg -i libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb
 
 
 Referans Link:
@@ -78,11 +83,11 @@ Adresinden CUDA 8 için ZED SDK for Linux paketi indirilir.
 
 indirilen pakete çalışma izni verilir.
 
-	sudo chmod +x ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run
+	sudo chmod +x ZED_SDK_Linux_Ubuntu16_v2.2.1.run
 
 indirilen paket çalıştırılarak kurulum tamamlanır.
 
-	./ZED_SDK_Linux_Ubuntu16_CUDA8_v2.2.0.run
+	./ZED_SDK_Linux_Ubuntu16_v2.2.1.run
 	
 ### ZED KAMERA PYTHON3 PAKET KURULUMU
 https://github.com/stereolabs/zed-python
@@ -107,9 +112,6 @@ Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
 	cd PyOpenGL-3.1.1a1
 	python3 setup.py install
 
-opencv kurulumu aşağıda anlatılan uzun yöntemle yapılabileceği gibi görüntü pyzed kütüphanesinden alınacağından dolayı aşağıdaki komut ilede opencv kurulumu yapılabilir.
-
-	sudo install pip3 opencv-python
 	
 ## ROS KİNETİC KURULUMU
 
@@ -146,6 +148,9 @@ Kurulum yapmak isteyenler için;
 	sudo apt-get install python-opencv
 Komut ile Opencv Kurulması Halinde Linux'ta kamera fonksiyonu çalışmayacaktır.
 
+python3 için opencv Kurulumu sadece aşağıdaki satır kullanılarak yapılabilir.
+
+	pip3 install opencv-python
 ### Metod2:
 	sudo apt-get update
 	sudo apt-get upgrade
