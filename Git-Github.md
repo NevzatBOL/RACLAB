@@ -44,6 +44,8 @@ Create a new repository ile yeni çalışma alanı oluşturulur.
 git çalışma alanımızı github'a yükleyelim.
 Öncelikle github'a yükleyeceğimiz klasörün dizinine terminalden gidelim.
 
+    github'a dosya yüklerken öncelikle git stash ve git pull yapılarak github üzerindeki değişiklikler git reposuna alınmalıdır. yükleme işlemi sonrasında gerçekleştirilir.
+    
     git remote add githubRepo https://github.com/....     -oluşturduğunuz repostory linkinizi yazın.
     git push -u githubRepo master   -githubta oluşturduğunuz çalışma alanına bilgisayardaki repostory mizi yükledik.
     
@@ -65,6 +67,7 @@ git çalışma alanımızı github'a yükleyelim.
  
  ## Branches (Dallar)   
  
+    git stash   --git üzerinde yapılan değişiklikleri geçici olarak depoda saklar. 
     git pull    -github dosyalarını bilgisayara çeker.
     git branch  -projenin dallarını listeler.
     git branch --all -uzak bilgisayardaki dalları listeler.
