@@ -42,3 +42,5 @@ ilk olrak ağırlık dosyasını indirelim.
 Referans Link:
 
 https://pjreddie.com/darknet/
+
+https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
