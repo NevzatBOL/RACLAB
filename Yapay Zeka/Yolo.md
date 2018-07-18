@@ -39,3 +39,6 @@ ilk olrak ağırlık dosyasını indirelim.
    
     wget https://pjreddie.com/media/files/yolov3.weights
     
+Referans Link:
+
+https://pjreddie.com/darknet/
