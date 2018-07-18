@@ -33,3 +33,9 @@ Opencv ile derlemek için;
       
      make
     
+## Hazır eğitilmiş model çalıştırma
+
+ilk olrak ağırlık dosyasını indirelim.
+   
+    wget https://pjreddie.com/media/files/yolov3.weights
+    
