@@ -52,14 +52,19 @@ cuDNN v7.1.4 Code Samples and User Guide for Ubuntu16.04 (Deb)
 Referans Link:
 
 http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
-
 ## TensorFlow KURULUMU
 
 python 2.7 GPU için paket kurulumu
 
 	sudo apt-get install python-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
-	sudo pip install tensorflow-gpu			-gpu için
-	sudo pip install tensorflow			-cpu için
+	sudo pip2 install tensorflow-gpu			-gpu için
+	sudo pip2 install tensorflow			-cpu için
+
+python 3.5+ GPU için paket kurulumu
+
+	sudo apt-get install python3-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
+	sudo pip3 install tensorflow-gpu			-gpu için
+	sudo pip3 install tensorflow			-cpu için
 
 Referans Link:
 
@@ -69,12 +74,15 @@ https://www.tensorflow.org/install/install_linux
 
 python 2.7 için paket kurulumu
 	
-	sudo pip install keras
+	sudo pip2 install keras
+
+python 3.5+ için paket kurulumu
+	
+	sudo pip3 install keras
 
 Referans Link:
 
 https://keras.io/
-
 ## ZED KAMERA SDK KURULUMU
 
 https://www.stereolabs.com/developers/release/2.2/
