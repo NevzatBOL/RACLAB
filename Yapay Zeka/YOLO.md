@@ -93,7 +93,7 @@ Datasetimizi oluşturmak için öncelikle train ve test klasörleri oluşturalı
      mkdir -p datasets/images
      cd datasets/images
     
-Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu images dizinini Open Dir ile açalım. PascalVOC yerine YOLO seçeneği seçili olmalıdır. Her resim için resimde algılanmasını istediğimiz nesneyi Create RectBox ile seçelim, etiketleyelim ve kaydedelim. her resim için ayrı ayrı txt dosyası oluşturulacaktır. ayrıca classes.txt isminde programın tüm etiket sınıflarının yer aldığı bir dosya oluşturulacaktır. 
+Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu images dizinini Open Dir ile açalım. PascalVOC yerine YOLO seçeneği seçili olmalıdır. Her resim için resimde algılanmasını istediğimiz nesneyi Create RectBox ile seçelim, etiketleyelim ve kaydedelim. her resim için ayrı ayrı txt dosyası oluşturulacaktır. Ayrıca classes.txt isminde programın tüm etiket sınıflarının yer aldığı bir dosya oluşturulacaktır. 
 
     python3 labelImg.py
 
@@ -144,6 +144,59 @@ Elusturduğumuz etiketlerin resimlerinin yollarını tek dosyada toplalamız ger
 
     data.py
 
+yolo'da eğitim yapabilmemiz için aşağıdaki üç dosyanın oluşturulması gereklidir.
+
+`cfg/obj.data
+cfg/obj.names
+cfg/Yolo-obj.cfg`
+
+    cd ~/yolo/darknet/cfg
+    
+    gedit obj.data
+    
+    classes= 15  
+    train  = datasets/images/train.txt  
+    valid  = datasets/images/test.txt  
+    names = data/obj.names  
+    backup = backup/ 
+
+*classes sayısı classes.txt deki etiket sayısı ile aynı olmalıdır.*
+
+obj.names dosyası içerisine classes.txt'de yer alan etiketler yazılmalıdır.
+
+    cd ~/yolo/darknet/data
+    
+    gedit obj.names
+    
+    dog
+    person
+    cat
+    tv
+    car
+    meatballs
+    marinara sauce
+    tomato soup
+    chicken noodle soup
+    french onion soup
+    chicken breast
+    ribs
+    pulled pork
+    hamburger
+    cavity
+    light
+
+Eğitim yapacağımız modelin configürasyon dosyasını oluşturulalım. Bunun için yolov3.cfg dosyasını kopyalayalım ve üzerinde düzenlemeler yapalım.
+
+    cd ~/yolo/darknet/cfg
+    
+    cp yolov3.cfg yolov3-obj.cfg
+
+    gedit yolov3-obj.cfg 
+    
+    batch=64
+    subdivisions=8 #Gpu miktarı az ise değer artırılabilir.
+    classes=15
+    
 Referans Link:
 
 https://pjreddie.com/darknet/
