@@ -202,3 +202,7 @@ Referans Link:
 https://pjreddie.com/darknet/
 
 https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
+
+https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/
+
+https://medium.com/@ribomo42/how-to-train-yolo-v2-with-your-own-data-object-and-labels-on-darknet-2b90dbfecb02
