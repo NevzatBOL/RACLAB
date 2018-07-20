@@ -1,27 +1,32 @@
-# Paket Kurulumları
+# Paket-Kurulumları
 
-## CUDA 8.0 KURULUMU
+## CUDA 9.0 KURULUMU
 
-https://developer.nvidia.com/cuda-80-ga2-download-archive
+https://developer.nvidia.com/cuda-90-download-archive
 
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
-	sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+	sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
+	sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
 	sudo apt-get update
-	sudo apt-get install cuda-8.0
+	sudo apt-get install cuda-9.0
 
 Komutları ile kurulum tamamlanır.
 
-## cuDNN 6.0 KURULUMU
+Referans Link:
+
+https://github.com/earcz/NVIDIA-GPU-Surucusu-ve-CUDA-Yukleme/wiki/CUDA-Yukleme
+
+## cuDNN 7.1.4 KURULUMU
 
 https://developer.nvidia.com/rdp/cudnn-download
 
-cuDNN v6.0 Library for Linux	Paketi indirilir.
+cuDNN v7.1.4 Library for Linux	Paketi indirilir.
 
 indirilen paket açılır.
 
-	tar -xzvf cudnn-8.0-linux-x64-v6.0.tgz
-
+	tar -xzvf cudnn-9.0-linux-x64-v7.1.tgz
+	
 gerekli paketler cuda dizinine kopyalanır.
 
 
@@ -31,17 +36,17 @@ gerekli paketler cuda dizinine kopyalanır.
 
 Debian dosyaları indirilir ve kurulur.
 
-cuDNN v6.0 Runtime Library for Ubuntu16.04 (Deb)
+cuDNN v7.1.4 Runtime Library for Ubuntu16.04 (Deb)
 
-	sudo dpkg -i libcudnn6_6.0.21-1+cuda8.0_amd64.deb
+	sudo dpkg -i libcudnn7_7.1.4.18-1+cuda9.0_amd64.deb
 
-cuDNN v6.0 Developer Library for Ubuntu16.04 (Deb)
+cuDNN v7.1.4 Developer Library for Ubuntu16.04 (Deb)
 
-	sudo dpkg -i libcudnn6-dev_6.0.21-1+cuda8.0_amd64.deb
+	sudo dpkg -i libcudnn7-dev_7.1.4.18-1+cuda9.0_amd64.deb 
 
-cuDNN v6.0 Code Samples and User Guide for Ubuntu16.04 (Deb)
+cuDNN v7.1.4 Code Samples and User Guide for Ubuntu16.04 (Deb)
 
-	sudo dpkg -i libcudnn6-doc_6.0.21-1+cuda8.0_amd64.deb
+	sudo dpkg -i libcudnn7-doc_7.1.4.18-1+cuda9.0_amd64.deb
 
 
 Referans Link:
@@ -50,11 +55,17 @@ http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
 
 ## TensorFlow KURULUMU
 
-python 2.7 GPU için paket kurulumu
+python 2.7 için paket kurulumu
 
 	sudo apt-get install python-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
-	sudo pip install tensorflow-gpu			-gpu için
-	sudo pip install tensorflow			-cpu için
+	sudo pip2 install tensorflow-gpu			-gpu için
+	sudo pip2 install tensorflow			-cpu için
+
+python 3.5+ için paket kurulumu
+
+	sudo apt-get install python3-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
+	sudo pip3 install tensorflow-gpu			-gpu için
+	sudo pip3 install tensorflow			-cpu için
 
 Referans Link:
 
@@ -64,7 +75,11 @@ https://www.tensorflow.org/install/install_linux
 
 python 2.7 için paket kurulumu
 	
-	sudo pip install keras
+	sudo pip2 install keras
+
+python 3.5+ için paket kurulumu
+	
+	sudo pip3 install keras
 
 Referans Link:
 
