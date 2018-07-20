@@ -73,8 +73,76 @@ video üzerinde modelimizi çalıştırmak için;
 
     ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights <video file>
    
+# Kendi Dataset'imiz ile object detection
 
+Kendi datasetimizi oluşturmak için ilk olarak labelImg programını indirelim.
 
+    cd ~/yolo
+    git clone https://github.com/tzutalin/labelImg.git
+  
+indirdiğimiz labelImg için gerekli olan paket kurulumlarını yapalım.
+
+    sudo apt-get install pyqt5-dev-tools
+    sudo pip3 install lxml
+    cd ~/yolo/labelImg/
+    make qt5py3
+
+Datasetimizi oluşturmak için öncelikle train ve test klasörleri oluşturalım. oluşturduğumuz bu klasöre labelImg i kullanarak etiketlediğimiz resimleri txt olarak kaydedeceğiz. Etiketler ile resimlerin aynı dizinde olmasına dikkat edelim. Etiketleri test ve train olarak etiketleri sonradan ayıracağız.
+
+     cd ~/yolo/darknet/
+     mkdir -p datasets/images
+     cd datasets/images
+    
+Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu images dizinini Open Dir ile açalım. PascalVOC yerine YOLO seçeneği seçili olmalıdır. Her resim için resimde algılanmasını istediğimiz nesneyi Create RectBox ile seçelim, etiketleyelim ve kaydedelim. her resim için ayrı ayrı txt dosyası oluşturulacaktır. ayrıca classes.txt isminde programın tüm etiket sınıflarının yer aldığı bir dosya oluşturulacaktır. 
+
+    python3 labelImg.py
+
+![LabelImages](https://github.com/raclab/RACLAB/blob/master/images/AI/labelimg_example.jpg)
+
+Etiket çıktıları aşağıdaki gibi olacaktır.
+
+    *15 classes.txt içerisinde yer alan etiketin indexini belirtir. 
+    <object-class> <x> <y> <width> <height>
+    
+    15 0.600000 0.363636 0.050746 0.296970
+    15 0.014925 0.543939 0.023881 0.166667
+
+Elusturduğumuz etiketlerin resimlerinin yollarını tek dosyada toplalamız gerekli bunun için;
+
+*burda oluşturduğumuz etiketleri train ve test olarak ayırdık. (%10 test datası)*
+
+    gedit data.py
+
+    #-*-coding: utf-8 -*-
+    import glob, os
+
+    # bulundugumuz dizin
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    #darknet.exe'ye göre datanın konumu
+    path_data = 'datasets/images/'
+
+    # Test icin kullanılacak datanın % degeri
+    percentage_test = 10;
+
+    # train.txt ve test.txt dosyalarını olusturduk.
+    file_train = open('train.txt', 'w')  
+    file_test = open('test.txt', 'w')
+
+    # datalarımızı train ve test olarak dagıtalım
+    counter = 1  
+    index_test = round(100 / percentage_test)  
+    for pathAndFilename in glob.iglob(os.path.join(current_dir, "*.jpg")):  
+        title, ext = os.path.splitext(os.path.basename(pathAndFilename))
+
+        if counter == index_test:
+            counter = 1
+            file_test.write(path_data + title + '.jpg' + "\n")
+        else:
+            file_train.write(path_data + title + '.jpg' + "\n")
+            counter = counter + 1
+
+    data.py
 
 Referans Link:
 
