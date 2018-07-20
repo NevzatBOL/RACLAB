@@ -61,7 +61,19 @@ Kameradan alınan görüntü ile modelimizi çalıştırıalım.
 
 *Kameradan anlık gönrüntü ile çalıştırmak için darknet'in Cuda ve opencv ile derlenmiş olması gerekir.*
 
-./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights
+    ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights
+
+**Bilgisayarın işlem hızına göre fps düşük olabilir. yolov3-tiny modeli kullanılarak daha yüksek fps'lerde işlem yapılabilir.**
+
+**işlem hızı düşük modeller daha başarılı sonuçlar verir fakat gerçek zamanlı uygulamalarda geçikme meydana gelebilir.**
+
+    ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights
+
+video üzerinde modelimizi çalıştırmak için;
+
+    ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights <video file>
+   
+
 
 
 Referans Link:
