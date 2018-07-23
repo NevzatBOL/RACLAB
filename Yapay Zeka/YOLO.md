@@ -255,7 +255,7 @@ Bir checkpoint'de eğitimi durdurur ve tekrar başlatmak isterseniz;
 
 Eğitim sonrasında ağırlık parametreleri backup içerisinde yer alır. Ağırık parametrelerini kullanarak modelimizi gerçek zamanlı olarak çalıştıralım.
 
-    ./darknet detector demo cfg/coco.data cfg/yolov2-obj.cfg backup/yolov2-obj_900.weights
+    ./darknet detector demo cfg/obj.data cfg/yolov2-obj.cfg backup/yolov2-obj_10000.weights
 
 Referans Link:
 
