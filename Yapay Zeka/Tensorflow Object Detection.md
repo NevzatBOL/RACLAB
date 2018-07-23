@@ -1,5 +1,5 @@
 # Tensorflow ile Object Detection
-## Hazır Api Çalıştırma
+## Hazır Model Çalıştırma
 
 ilk olarak bir çalışma dizini oluşturalım ve tensorflow'un model paketini indirelim.
 
