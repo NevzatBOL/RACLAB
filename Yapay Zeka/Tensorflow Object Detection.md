@@ -728,12 +728,12 @@ Kodumuzu çalıştırarak modelimizi gerçek zamanlı test edelim.
 
 ## Referanslar
 
-[Linux for object detection](https://pythonprogramming.net/introduction-use-tensorflow-object-detection-api-tutorial/)
+[Object detection on Linux](https://pythonprogramming.net/introduction-use-tensorflow-object-detection-api-tutorial/)
 
-[Linux for object detection - youtube](https://www.youtube.com/watch?v=COlbP62-B-U&list=PLQVvvaa0QuDcNK5GeCQnxYnSSaar2tpku)
+[Object detection on Linux - youtube](https://www.youtube.com/watch?v=COlbP62-B-U&list=PLQVvvaa0QuDcNK5GeCQnxYnSSaar2tpku)
 
-[Windows for object detection](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10)
+[Object detection on Windows](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10)
 
-[object detection basic theory-1](https://becominghuman.ai/tensorflow-object-detection-api-basics-of-detection-7b134d689c75)
+[Basic theory of object detection-1](https://becominghuman.ai/tensorflow-object-detection-api-basics-of-detection-7b134d689c75)
 
-[object detection basic theory-2](https://becominghuman.ai/tensorflow-object-detection-api-basics-of-detection-2-2-28b348495eec)
+[Basic theory of object detection-2](https://becominghuman.ai/tensorflow-object-detection-api-basics-of-detection-2-2-28b348495eec)
