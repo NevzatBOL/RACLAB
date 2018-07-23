@@ -69,7 +69,7 @@ Kameradan alınan görüntü ile modelimizi çalıştırıalım.
 
     ./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights
 
-video üzerinde modelimizi çalıştırmak için;
+Video üzerinde modelimizi çalıştırmak için;
 
     ./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights <video file>
    
@@ -114,7 +114,7 @@ Etiket çıktıları aşağıdaki gibi olacaktır.
 
 Datasetimiz içerisinde yer alan resimlerinin yollarını tek dosyada toplalamız gerekli bunun için aşağıdaki kod kullanılabilir.
 
-*burda oluşturduğumuz etiketleri train ve test olarak ayırdık. (%10 test datası)*
+*Burda oluşturduğumuz etiketleri train ve test olarak ayırdık. (%10 test datası)*
 
     gedit data.py
 
@@ -149,7 +149,7 @@ Datasetimiz içerisinde yer alan resimlerinin yollarını tek dosyada toplalamı
 
     data.py
 
-**bu kod ile test ve train olarak ayırdığımızda farklı etiketler için ayrı ayrı %10'luk validation ayrılmaz tüm datanın rastgele %10'u alınır. Farklı etiketler için ayrı ayrı %10 test datası oluşturmak için aşağıdaki kod üzerinde düzenlemeler yaparak kullanabilirsiniz.**
+**Bu kod ile test ve train olarak ayırdığımızda farklı etiketler için ayrı ayrı %10'luk validation datası ayrılmaz tüm datanın rastgele %10'u alınır. Farklı etiketler için ayrı ayrı %10'luk test datası oluşturmak için aşağıdaki kod üzerinde düzenlemeler yaparak kullanabilirsiniz.**
 
     gedit data_split.py
 
@@ -189,7 +189,7 @@ Datasetimiz içerisinde yer alan resimlerinin yollarını tek dosyada toplalamı
 
     python data_split.py
 
-yolo'da eğitim yapabilmemiz için aşağıdaki üç dosyanın oluşturulması gereklidir.
+Yolo'da eğitim yapabilmemiz için aşağıdaki üç dosyanın oluşturulması gereklidir.
 
 `cfg/obj.data
 cfg/obj.names
@@ -247,7 +247,7 @@ Doğru ağırlık parametrelerine ulaşmak için daha önce eğitilmiş bir mode
 
 Birden fazla GPU çalıştırarak eğitim yapmak için;
 
-    ./darknet detector train cfg/obj.data cfg/yolov2-obj.cfg -gpus 0,1,2,3
+    ./darknet detector train cfg/obj.data cfg/yolov2-obj.cfg -gpus 0,1,2,3
 
 Bir checkpoint'de eğitimi durdurur ve tekrar başlatmak isterseniz;
     
