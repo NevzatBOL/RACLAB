@@ -27,7 +27,7 @@ GPU ile dermeke için;
      
 Opencv ile derlemek için;
 
-*C++ için opencv kurulu olması gerekir. kurulu değilse: sudo apt-get install libopencv* ile kurulum yapılır.
+*C++ için opencv kurulu olması gerekir. kurulu değilse: sudo apt-get install libopencv** ile kurulum yapılır.
 
     gedit Makefile 
     
@@ -87,13 +87,18 @@ indirdiğimiz labelImg için gerekli olan paket kurulumlarını yapalım.
     cd ~/yolo/labelImg/
     make qt5py3
 
-Datasetimizi oluşturmak için öncelikle train ve test klasörleri oluşturalım. oluşturduğumuz bu klasöre labelImg i kullanarak etiketlediğimiz resimleri txt olarak kaydedeceğiz. Etiketler ile resimlerin aynı dizinde olmasına dikkat edelim. Etiketleri test ve train olarak etiketleri sonradan ayıracağız.
+lableImg'de default olarak gelen etiketleri değiştirmek isterseniz labelImg/data/predefined_classes.txt içerisinde yer alan etiketler değiştirilebilir.
+
+Datasetimizi oluşturan resimleri images klasöründe tutalım. Oluşturacağımız etikerleri ise labels klasörüne kaydetmeliyiz. labels klasörüne labelImg i kullanarak etiketlediğimiz txt olarak kaydedeceğiz. Frameleri test ve train olarak hepsini etiketledikten sonradan ayıracağız.
 
      cd ~/yolo/darknet/
-     mkdir -p datasets/images
-     cd datasets/images
+     mkdir datasets
+     cd datasets/
+     mkdir images
+     mkdir labels
+     cd images/
     
-Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu images dizinini Open Dir ile açalım. PascalVOC yerine YOLO seçeneği seçili olmalıdır. Her resim için resimde algılanmasını istediğimiz nesneyi Create RectBox ile seçelim, etiketleyelim ve kaydedelim. her resim için ayrı ayrı txt dosyası oluşturulacaktır. Ayrıca classes.txt isminde programın tüm etiket sınıflarının yer aldığı bir dosya oluşturulacaktır. 
+Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu images dizinini Open Dir ile açalım. PascalVOC yerine **YOLO** seçeneği seçili olmalıdır. Her resim için resimde algılanmasını istediğimiz nesneyi Create RectBox ile seçelim, etiketleyelim ve kaydedelim. her resim için ayrı ayrı txt dosyası oluşturulacaktır. Ayrıca classes.txt isminde programın tüm etiket sınıflarının yer aldığı bir dosya oluşturulacaktır. 
 
     python3 labelImg.py
 
@@ -101,13 +106,13 @@ Datasetimizi labelImg'i kullanarak oluşturabiliriz. Resimlerin bulunduğu image
 
 Etiket çıktıları aşağıdaki gibi olacaktır.
 
-    *15 classes.txt içerisinde yer alan etiketin indexini belirtir. 
+    *5 classes.txt içerisinde yer alan etiketin indexini belirtir. 
     <object-class> <x> <y> <width> <height>
     
-    15 0.600000 0.363636 0.050746 0.296970
-    15 0.014925 0.543939 0.023881 0.166667
+    5 0.600000 0.363636 0.050746 0.296970
+    5 0.014925 0.543939 0.023881 0.166667
 
-Elusturduğumuz etiketlerin resimlerinin yollarını tek dosyada toplalamız gerekli bunun için;
+Datasetimiz içerisinde yer alan resimlerinin yollarını tek dosyada toplalamız gerekli bunun için aşağıdaki kod kullanılabilir.
 
 *burda oluşturduğumuz etiketleri train ve test olarak ayırdık. (%10 test datası)*
 
@@ -144,6 +149,46 @@ Elusturduğumuz etiketlerin resimlerinin yollarını tek dosyada toplalamız ger
 
     data.py
 
+**bu kod ile test ve train olarak ayırdığımızda farklı etiketler için ayrı ayrı %10'luk validation ayrılmaz tüm datanın rastgele %10'u alınır. Farklı etiketler için ayrı ayrı %10 test datası oluşturmak için aşağıdaki kod üzerinde düzenlemeler yaparak kullanabilirsiniz.**
+
+    gedit data_split.py
+
+    #-*-coding: utf-8 -*-
+    import glob
+    import numpy as np
+
+    #images içerisinde yer alan farklı sınıflara ait resimlerin isimleri
+    #aynı sınıfa ait resimler için isimlerin, isimsayı.jpg şekilde isimlendirildiği düsünülmüstür.
+    name_class = ["way","sol_donme","sag_donme","parky","red_light","green_light","durak"]
+    counter = np.zeros(len(name_class))
+
+    #darknet.exe'ye göre datanın konumu
+    path_data = 'datasets/images/'
+
+    # Test icin kullanılacak datanın % degeri
+    validation_test = 10
+
+    # train.txt ve test.txt dosyalarını olusturduk.
+    file_train = open('train.txt', 'w')  
+    file_test = open('test.txt', 'w')
+
+    #datayı test ve train olarak ayırdık.
+    def yaz(name):
+        for i in range(7):
+            if name_class[i] == name[:-6]: #resimlerin sayı.jpg kısımları cıkartılacak sekilde sondan kırpma islemi uygulanmalıdır.
+                counter[i] +=1
+                if counter[i] % validation_test == 0:
+                    file_test.write(path_data + name + "\n")
+                else :
+                    file_train.write(path_data + name + "\n")	
+
+                break
+
+    for file_name in glob.glob('*.jpg'):
+        yaz(file_name)
+
+    python data_split.py
+
 yolo'da eğitim yapabilmemiz için aşağıdaki üç dosyanın oluşturulması gereklidir.
 
 `cfg/obj.data
@@ -154,7 +199,7 @@ cfg/Yolo-obj.cfg`
     
     gedit obj.data
     
-    classes= 15  
+    classes= 8  
     train  = datasets/images/train.txt  
     valid  = datasets/images/test.txt  
     names = data/obj.names  
@@ -168,35 +213,50 @@ obj.names dosyası içerisine classes.txt'de yer alan etiketler yazılmalıdır.
     
     gedit obj.names
     
-    dog
-    person
-    cat
-    tv
-    car
-    meatballs
-    marinara sauce
-    tomato soup
-    chicken noodle soup
-    french onion soup
-    chicken breast
-    ribs
-    pulled pork
-    hamburger
-    cavity
-    light
+    Durak
+    Girilmez
+    Park Yapilmaz
+    Sola Donulmez
+    Saga Donulmez
+    Yesil Isik
+    Kirmizi Isik
 
-Eğitim yapacağımız modelin configürasyon dosyasını oluşturulalım. Bunun için yolov3.cfg dosyasını kopyalayalım ve üzerinde düzenlemeler yapalım.
+Eğitim yapacağımız modelin configürasyon dosyasını oluşturulalım. Bunun için yolov2.cfg dosyasını kopyalayalım ve üzerinde düzenlemeler yapalım.
 
     cd ~/yolo/darknet/cfg
     
-    cp yolov3.cfg yolov3-obj.cfg
+    cp yolov2.cfg yolov2-obj.cfg
 
-    gedit yolov3-obj.cfg 
+    gedit yolov2-obj.cfg 
     
-    batch=64
+    #dosyanın en başında yer alan aşağıdaki iki satır düzenlenebilir.
+    batch=64 #aynı anda işleme sokulacak resim sayısı.
     subdivisions=8 #Gpu miktarı az ise değer artırılabilir.
-    classes=15
     
+    #dosyanın en altında yer alan aşağıdaki iki satır değiştirilmelidir.
+    filters=65 #filters=(classes + coords + 1)*num = (8+4+1)*5 = 65
+    classes=8
+   
+Modelimizi Eğitmek için;
+
+    ./darknet detector train cfg/obj.data cfg/yolov2-obj.cfg
+
+Doğru ağırlık parametrelerine ulaşmak için daha önce eğitilmiş bir modelin ağırlık parametrelerini yükleyerek eğitim yapmak için;
+
+    ./darknet detector train cfg/obj.data cfg/yolov2-obj.cfg <weight file>
+
+Birden fazla GPU çalıştırarak eğitim yapmak için;
+
+    ./darknet detector train cfg/obj.data cfg/yolov2-obj.cfg -gpus 0,1,2,3
+
+Bir checkpoint'de eğitimi durdurur ve tekrar başlatmak isterseniz;
+    
+    ./darknet detector train cfg/obj.data cfg/yolov2-obj.cfg backup/yolov2-obj.backup
+
+Eğitim sonrasında ağırlık parametreleri backup içerisinde yer alır. Ağırık parametrelerini kullanarak modelimizi gerçek zamanlı olarak çalıştıralım.
+
+    ./darknet detector demo cfg/coco.data cfg/yolov2-obj.cfg backup/yolov2-obj_900.weights
+
 Referans Link:
 
 https://pjreddie.com/darknet/
@@ -204,5 +264,3 @@ https://pjreddie.com/darknet/
 https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
 
 https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/
-
-https://medium.com/@ribomo42/how-to-train-yolo-v2-with-your-own-data-object-and-labels-on-darknet-2b90dbfecb02
