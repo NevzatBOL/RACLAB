@@ -10,6 +10,7 @@ ilk olarak bir çalışma dizini oluşturalım ve tensorflow'un model paketini i
 Linux için protoc-3.6.0-linux-x86_64.zip'u [indirelim.](https://github.com/google/protobuf/releases) indirdiğimiz dosyanın içerisinde bin klasörünün içinde yer alan protoc dosyasını /usr/local/bin/ klasörüne atalım ve protoc dosyasını çalıştırılabilir yapalım.
 
     sudo cp protoc ~ /usr/local/bin/
+    cd /usr/local/bin/
     sudo chmod 777 protoc
     
 Oluşturduğumuz object_detection klasörü içerisinde yer alan models/research klasörüne gidelim.
@@ -229,7 +230,14 @@ Daha önce indirmiş olduğumuz tensorflow'un models paketi içerisinde yer alan
 
     cd ~/object_detection/models/research
     
+python2 için;
+
+    sudo python setup.py install
+    
+python3.5+ için;
+
     sudo python3 setup.py install
+
     
 Oluşturduğumuz csv dosyalarını record dosyasına dönüştürmek için aşağıdaki kodları kullanalım.
 
@@ -237,7 +245,9 @@ Oluşturduğumuz csv dosyalarını record dosyasına dönüştürmek için aşa�
     
     """if row_label == 'light':
             return 1"""
-    row_label etiketlerimze göre düzenlenmelidir. Bir den çok etiket için elif oluşturulması ve return'ler birer birer artırılmalıdır. return'lerin döndürdüğü değerler object-detection.pbtxt'in id değerleridir.
+    row_label etiketlerimze göre düzenlenmelidir. 
+    Bir den çok etiket için elif oluşturulması ve return'ler birer birer artırılmalıdır. 
+    return'lerin döndürdüğü değerler object-detection.pbtxt'in id değerleridir.
     
     gedit generate_tfrecord.py 
 
@@ -348,22 +358,21 @@ oluşturduğumuz kodu çalıştırarak train_labels.csv ve test_labels.csv dosya
 
       # Create test data:
       python3 generate_tfrecord.py --csv_input=data/test_labels.csv  --output_path=data/test.record
-      
-Artık Modelimizi eğitmeye başlayabiliriz.      
+           
 
-ilk olarak object_detection/models/research/object_detection dizinine eğitim paremetrelerini kaydedeceğimiz training klasörünü, modellerimizi kaydedeceğimiz models klasörünü ve modellerimizin konfigürasyonlarını kaydedeceğimiz config klasörünü oluşturalım.
+Şimdi de object_detection/models/research/object_detection dizinine eğitim paremetrelerini kaydedeceğimiz training klasörünü, modellerimizi kaydedeceğimiz models klasörünü ve modellerimizin konfigürasyonlarını kaydedeceğimiz config klasörünü oluşturalım.
 
     cd ~/object_detection/models/research/object_detection/datasets
     mkdir training
     mkdir models
     mkdir config
     
-Kullanacağımız [modeli indirelim](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). Biz bu örnek için ssd_mobilenet_v1_coco kullanacağız. İndirdiğimiz model dosyasını rardan çıkaralım ve  object_detection/models/research/object_detection/datasets/models/ dizinine kopyalayalım. Yada aşağıdaki kodlar kullanılarak direk object_detection/models/research/object_detection/datasets/models/ klasörüne model indirilebilir. Dosya indikten sonra rardan çıkartılmalıdır.
+Kullanacağımız [modeli indirelim](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). Biz bu örnek için ssd_mobilenet_v1_coco kullanacağız. İndirdiğimiz model dosyasını rar'dan çıkaralım ve  object_detection/models/research/object_detection/datasets/models/ dizinine kopyalayalım. Yada aşağıdaki kodlar kullanılarak direk object_detection/models/research/object_detection/datasets/models/ klasörüne model indirilebilir. Dosya indikten sonra rardan çıkartılmalıdır.
 
     cd ~/object_detection/models/research/object_detection/datasets/models/
     wget http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2018_01_28.tar.gz
     
-model'in config dosyasını object_detection/models/research/object_detection/datasets/config klasörüne [indirelim](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs). Bu örnek için /ssd_mobilenet_v1_coco.config dosyasını indirdik. İndirdiğimiz dosyayı güncelleyelim.
+Model'in config dosyasını object_detection/models/research/object_detection/datasets/config klasörüne [indirelim](https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs). Bu örnek için /ssd_mobilenet_v1_coco.config dosyasını indirdik.
 
     cd ~/object_detection/models/research/object_detection/datasets/config/
     wget https://raw.githubusercontent.com/tensorflow/models/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config
@@ -571,7 +580,7 @@ model'in config dosyasını object_detection/models/research/object_detection/da
       num_readers: 1
     }
     
-config klasörü içerisine object-detection.pbtxt dosyasını oluşturalım. Bu dosya içerisinde eğitimde kaç sınıf kullanılacağı ve sıfların etiketleri yer alır. Birden fazla etiket kullanılacaksa item {} buloğu alt alta eklenir. item buloğunun id'si ve name'i record dosyasını oluşturken verdiğimiz id ve name ile aynı olmalıdır.
+Config klasörü içerisine object-detection.pbtxt dosyasını oluşturalım. Bu dosya içerisinde eğitimde kaç sınıf kullanılacağı ve sıfların etiketleri yer alır. Birden fazla etiket kullanılacaksa item {} buloğu alt alta eklenir. item buloğunun id'si ve name'i record dosyasını oluşturken verdiğimiz id ve name ile aynı olmalıdır.
  
         cd ~/object_detection/models/research/object_detection/config
         gedit object-detection.pbtxt 
@@ -600,7 +609,7 @@ Termindalde yer alan `http://Bol:6006` benzeri linki açarak internet tarayıcı
 
 ![Tensorboard](https://github.com/raclab/RACLAB/blob/master/images/AI/object_detection_model_loss.png)
 
-Eğitim sonrasında oluşan cgeckpoint'ler ile moeli yapılandırmak için aşağıdaki kod kullanılır.
+Eğitim sonrasında oluşan checkpoint'ler ile modeli yapılandırmak için aşağıdaki kod kullanılır.
 
     cd ~/object_detection/models/research
     export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
@@ -643,7 +652,6 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
 
     #Model preparation 
 
-    #Variables
     #What model to download.
     MODEL_NAME = 'light_detection'
 
@@ -653,7 +661,7 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
     #List of the strings that is used to add correct label for each box.
     PATH_TO_LABELS = os.path.join('config', 'object-detection.pbtxt')
 
-    NUM_CLASSES = 1 #sinif sayisi
+    NUM_CLASSES = 1
 
     #Load a (frozen) Tensorflow model into memory.
     detection_graph = tf.Graph()
@@ -669,21 +677,6 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
     label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
     categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
     category_index = label_map_util.create_category_index(categories)
-
-
-    #Helper code
-    def load_image_into_numpy_array(image):
-      (im_width, im_height) = image.size
-      return np.array(image.getdata()).reshape(
-          (im_height, im_width, 3)).astype(np.uint8)
-
-
-    #Detection
-    PATH_TO_TEST_IMAGES_DIR = 'test_images'
-    TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(i)) for i in range(1, 3) ]
-
-    #Size, in inches, of the output images.
-    IMAGE_SIZE = (12, 8)
 
 
     with detection_graph.as_default():
@@ -718,7 +711,7 @@ Gerçek zamanlı eğiştiğimiz modeli çalıştırmak için aşağıdaki kodlar
           if cv2.waitKey(25) & 0xFF == 27:
             cv2.destroyAllWindows()
             break
-
+            
 Kodumuzu çalıştırarak modelimizi gerçek zamanlı test edelim.
 
     python3 object_detection_test.py
@@ -727,11 +720,11 @@ Kodumuzu çalıştırarak modelimizi gerçek zamanlı test edelim.
 
 **Hata, Faster-RCNN-Inception-V2 modelindeki eğitimim için, yaklaşık 3.0'da başladı ve hızla 0.8'in altına düştü. Modelinizin kaybı sürekli olarak 0.05'in altına düşene kadar eğitilmelidir. MobileNet-SSD, yaklaşık 20'lik bir kayıpla başlar ve kayıp sürekli olarak 2'nin altına düşene kadar eğitilmelidir.**
 
-**(SSD-MobileNet modeli gibi) daha hızlı algılama sağlayan ancak daha az doğruluk oranına sahiptir**
+**Bazı modeller (SSD-MobileNet modeli gibi) daha hızlı algılama sağlar ancak daha az doğruluk oranına sahiptir**
 
 **Bazı modeller (Fast-RCNN modeli gibi) daha yavaş algılama sağlarken daha fazla doğruluk oranına sahiptir.** 
 
-**Genellikle hesaplama işlemi daha uzun süren modeller daha çok doğruluk oranına sahiptir fakat real time uygulamalarda işlem gücü yetersizliğinden modelin çalışmasında gecikmeler yaşanabilir.**
+**Genellikle hesaplama işlemi daha uzun süren modeller daha yüksek doğruluk oranına sahiptir fakat real time uygulamalarda işlem gücü yetersizliğinden modelin çalışmasında gecikmeler yaşanabilir.**
 
 ## Referanslar
 
