@@ -175,7 +175,7 @@ Datasetimiz içerisinde yer alan resimlerinin yollarını tek dosyada toplalamı
     #datayı test ve train olarak ayırdık.
     def yaz(name):
         for i in range(7):
-            if name_class[i] == name[:-6]: #resimlerin sayı.jpg kısımları cıkartılacak sekilde sondan kırpma islemi uygulanmalıdır.
+            if name_class[i] == name[:-5] or name_class[i] == name[:-6]: #resimlerin sayı.jpg kısımları cıkartılacak sekilde sondan kırpma islemi uygulanmalıdır.
                 counter[i] +=1
                 if counter[i] % validation_test == 0:
                     file_test.write(path_data + name + "\n")
