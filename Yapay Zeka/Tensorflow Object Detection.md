@@ -716,6 +716,147 @@ Kodumuzu çalıştırarak modelimizi gerçek zamanlı test edelim.
 
     python3 object_detection_test.py
 
+## Augmentation
+
+Eğtim datasının az olması eğitim kalitesini düşürmektedir data doğal yollarla çoğaltılabileceği gibi orjinal data üzerinde değişiklikler yapılarak datanın çoğaltılması mümkündür. 
+
+Data çoğaltma metodlarından bazıları; Görüntünün parlaklığının artırılıp azaltılması, görüntünün aynalanması, görüntü üzerine gürültü eklenmesi gibi metodlar olduğu söylenebilir. Eğitmekte olduğunuz modele uygun bir data çoğaltma algoritması bu doğrultuda geliştirilebilir. Burda resimin parlaklığının artırılıp azaltılması ile datanın çoğaltılması üzerine örnek bir algoritma paylaşılacaktır.
+
+    import numpy as np
+    import cv2
+    import glob
+
+    def duzenle(frame,alpha,beta):
+        img=cv2.multiply(frame,np.array([alpha]))
+        new_img=cv2.add(img,beta)
+        return new_img
+
+
+    #cogaltilacak data orjinal_data isiminde bir klasorde bulunmaktadir.
+    for file_name in glob.glob('orjinal_data/*.jpg'):
+        print file_name
+        frame=cv2.imread(file_name)
+        parlak=duzenle(frame,alpha=2.0,beta=100)
+        sonuk=duzenle(frame,alpha=0.5,beta=-100)
+
+        dirt, line = file_name.split('/')
+        name, ext= line.split('.')
+        fname='data/'+name+'P'+'.jpg'
+        cv2.imwrite(fname,parlak)
+
+        fname='data/'+name+'S'+'.jpg'
+        cv2.imwrite(fname,sonuk)
+
+## Ekler
+
+Bu bölümde dataları sınıflandırırken uygulayabileceğiniz bazı yöntemler anlatılmaktadır. Bu yöntemlerin kullanımı sınıflandırma işleminde harcanılan vakti azaltmakta ve bazı kolaylıklar sağlamaktadır.
+
+labelImg uygulaması kullanılırken View sekmesi üzerinden Auto Saving özelliği açılarak her yeni resime geçildiğinde otomatik kaydedilmesi sağlanabilir. View sekmesi üzerinden Advanced Mode özelliği açılarak sürekli kullanmak istedimiz Create RectBox seçeneği otomatik seçili hale getirilebilir. 
+
+Train ve test dataları aynı dizine kaydedilip aşağıdaki kod yardımı ile ayrıştırılabilir.
+
+    import os
+    import glob
+    import pandas as pd
+    import xml.etree.ElementTree as ET
+    import numpy as np
+    import shutil
+
+    def xml_to_csv(path):
+        xml_list = []
+        for xml_file in glob.glob(path + '/*.xml'):
+            tree = ET.parse(xml_file)
+            root = tree.getroot()
+            for member in root.findall('object'):
+                value = (root.find('filename').text,
+                         int(root.find('size')[0].text),
+                         int(root.find('size')[1].text),
+                         member[0].text,
+                         int(member[4][0].text),
+                         int(member[4][1].text),
+                         int(member[4][2].text),
+                         int(member[4][3].text)
+                         )
+                xml_list.append(value)
+        column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
+        xml_df = pd.DataFrame(xml_list, columns=column_name)
+        return xml_df
+
+    #name_class kendi siniflariniza gore duzenlemelisiniz.
+    name_class = ['Durak','Girilmez','Kirmizi_Isik','Yesil_Isik','Park_Yapilmaz','Saga_Donulmez','Sola_Donulmez'] 
+    counter = np.zeros(len(name_class))
+    validation_test = 10
+
+    def bol(file_name):
+        _, name= file_name.split('/')
+        for i in range(len(name_class)):
+            if name_class[i] == name[:-5] or name_class[i] == name[:-6] :
+                counter[i] += 1
+                if counter[i] % validation_test == 0:
+                    shutil.move(file_name,'images/test/')
+                else :
+                    shutil.move(file_name,'images/train/')
+
+                break
+
+    def main():
+        for file_name in glob.glob('images/*.xml'):
+            print file_name
+            bol(file_name)
+
+        for directory in ['train','test']:
+            image_path = os.path.join(os.getcwd(), 'images/{}'.format(directory))
+            xml_df = xml_to_csv(image_path)
+            xml_df.to_csv('data/{}_labels.csv'.format(directory), index=None)
+            print('Successfully converted xml to csv.')
+
+    main()
+
+Örneğin data çoğaltma yöntemi olarak parlaklık artırma ve azaltma işlemi uygulanmışsa data sınıflandırılırken sadece orjinal data üzerinde işlem gerçekleştirilip kaydedilen csv dosyaları üzerinde çoğaltılan datalar orjinal data verisi kullanılarak oluşturulabilir. bunun için xml_to_csv.py kodu çalıştırıldıktan sonra aşağıdaki kod yardımı yukarıdaki anlatılan metod gerçekleştilebilir.
+
+    import os
+    import pandas as pd
+    from collections import namedtuple, OrderedDict
+
+    column_name = ['filename', 'width', 'height', 'class', 'xmin', 'ymin', 'xmax', 'ymax']
+
+    def split(df, group):
+        data = namedtuple('data', ['filename', 'object'])
+        gb = df.groupby(group)
+        return [data(filename, gb.get_group(x)) for filename, x in zip(gb.groups.keys(), gb.groups)]
+
+
+    def yaz(dt):
+        xml_list=[]
+        grouped=split(dt,'filename')
+
+        for group in grouped:
+            for index, row in group.object.iterrows():
+                for i in range(3):
+                    file_name = row['filename']
+                    fname, ext = file_name.split('.')
+                    if i == 0:
+                        line = file_name
+                    elif i == 1:
+                        line = fname+'P.'+ext
+                    elif i == 2:
+                        line = fname+'S.'+ext
+
+                    value=(line,row['width'],row['height'],row['class'],row['xmin'],row['ymin'],row['xmax'],row['ymax'])
+                    xml_list.append(value)
+            xml_df = pd.DataFrame(xml_list, columns=column_name)
+        return xml_df
+
+    def main():
+        for directory in ['train','test']:
+            csv_path = os.path.join(os.getcwd(), '{}'.format(directory))
+            dt = pd.read_csv('data/{}_labels.csv'.format(directory))
+            xml_df = yaz(dt)
+            xml_df.to_csv('data/{}.csv'.format(directory), index=None)
+            print('Successfully converted xml to csv.')
+
+    main()
+    
 ## Notlar
 
 **Hata, Faster-RCNN-Inception-V2 modelindeki eğitimim için, yaklaşık 3.0'da başladı ve hızla 0.8'in altına düştü. Modelinizin kaybı sürekli olarak 0.05'in altına düşene kadar eğitilmelidir. MobileNet-SSD, yaklaşık 20'lik bir kayıpla başlar ve kayıp sürekli olarak 2'nin altına düşene kadar eğitilmelidir.**
