@@ -33,11 +33,23 @@ Opencv ile derlemek için;
     
       OPENCV=1  
       
-     make
+    make
+
+Kullanmakta olduğum Makefile Dosyası aşağıdaki gibidir.
+
+    gedit Makefile 
+
+      GPU=1
+      CUDNN=1
+      OPENCV=1
+      OPENMP=0
+      DEBUG=0
+    
+    make
     
 ## Hazır eğitilmiş model çalıştırma
 
-ilk olrak ağırlık dosyasını indirelim.
+ilk olarak ağırlık dosyasını indirelim.
    
     wget https://pjreddie.com/media/files/yolov3.weights
     
@@ -159,7 +171,7 @@ Datasetimiz içerisinde yer alan resimlerinin yollarını tek dosyada toplalamı
 
     #images içerisinde yer alan farklı sınıflara ait resimlerin isimleri
     #aynı sınıfa ait resimler için isimlerin, isimsayı.jpg şekilde isimlendirildiği düsünülmüstür.
-    name_class = ["way","sol_donme","sag_donme","parky","red_light","green_light","durak"]
+    name_class = ['Durak','Girilmez','Kirmizi_Isik','Yesil_Isik','Park_Yapilmaz','Saga_Donulmez','Sola_Donulmez']
     counter = np.zeros(len(name_class))
 
     #darknet.exe'ye göre datanın konumu
@@ -174,7 +186,7 @@ Datasetimiz içerisinde yer alan resimlerinin yollarını tek dosyada toplalamı
 
     #datayı test ve train olarak ayırdık.
     def yaz(name):
-        for i in range(7):
+        for i in range(len(name_class)):
             if name_class[i] == name[:-5] or name_class[i] == name[:-6]: #resimlerin sayı.jpg kısımları cıkartılacak sekilde sondan kırpma islemi uygulanmalıdır.
                 counter[i] +=1
                 if counter[i] % validation_test == 0:
@@ -199,7 +211,7 @@ cfg/Yolo-obj.cfg`
     
     gedit obj.data
     
-    classes= 8  
+    classes= 7  
     train  = datasets/images/train.txt  
     valid  = datasets/images/test.txt  
     names = data/obj.names  
@@ -234,8 +246,8 @@ Eğitim yapacağımız modelin configürasyon dosyasını oluşturulalım. Bunun
     subdivisions=8 #Gpu miktarı az ise değer artırılabilir.
     
     #dosyanın en altında yer alan aşağıdaki iki satır değiştirilmelidir.
-    filters=65 #filters=(classes + coords + 1)*num = (8+4+1)*5 = 65
-    classes=8
+    filters=60 #filters=(classes + coords + 1)*num = (7+4+1)*5 = 60
+    classes=7
    
 Modelimizi Eğitmek için;
 
