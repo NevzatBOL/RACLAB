@@ -276,3 +276,47 @@ https://pjreddie.com/darknet/
 https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
 
 https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/
+
+# yolo ile clasification
+
+ImageNet üzerinde eğitilmiş modelin ağırlık dosyalarını indirelim ve test edelim.
+
+    wget https://pjreddie.com/media/files/extraction.weights
+    
+    ./darknet classifier predict cfg/imagenet1k.data cfg/extraction.cfg extraction.weights data/dog.jpg
+    
+bir resim yolu belirtmeden modeli yüklerseniz test için sizden resim yolu isteyecektir. Böylece herseferinde modeli tekrar yüklemeye gerek kalmadan istediğiniz kadar resimi test edebilirsiniz. İşlemi sonlandırmak için ctrl+c komutunu kullanın.
+
+    ./darknet classifier predict cfg/imagenet1k.data cfg/extraction.cfg extraction.weights
+
+# yolo ile Nightmare
+
+
+VGG-16 modelini kullanarak yapay zekanın her iterasyonda resimleri nasıl algıladığını ve değiştirdiğini görelim. Google'ın yapmış olduğu çalışmayı, [Inceptionism: Going Deeper into Neural Networks](https://ai.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html) bu makeleden okuyabilirsiniz. VGG-16 modelimizin ağırlık dosyalarını indirelim ve test edelim.
+
+    wget https://pjreddie.com/media/files/vgg-conv.weights
+ 
+    ./darknet nightmare cfg/vgg-conv.cfg vgg-conv.weights data/dog.jpg 7
+    
+iterasyon sayısı artıkça da karışık resimler ortaya çıkmaya başlayacaktır. Modelin çalışma parameterlerinde biraz daha oynayarak farklı sonuçlar elde edebilirsiniz.
+
+    ./darknet nightmare cfg/vgg-conv.cfg vgg-conv.weights \data/scream.jpg 10 -range 3 -iters 20 -rate .01 -rounds 4
+    
+*-rounds n: mermi sayısını değiştir (varsayılan 1). Daha fazla mermi, daha çok görüntü oluşturduğunu ve genellikle orijinal görüntüde daha fazla değişiklik anlamına gelir.
+
+-iters n: tur başına yineleme sayısını değiştir (varsayılan 10). Daha fazla yineleme, görüntü başına turda daha fazla değişiklik anlamına gelir.
+
+-range n: olası katmanların aralığını değiştir (varsayılan 1). Bire ayarlanırsa, her yinelemede yalnızca verilen katman seçilir. Aksi takdirde, aralıktan farklı olarak bir katman seçilir (örneğin 10-3, 9-11 katmanları arasında seçim yapar).
+
+-octaves n: olası ölçeklerin sayısını değiştir (varsayılan 4). Bir octaves'da, sadece tam boyutlu görüntü incelenir. Her ek octaves, görüntünün daha küçük bir versiyonunu ekler (önceki octaves'ın 3/4'ü).
+
+-rate x: Görüntü için öğrenme hızını değiştir (varsayılan .05). Daha yüksek, görüntü başına yineleme başına daha fazla değişiklik anlamına gelir aynı zamanda bazı kararsızlık ve belirsizlikler getirir.
+
+-thresh x: büyütülecek özellikler için eşiği değiştir (varsayılan 1.0). x Hedef katmanda sadece standart sapmaların ortalamadan uzak özellikleri büyütülür. Daha yüksek bir eşik daha az özelliğin daha büyük olduğu anlamına gelir.
+
+-zoom x: her turdan sonra görüntüye uygulanan yakınlaştırmayı değiştir (varsayılan 1.0). İsteğe bağlı olarak, her turdan sonra görüntüye uygulanacak bir yakınlaştırma (x <1) veya uzaklaştırma (x> 1) ekleyebilirsiniz.
+
+-rotate x: Her turdan sonra uygulanan dönüşü değiştir (varsayılan 0.0).*
+
+
+
