@@ -277,7 +277,7 @@ https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/
 
 https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/
 
-# yolo ile clasification
+# yolo ile Classification
 
 ImageNet üzerinde eğitilmiş modelin ağırlık dosyalarını indirelim ve test edelim.
 
@@ -318,5 +318,38 @@ iterasyon sayısı artıkça da karışık resimler ortaya çıkmaya başlayacak
 
 -rotate x: Her turdan sonra uygulanan dönüşü değiştir (varsayılan 0.0).*
 
+# yolo ile RNN
 
+RNN ile ilgli [bu](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) makeleyi okuyabilirsiniz.
 
+George RR Martin ağırlık dosyasını indirmek için;
+    
+    wget https://pjreddie.com/media/files/grrm.weights
+    
+    ./darknet rnn generate cfg/rnn.cfg grrm.weights -srand 0 -seed JON
+
+William Shakespeare ağırlık dosyasını indirmek için;
+    
+    wget https://pjreddie.com/media/files/shakespeare.weights
+    
+    ./darknet rnn generate cfg/rnn.cfg shakespeare.weights -srand 0
+
+Leo Tolstoy ağırlık dosyasını indirmek için;
+
+    wget https://pjreddie.com/media/files/tolstoy.weights
+    
+    ./darknet rnn generate cfg/rnn.cfg tolstoy.weights -srand 0 -seed Chapter
+
+Immanuel Kant ağırlık dosyasını indirmek için;
+
+    wget https://pjreddie.com/media/files/kant.weights
+    
+    ./darknet rnn generate cfg/rnn.cfg kant.weights -srand 0 -seed Thus -temp .8
+    
+Kendi modelinizi eğitmek için;
+
+    ./darknet rnn train cfg/rnn.train.cfg -file data.txt
+    
+Eğitimi istediğiniz checkpoint'ten başlatabilirsiniz.    
+
+    ./darknet rnn train cfg/rnn.train.cfg backup/rnn.train.backup -file data.txt
