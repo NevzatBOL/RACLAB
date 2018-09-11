@@ -83,43 +83,19 @@ python 3.5+ için paket kurulumu
 Referans Link:
 
 https://keras.io/
+
 ## ZED KAMERA SDK KURULUMU
 
-https://www.stereolabs.com/developers/release/2.2/
-
-Adresinden CUDA 8 için ZED SDK for Linux paketi indirilir.
+https://www.stereolabs.com/developers/ Adresinden işletim sistemimize uygun sdk dosyası indirilir. sdk indirilirken kurulu olan CUDA sürümüne dikkat edilmelidir.
 
 indirilen pakete çalışma izni verilir.
 
-	sudo chmod +x ZED_SDK_Linux_Ubuntu16_v2.2.1.run
-
+	sudo chmod +x ZED_SDK_Linux_Ubuntu16_CUDA9_v2.5.1.run
+	
 indirilen paket çalıştırılarak kurulum tamamlanır.
 
-	./ZED_SDK_Linux_Ubuntu16_v2.2.1.run
+	./ZED_SDK_Linux_Ubuntu16_CUDA9_v2.5.1.run
 	
-### ZED KAMERA PYTHON3 PAKET KURULUMU
-https://github.com/stereolabs/zed-python
-
-Adresinden python3.5+ için pyzed kütüphanesi indirilir.
-
-	sudo apt-get install python3-pip
-	sudo pip3 install cython
-	sudo pip3 install numpy
-	
-	python3 setup.py build
-	python3 setup.py install
-pyzed kütüphanesinin kurulumu tamamlanır.
-
-#### pyzed kütüphanesinin yanında ihtiyacımız olan diğer kütüphanelerin kurulumları;
-
-https://pypi.python.org/pypi/PyOpenGL/3.1.1a1#downloads
-
-Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
-	
-	tar -zxvf PyOpenGL-3.1.1a1.tar.gz
-	cd PyOpenGL-3.1.1a1
-	python3 setup.py install
-
 	
 ## ROS KİNETİC KURULUMU
 
@@ -144,6 +120,7 @@ Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
 	sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 
 Referans Link:
+
 http://wiki.ros.org/kinetic/Installation/Ubuntu
 
 ## OPENCV KURULUMU
@@ -272,33 +249,6 @@ https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
 Raspberry Pi için:
 
 https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
-
-## BAZI PYTHON PAKETLERİNİN KURULUMU
-
-### Kütüphane kurmada kullanılabilecek metodlar;
-
-	sudo apt-get install python-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
-	
-	sudo apt-get install python-kütüphane_adı
-	sudo pip install kütüphane_adı
-	pip search kütüphane_adı 	Kütüphane aramada kullanılır.
-
-
-
-	matplotlib	sudo pip install matplotlib
-
-	PIL(Pillow)	sudo pip install Pillow
-
-
-	zbar		sudo apt-get install python-zbar	qr kod okuma kütüphanesi
-
-
-	sklearn 	sudo pip install sklearn		yapay zeka kütüphanesi
-	scipy		sudo pip install scipy			sklearn için gerekli.
-
-
-	pytesseract	sudo pip install pytesseract		görüntüden text çekmek için kullanılır.
-	tesseract	sudo apt-get install tesseract-ocr	pytesseract için gerekli.
 
 
 
