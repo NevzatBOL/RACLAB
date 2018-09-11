@@ -13,6 +13,8 @@ adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
 Komutları ile kurulum tamamlanır.
 
+.bashrc dosyasına `export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}` satırı eklenir.
+
 Referans Link:
 
 https://github.com/earcz/NVIDIA-GPU-Surucusu-ve-CUDA-Yukleme/wiki/CUDA-Yukleme
