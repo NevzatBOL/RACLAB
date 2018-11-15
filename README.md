@@ -1,6 +1,6 @@
 # UDEMY EĞİTİMLERİM
 
-## Udemy Üzerinde yayınlamakta olduğum eğitimime aşadağıdaki indirim kupanunu kullanarak ulaşabilirsiniz.
+## Udemy Üzerinde yayınlamakta olduğum eğitimlerime aşadağıdaki indirim kuponlarını kullanarak ulaşabilirsiniz.
 
 ## Temel ROS Eğitimi
 
