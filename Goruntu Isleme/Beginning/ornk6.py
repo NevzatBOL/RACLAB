@@ -21,7 +21,7 @@ cv2.polylines(img,[pts],True,(0,255,255))
 
 #Yazı yazmak icin
 font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img,'OpenCV',(10,500), font, 4,(255,255,255),2,cv2.CV_AA) #cv2.CV_AA to cv2.LINE_AA
+cv2.putText(img,'OpenCV',(10,500), font, 4,(255,255,255),2, cv2.LINE_AA) #cv2.CV_AA to cv2.LINE_AA
 
 cv2.imshow("img",img)
 cv2.waitKey(0)
