@@ -44,8 +44,8 @@ print data.describe() #data hakkında detaylı bilgi verir.
 
 #not ortalamasını iyi,orta,kotu olarak sınıflandırdık.
 birinci = data.ortalama<0.425
-ikinci = (data.ortalama>=0.425) & (data.ortalama<1.788)
-ucuncu = data.ortalama>=1.788
+ikinci = (data.ortalama>=0.425) & (data.ortalama<0.788)
+ucuncu = data.ortalama>=0.788
 #print ikinci
 
 data.loc[birinci,"ortalama"] = 0 #toplam kolununda birinci sartını saglayanları 0 yapar.

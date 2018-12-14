@@ -5,6 +5,9 @@ import cv2
 import numpy as np
 from skimage import exposure
 
+#skimage kurulu degilse asagıdaki satır kullanılarak kurulum yapılabilir.
+#sudo pip2 install scikit-image 
+
 def unwarp(img, src, dst):
     h,w = img.shape[:2]
 
@@ -74,28 +77,28 @@ while(1):
 	if ret:	
 		h,w=frame.shape[:2]
 
-        #src noktaları ornek29.py kullanılarak tespit edilebilir.
-        src = np.float32([(575,464),
-                  (707,464), 
-                  (258,682), 
-                  (1049,682)])
-        dst = np.float32([(450,h),
-                  (w-450,h),
-                  (450,0),
-                  (w-450,0)])
-        #Img_warp, M, Minv = unwarp(frame, src, dst)
+		#src noktaları ornek29.py kullanılarak tespit edilebilir.
+		src = np.float32([(575,464),
+		          (707,464), 
+		          (258,682), 
+		          (1049,682)])
+		dst = np.float32([(450,h),
+		          (w-450,h),
+		          (450,0),
+		          (w-450,0)])
+		#Img_warp, M, Minv = unwarp(frame, src, dst)
 
-        #binary = abs_sobel_thresh(frame)
-        #binary = mag_thresh(frame)
-        #binary = dir_thresh(frame)
+		#binary = abs_sobel_thresh(frame)
+		#binary = mag_thresh(frame)
+		#binary = dir_thresh(frame)
 
-        #binary = combined(frame)
+		#binary = combined(frame)
 
-        gamma = gamma_(frame)
-        binary = combined(gamma)
+		gamma = gamma_(frame)
+		binary = combined(gamma)
 
-        #cv2.imshow("Gamma",gamma)
-        cv2.imshow("Filtre",binary)
+		#cv2.imshow("Gamma",gamma)
+		cv2.imshow("Filtre",binary)
 	if cv2.waitKey(10) & 0xFF ==27:
 		break
 cam.release()
