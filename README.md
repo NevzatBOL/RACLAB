@@ -1,3 +1,18 @@
+# UDEMY EĞİTİMLERİM
+
+## Udemy Üzerinde yayınlamakta olduğum eğitimlerime aşadağıdaki indirim kuponlarını kullanarak ulaşabilirsiniz.
+
+## Temel ROS Eğitimi
+
+### [Udemy - Temel ROS Eğitimi İndirim Kuponu](https://www.udemy.com/temel-ros-egitimi/?couponCode=2018_ROS)
+
+### [Kursun Tanıtım Videosu](https://youtu.be/K92_CLqbFT4)
+
+## ROS - Urdf ve Xacro ile Robot Modelleme
+
+### [Udemy - ROS - Urdf ve Xacro ile Robot Modelleme Eğitimi İndirim Kuponu](https://www.udemy.com/ros-ile-robot-modelleme/?couponCode=ROSXACRO)
+
+
 # Paket-Kurulumları
 
 ## CUDA 9.0 KURULUMU
@@ -12,6 +27,8 @@ adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 	sudo apt-get install cuda-9.0
 
 Komutları ile kurulum tamamlanır.
+
+.bashrc dosyasına `export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}` satırı eklenir.
 
 Referans Link:
 
@@ -52,14 +69,19 @@ cuDNN v7.1.4 Code Samples and User Guide for Ubuntu16.04 (Deb)
 Referans Link:
 
 http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html
-
 ## TensorFlow KURULUMU
 
-python 2.7 GPU için paket kurulumu
+python 2.7 için paket kurulumu
 
 	sudo apt-get install python-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
-	sudo pip install tensorflow-gpu			-gpu için
-	sudo pip install tensorflow			-cpu için
+	sudo pip2 install tensorflow-gpu		-gpu için
+	sudo pip2 install tensorflow			-cpu için
+
+python 3.5+ için paket kurulumu
+
+	sudo apt-get install python3-pip		(pip kurulu değil ise önce pip kurulumu yapılır.)
+	sudo pip3 install tensorflow-gpu		-gpu için
+	sudo pip3 install tensorflow			-cpu için
 
 Referans Link:
 
@@ -69,7 +91,11 @@ https://www.tensorflow.org/install/install_linux
 
 python 2.7 için paket kurulumu
 	
-	sudo pip install keras
+	sudo pip2 install keras
+
+python 3.5+ için paket kurulumu
+	
+	sudo pip3 install keras
 
 Referans Link:
 
@@ -77,41 +103,16 @@ https://keras.io/
 
 ## ZED KAMERA SDK KURULUMU
 
-https://www.stereolabs.com/developers/release/2.2/
-
-Adresinden CUDA 8 için ZED SDK for Linux paketi indirilir.
+https://www.stereolabs.com/developers/ Adresinden işletim sistemimize uygun sdk dosyası indirilir. sdk indirilirken kurulu olan CUDA sürümüne dikkat edilmelidir.
 
 indirilen pakete çalışma izni verilir.
 
-	sudo chmod +x ZED_SDK_Linux_Ubuntu16_v2.2.1.run
-
+	sudo chmod +x ZED_SDK_Linux_Ubuntu16_CUDA9_v2.5.1.run
+	
 indirilen paket çalıştırılarak kurulum tamamlanır.
 
-	./ZED_SDK_Linux_Ubuntu16_v2.2.1.run
+	./ZED_SDK_Linux_Ubuntu16_CUDA9_v2.5.1.run
 	
-### ZED KAMERA PYTHON3 PAKET KURULUMU
-https://github.com/stereolabs/zed-python
-
-Adresinden python3.5+ için pyzed kütüphanesi indirilir.
-
-	sudo apt-get install python3-pip
-	sudo pip3 install cython
-	sudo pip3 install numpy
-	
-	python3 setup.py build
-	python3 setup.py install
-pyzed kütüphanesinin kurulumu tamamlanır.
-
-#### pyzed kütüphanesinin yanında ihtiyacımız olan diğer kütüphanelerin kurulumları;
-
-https://pypi.python.org/pypi/PyOpenGL/3.1.1a1#downloads
-
-Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
-	
-	tar -zxvf PyOpenGL-3.1.1a1.tar.gz
-	cd PyOpenGL-3.1.1a1
-	python3 setup.py install
-
 	
 ## ROS KİNETİC KURULUMU
 
@@ -136,6 +137,7 @@ Adresinden PyOpenGL-3.1.1a1.tar.gz dosyası indirilir.
 	sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 
 Referans Link:
+
 http://wiki.ros.org/kinetic/Installation/Ubuntu
 
 ## OPENCV KURULUMU
@@ -264,33 +266,6 @@ https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/
 Raspberry Pi için:
 
 https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/
-
-## BAZI PYTHON PAKETLERİNİN KURULUMU
-
-### Kütüphane kurmada kullanılabilecek metodlar;
-
-	sudo apt-get install python-pip			(pip kurulu değil ise önce pip kurulumu yapılır.)
-	
-	sudo apt-get install python-kütüphane_adı
-	sudo pip install kütüphane_adı
-	pip search kütüphane_adı 	Kütüphane aramada kullanılır.
-
-
-
-	matplotlib	sudo pip install matplotlib
-
-	PIL(Pillow)	sudo pip install Pillow
-
-
-	zbar		sudo apt-get install python-zbar	qr kod okuma kütüphanesi
-
-
-	sklearn 	sudo pip install sklearn		yapay zeka kütüphanesi
-	scipy		sudo pip install scipy			sklearn için gerekli.
-
-
-	pytesseract	sudo pip install pytesseract		görüntüden text çekmek için kullanılır.
-	tesseract	sudo apt-get install tesseract-ocr	pytesseract için gerekli.
 
 
 

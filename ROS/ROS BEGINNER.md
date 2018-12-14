@@ -249,8 +249,8 @@
 
     rosed beginner_tutorials package.xml			-package.xml dosyası içerisinde aşağıdaki kodların bulunduğundan emin oluruz.
       <build_depend>message_generation</build_depend>	-message_gereration oluşturma zamanında ihtiyacımı var.
-      <run_depend>message_runtime</run_depend>		-message_runtime çalıma zamanında ihtiyacımız var.
-
+      <build_export_depend>message_generation</build_export_depend>
+      <exec_depend>message_runtime</exec_depend>	-message_runtime çalıma zamanında ihtiyacımız var.
 
     rosed paket_adı CMakeList.txt
     find_package(catkin REQUIRED COMPONENTS
