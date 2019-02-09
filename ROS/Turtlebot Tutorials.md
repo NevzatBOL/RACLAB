@@ -151,3 +151,13 @@ Rviz'i çalıştıralım.
 Turtlebotun haritada konumunu bulabilmesi için rviz üzerinde robtun bulunduğu konumu yaklaşık olarak **2D Pose Estimate** ile işaretleyelim. 
 
 Turtlebot artık konumunu bildiğine göre **2D Nav Goal** seçeneğini kullanarak harita üzerinden gideceği konuma yönlendirelim.
+
+# Referanslar Linkler
+
+http://wiki.ros.org/turtlebot/Tutorials/indigo
+
+http://learn.turtlebot.com/
+
+https://www.clearpathrobotics.com/assets/guides/turtlebot/index.html
+
+http://edu.gaitech.hk/turtlebot/turtlebot-tutorials.html
