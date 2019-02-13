@@ -38,7 +38,7 @@ https://github.com/earcz/NVIDIA-GPU-Surucusu-ve-CUDA-Yukleme/wiki/CUDA-Yukleme
 
 https://developer.nvidia.com/rdp/cudnn-download
 
-**Metod 1:** cuDNN v7.1.4 Library for Linux	Paketi indirilir.
+**Metod 1:** Cudnn v7.1.4 Library for Linux	Paketi indirilir.
 
 indirilen paket açılır.
 
