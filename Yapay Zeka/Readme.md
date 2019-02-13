@@ -7,11 +7,13 @@ https://developer.nvidia.com/cuda-90-download-archive
 adresinden cuda paketi indirilir. (Linux>x86_64>Ubuntu>16.04>deb(local))
 
 	sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
-	sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
+	sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
 	sudo apt-get update
-	sudo apt-get install cuda-9.0
+	sudo apt-get install cuda
 
 Komutları ile kurulum tamamlanır.
+
+.bashrc dosyasına `export PATH=/usr/local/cuda-9.0/bin${PATH:+:${PATH}}` satırı eklenir.
 
 Referans Link:
 
@@ -21,7 +23,7 @@ https://github.com/earcz/NVIDIA-GPU-Surucusu-ve-CUDA-Yukleme/wiki/CUDA-Yukleme
 
 https://developer.nvidia.com/rdp/cudnn-download
 
-cuDNN v7.1.4 Library for Linux	Paketi indirilir.
+**Metod 1:** cuDNN v7.1.4 Library for Linux	Paketi indirilir.
 
 indirilen paket açılır.
 
@@ -29,12 +31,11 @@ indirilen paket açılır.
 	
 gerekli paketler cuda dizinine kopyalanır.
 
-
 	sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 	sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 	sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 
-Debian dosyaları indirilir ve kurulur.
+**Metod 2:** Cudnn Debian dosyaları ile kurulum için;
 
 cuDNN v7.1.4 Runtime Library for Ubuntu16.04 (Deb)
 
