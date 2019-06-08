@@ -14,14 +14,14 @@
 
 **Temel ROS Eğitimi**
 
-[![beginner](https://i9.ytimg.com/vi/K92_CLqbFT4/mq1.jpg?sqp=CNSMqecF&rs=AOn4CLDOKPUTWmv0KSOxsFi3Qto0-EkG7Q)](https://www.youtube.com/watch?v=K92_CLqbFT4)
+[![beginner](https://github.com/NevzatBOL/Udemy_Discount/blob/master/image/ROS_Beginner2.jpg?raw=true)](https://www.youtube.com/watch?v=K92_CLqbFT4)
 
 
 **ROS - Urdf ve Xacro ile Robot Modelleme**
 
-[![ModelOlusturma](https://i9.ytimg.com/vi/RHi-WnTi7lI/mq3.jpg?sqp=CNSMqecF&rs=AOn4CLD30-VyGxF2D56o04hBNJ4YU728pg)](https://www.youtube.com/watch?v=RHi-WnTi7lI)
+[![ModelOlusturma](https://github.com/NevzatBOL/Udemy_Discount/blob/master/image/ROS_Model_Olusturma2.jpg?raw=true)](https://www.youtube.com/watch?v=RHi-WnTi7lI)
 
 
 **Uygulamalar ile ROS Eğitimi**
 
-[![Intermediate](https://i9.ytimg.com/vi/liDSuwpU2QE/mq3.jpg?sqp=CNSMqecF&rs=AOn4CLDCsIZRYCc-V8Fkmj9JnCGTOyCcWQ)](https://www.youtube.com/watch?v=liDSuwpU2QE)
+[![Intermediate](https://github.com/NevzatBOL/Udemy_Discount/blob/master/image/ROS_Intermediate2.jpg?raw=true)](https://www.youtube.com/watch?v=liDSuwpU2QE)
